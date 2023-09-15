@@ -18,7 +18,7 @@ void main() {
   setUp(() {
     remoteDataSource = MockAuthRemoteDataSource();
     repo = AuthRepoImpl(remoteDataSource);
-    registerFallbackValue(UpdateUserAction.password);
+    registerFallbackValue(UpdateUserAction.email);
   });
 
   const tUser = UserModel.empty();
@@ -26,7 +26,7 @@ void main() {
   const tPassword = 'password';
   const tFullName = 'fullName';
   const tUserData = 'userData';
-  const tUpdateAction = UpdateUserAction.password;
+  const tUpdateAction = UpdateUserAction.email;
   const tServerException = ServerException(message: '', statusCode: '');
 
   group('signIn', () {
@@ -144,11 +144,13 @@ void main() {
             ServerFailure.fromException(tServerException),
           ),
         );
-        verify(() => remoteDataSource.signUp(
-              email: tEmail,
-              password: tPassword,
-              fullName: tFullName,
-            )).called(1);
+        verify(
+          () => remoteDataSource.signUp(
+            email: tEmail,
+            password: tPassword,
+            fullName: tFullName,
+          ),
+        ).called(1);
         verifyNoMoreInteractions(remoteDataSource);
       },
     );

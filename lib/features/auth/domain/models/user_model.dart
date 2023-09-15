@@ -5,6 +5,7 @@ class UserModel extends Equatable {
     required this.uid,
     required this.email,
     required this.fullName,
+    this.bio,
     this.profilePic,
   });
 
@@ -14,12 +15,14 @@ class UserModel extends Equatable {
           email: '',
           fullName: '',
           profilePic: '',
+          bio: '',
         );
 
   final String uid;
   final String email;
   final String? profilePic;
   final String fullName;
+  final String? bio;
 
   @override
   String toString() {
