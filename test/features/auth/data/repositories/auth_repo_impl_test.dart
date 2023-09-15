@@ -1,4 +1,6 @@
 import 'package:dartz/dartz.dart';
+import 'package:gaze/core/errors/exceptions.dart';
+import 'package:gaze/core/errors/failures.dart';
 import 'package:gaze/features/auth/data/data_sources/auth_remote_data_source.dart';
 import 'package:gaze/features/auth/data/repositories/auth_repo_impl.dart';
 import 'package:gaze/features/auth/domain/models/user_model.dart';
@@ -20,6 +22,7 @@ void main() {
   const tUser = UserModel.empty();
   const tEmail = 'email';
   const tPassword = 'password';
+  const tServerException = ServerException(message: '', statusCode: '');
 
   group('signIn', () {
     test(
@@ -48,5 +51,34 @@ void main() {
         verifyNoMoreInteractions(remoteDataSource);
       },
     );
+    test(
+        'should call [AuthRemoteDataSource.signIn] and return [ServerFailure] '
+        'when the call is unsuccessful', () async {
+      when(
+        () => remoteDataSource.signIn(
+          email: any(named: 'email'),
+          password: any(named: 'password'),
+        ),
+      ).thenThrow(tServerException);
+
+      final result = await repo.signIn(
+        email: tEmail,
+        password: tPassword,
+      );
+
+      expect(
+        result,
+        Left<ServerFailure, dynamic>(
+          ServerFailure.fromException(tServerException),
+        ),
+      );
+      verify(
+        () => remoteDataSource.signIn(
+          email: tEmail,
+          password: tPassword,
+        ),
+      ).called(1);
+      verifyNoMoreInteractions(remoteDataSource);
+    });
   });
 }
