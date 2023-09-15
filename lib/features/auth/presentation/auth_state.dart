@@ -15,6 +15,15 @@ class AuthLoading extends AuthState {
   const AuthLoading();
 }
 
+class AuthError extends AuthState {
+  const AuthError(this.message);
+
+  final String message;
+
+  @override
+  List<String> get props => [message];
+}
+
 class SignedIn extends AuthState {
   const SignedIn(this.user);
 
