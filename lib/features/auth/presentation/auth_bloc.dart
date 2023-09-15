@@ -4,14 +4,47 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:gaze/core/enums/update_user.dart';
 import 'package:gaze/features/auth/domain/models/user_model.dart';
+import 'package:gaze/features/auth/domain/usecases/sign_in.dart';
+import 'package:gaze/features/auth/domain/usecases/sign_up.dart';
+import 'package:gaze/features/auth/domain/usecases/update_user.dart';
 
 part 'auth_event.dart';
+
 part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  AuthBloc() : super(AuthInitial()) {
+  AuthBloc({
+    required SignInUseCase signIn,
+    required SignUpUseCase signUp,
+    required UpdateUserUseCase updateUser,
+  })  : _signIn = signIn,
+        _signUp = signUp,
+        _updateUser = updateUser,
+        super(const AuthInitial()) {
     on<AuthEvent>((event, emit) {
-      // TODO: implement event handler
+      emit(const AuthLoading());
     });
+    on<SignInEvent>(_signInHandler);
+  }
+
+  final SignInUseCase _signIn;
+  final SignUpUseCase _signUp;
+  final UpdateUserUseCase _updateUser;
+
+  Future<void> _signInHandler(
+    SignInEvent event,
+    Emitter<AuthState> emit,
+  ) async {
+    final result = await _signIn(
+      SignInParams(
+        email: event.email,
+        password: event.password,
+      ),
+    );
+
+    result.fold(
+      (failure) => null,
+      (user) => emit(SignedIn(user)),
+    );
   }
 }

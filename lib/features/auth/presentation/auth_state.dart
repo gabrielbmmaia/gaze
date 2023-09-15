@@ -11,7 +11,9 @@ class AuthInitial extends AuthState {
   const AuthInitial();
 }
 
-class AuthLoading extends AuthState {}
+class AuthLoading extends AuthState {
+  const AuthLoading();
+}
 
 class SignedIn extends AuthState {
   const SignedIn(this.user);
