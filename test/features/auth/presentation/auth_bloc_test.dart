@@ -102,4 +102,26 @@ void main() {
       },
     );
   });
+
+  group('signUpEvent', () {
+    blocTest<AuthBloc, AuthState>(
+      'should emit [AuthLoading, SignedUp] when [SignUpEvent] is added',
+      build: () {
+        when(() => signUp(any())).thenAnswer((_) async => const Right(null));
+        return bloc;
+      },
+      act: (bloc) => bloc.add(
+        SignUpEvent(
+          email: tSigUpParams.email,
+          password: tSigUpParams.password,
+          fullName: tSigUpParams.fullName,
+        ),
+      ),
+      expect: () => const <AuthState>[AuthLoading(), SignedUp()],
+      verify: (_) {
+        verify(() => signUp(tSigUpParams)).called(1);
+        verifyNoMoreInteractions(signUp);
+      },
+    );
+  });
 }
