@@ -29,17 +29,28 @@ class AuthRepoImpl implements AuthRepo {
   }
 
   @override
-  ResultFuture<void> signUp(
-      {required String email,
-      required String fullName,
-      required String password}) {
-    // TODO: implement signUp
-    throw UnimplementedError();
+  ResultFuture<void> signUp({
+    required String email,
+    required String fullName,
+    required String password,
+  }) async {
+    try {
+      await _remoteDataSource.signUp(
+        email: email,
+        password: password,
+        fullName: fullName,
+      );
+      return const Right(null);
+    } on ServerException catch (e) {
+      return Left(ServerFailure.fromException(e));
+    }
   }
 
   @override
-  ResultFuture<void> updateUser(
-      {required UpdateUserAction action, required userData}) {
+  ResultFuture<void> updateUser({
+    required UpdateUserAction action,
+    required userData,
+  }) {
     // TODO: implement updateUser
     throw UnimplementedError();
   }

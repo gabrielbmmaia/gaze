@@ -22,6 +22,7 @@ void main() {
   const tUser = UserModel.empty();
   const tEmail = 'email';
   const tPassword = 'password';
+  const tFullName = 'fullName';
   const tServerException = ServerException(message: '', statusCode: '');
 
   group('signIn', () {
@@ -80,5 +81,39 @@ void main() {
       ).called(1);
       verifyNoMoreInteractions(remoteDataSource);
     });
+  });
+
+  group('signUp', () {
+    test(
+      'should call [AuthRemoteDataSource.signUp] and return [void] when '
+      'the call is successful',
+      () async {
+        when(
+          () => remoteDataSource.signUp(
+            email: any(named: 'email'),
+            password: any(named: 'password'),
+            fullName: any(named: 'fullName'),
+          ),
+        ).thenAnswer(
+          (_) async => Future.value(),
+        );
+
+        final result = await repo.signUp(
+          email: tEmail,
+          fullName: tFullName,
+          password: tPassword,
+        );
+
+        expect(result, const Right<dynamic, void>(null));
+        verify(
+          () => remoteDataSource.signUp(
+            email: tEmail,
+            fullName: tFullName,
+            password: tPassword,
+          ),
+        ).called(1);
+        verifyNoMoreInteractions(remoteDataSource);
+      },
+    );
   });
 }
