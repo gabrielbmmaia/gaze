@@ -115,5 +115,38 @@ void main() {
         verifyNoMoreInteractions(remoteDataSource);
       },
     );
+
+    test(
+      'should call [AuthRemoteDataSource] and return [ServerFailure] when '
+      'the call is unsuccessful',
+      () async {
+        when(
+          () => remoteDataSource.signUp(
+            email: any(named: 'email'),
+            password: any(named: 'password'),
+            fullName: any(named: 'fullName'),
+          ),
+        ).thenThrow(tServerException);
+
+        final result = await repo.signUp(
+          email: tEmail,
+          fullName: tFullName,
+          password: tPassword,
+        );
+
+        expect(
+          result,
+          Left<ServerFailure, dynamic>(
+            ServerFailure.fromException(tServerException),
+          ),
+        );
+        verify(() => remoteDataSource.signUp(
+              email: tEmail,
+              password: tPassword,
+              fullName: tFullName,
+            )).called(1);
+        verifyNoMoreInteractions(remoteDataSource);
+      },
+    );
   });
 }
