@@ -55,22 +55,22 @@ flutter:
   fonts:
     - family: Aeonik
       fonts:
-        - asset: assets/fonts/aeonik/AeonikTRIAL-Bold.otf
+        - asset: asset/fonts/aeonik/AeonikTRIAL-Bold.otf
           weight: 700
-        - asset: assets/fonts/aeonik/AeonikTRIAL-BoldItalic.otf
+        - asset: asset/fonts/aeonik/AeonikTRIAL-BoldItalic.otf
           style: italic
           weight: 700
-        - asset: assets/fonts/aeonik/AeonikTRIAL-Light.otf
+        - asset: asset/fonts/aeonik/AeonikTRIAL-Light.otf
           weight: 300
-        - asset: assets/fonts/aeonik/AeonikTRIAL-LightItalic.otf
+        - asset: asset/fonts/aeonik/AeonikTRIAL-LightItalic.otf
           style: italic
           weight: 300
-        - asset: assets/fonts/aeonik/AeonikTRIAL-Regular.otf
+        - asset: asset/fonts/aeonik/AeonikTRIAL-Regular.otf
           weight: 400
-        - asset: assets/fonts/aeonik/AeonikTRIAL-RegularItalic.otf
+        - asset: asset/fonts/aeonik/AeonikTRIAL-RegularItalic.otf
           style: italic
           weight: 400
     - family: Satisfy
       fonts:
-        - asset: assets/fonts/satisfy/Satisfy-Regular.ttf
+        - asset: asset/fonts/satisfy/Satisfy-Regular.ttf
           weight: 400
