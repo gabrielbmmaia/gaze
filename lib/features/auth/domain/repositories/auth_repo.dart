@@ -20,9 +20,6 @@ abstract class AuthRepo {
     required String password,
   });
 
-
-  ResultFuture<void> forgotPassword(String email);
-
   /*
   * Funcionalidade para alterar alguma informação do usuário. É necessário
   * informar o Enum desejado e o dado a ser alterado.
