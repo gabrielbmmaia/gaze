@@ -5,7 +5,7 @@ import 'package:gaze/features/auth/domain/models/user_model.dart';
 import 'package:gaze/features/auth/domain/usecases/sign_in.dart';
 import 'package:gaze/features/auth/domain/usecases/sign_up.dart';
 import 'package:gaze/features/auth/domain/usecases/update_user.dart';
-import 'package:gaze/features/auth/presentation/auth_bloc.dart';
+import 'package:gaze/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
 
