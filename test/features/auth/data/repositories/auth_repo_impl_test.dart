@@ -179,5 +179,37 @@ void main() {
         verifyNoMoreInteractions(remoteDataSource);
       },
     );
+
+    test(
+      'should call [AuthRemoteDataSource.updateUser] and return [ServerFailure] '
+      'when the call to remote data source is unsuccessful',
+      () async {
+        when(
+          () => remoteDataSource.updateUser(
+            action: any(named: 'action'),
+            userData: any<dynamic>(named: 'userData'),
+          ),
+        ).thenThrow(tServerException);
+
+        final result = await repo.updateUser(
+          action: tUpdateAction,
+          userData: tUserData,
+        );
+
+        expect(
+          result,
+          Left<ServerFailure, dynamic>(
+            ServerFailure.fromException(tServerException),
+          ),
+        );
+        verify(
+          () => remoteDataSource.updateUser(
+            action: tUpdateAction,
+            userData: tUserData,
+          ),
+        ).called(1);
+        verifyNoMoreInteractions(remoteDataSource);
+      },
+    );
   });
 }
