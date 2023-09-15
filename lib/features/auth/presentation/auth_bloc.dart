@@ -61,7 +61,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       ),
     );
     result.fold(
-      (failure) => null,
+      (failure) => emit(AuthError(failure.errorMessage)),
       (_) => emit(const SignedUp()),
     );
   }

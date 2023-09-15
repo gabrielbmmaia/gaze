@@ -123,5 +123,28 @@ void main() {
         verifyNoMoreInteractions(signUp);
       },
     );
+    blocTest<AuthBloc, AuthState>(
+      'should emit [AuthLoading, AuthError] when [SignUpEvent] is '
+      'added unsuccessful',
+      build: () {
+        when(() => signUp(any())).thenAnswer((_) async => Left(tServerFailure));
+        return bloc;
+      },
+      act: (bloc) => bloc.add(
+        SignUpEvent(
+          email: tSigUpParams.email,
+          password: tSigUpParams.password,
+          fullName: tSigUpParams.fullName,
+        ),
+      ),
+      expect: () => <AuthState>[
+        const AuthLoading(),
+        AuthError(tServerFailure.errorMessage),
+      ],
+      verify: (_) {
+        verify(() => signUp(tSigUpParams)).called(1);
+        verifyNoMoreInteractions(signUp);
+      },
+    );
   });
 }
