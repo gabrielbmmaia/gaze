@@ -49,9 +49,16 @@ class AuthRepoImpl implements AuthRepo {
   @override
   ResultFuture<void> updateUser({
     required UpdateUserAction action,
-    required userData,
-  }) {
-    // TODO: implement updateUser
-    throw UnimplementedError();
+    required dynamic userData,
+  }) async {
+    try {
+      await _remoteDataSource.updateUser(
+        action: action,
+        userData: userData,
+      );
+      return const Right(null);
+    } on ServerException catch (e) {
+      return Left(ServerFailure.fromException(e));
+    }
   }
 }
