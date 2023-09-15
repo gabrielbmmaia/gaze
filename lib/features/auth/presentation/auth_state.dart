@@ -38,10 +38,5 @@ class SignedUp extends AuthState {
 }
 
 class UserUpdated extends AuthState {
-  const UserUpdated(this.message);
-
-  final String message;
-
-  @override
-  List<String> get props => [message];
+  const UserUpdated();
 }

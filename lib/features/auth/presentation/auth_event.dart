@@ -45,5 +45,5 @@ class UpdateUserEvent extends AuthEvent {
   final dynamic userData;
 
   @override
-  List<Object?> get props => [action, userData];
+  List<dynamic> get props => [action, userData];
 }

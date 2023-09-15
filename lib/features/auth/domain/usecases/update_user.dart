@@ -32,5 +32,5 @@ class UpdateUserParams extends Equatable {
   final dynamic userData;
 
   @override
-  List<Object?> get props => throw UnimplementedError();
+  List<Object?> get props => [action, userData];
 }

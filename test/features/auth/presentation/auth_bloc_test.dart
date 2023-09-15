@@ -147,4 +147,52 @@ void main() {
       },
     );
   });
+
+  group('updateUserEvent', () {
+    blocTest<AuthBloc, AuthState>(
+      'should emit [AuthLoading, UserUpdated] when [UpdateUserEvent] is added',
+      build: () {
+        when(() => updateUser(any())).thenAnswer(
+          (_) async => const Right(null),
+        );
+        return bloc;
+      },
+      act: (bloc) => bloc.add(
+        UpdateUserEvent(
+          action: tUpdateUserParams.action,
+          userData: tUpdateUserParams.userData,
+        ),
+      ),
+      expect: () => const <AuthState>[AuthLoading(), UserUpdated()],
+      verify: (_) {
+        verify(() => updateUser(tUpdateUserParams)).called(1);
+        verifyNoMoreInteractions(updateUser);
+      },
+    );
+
+    blocTest<AuthBloc, AuthState>(
+      'should emit [AuthLoading, AuthError] when [UpdateUserEvent] is '
+      'added unsuccessful',
+      build: () {
+        when(() => updateUser(any())).thenAnswer(
+          (_) async => Left(tServerFailure),
+        );
+        return bloc;
+      },
+      act: (bloc) => bloc.add(
+        UpdateUserEvent(
+          action: tUpdateUserParams.action,
+          userData: tUpdateUserParams.userData,
+        ),
+      ),
+      expect: () => <AuthState>[
+        const AuthLoading(),
+        AuthError(tServerFailure.errorMessage)
+      ],
+      verify: (_) {
+        verify(() => updateUser(tUpdateUserParams)).called(1);
+        verifyNoMoreInteractions(updateUser);
+      },
+    );
+  });
 }

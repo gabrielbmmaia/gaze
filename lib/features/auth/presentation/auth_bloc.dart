@@ -26,6 +26,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     });
     on<SignInEvent>(_signInHandler);
     on<SignUpEvent>(_signUpHandler);
+    on<UpdateUserEvent>(_updateUserHandler);
   }
 
   final SignInUseCase _signIn;
@@ -63,6 +64,23 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     result.fold(
       (failure) => emit(AuthError(failure.errorMessage)),
       (_) => emit(const SignedUp()),
+    );
+  }
+
+  Future<void> _updateUserHandler(
+    UpdateUserEvent event,
+    Emitter<AuthState> emit,
+  ) async {
+    final result = await _updateUser(
+      UpdateUserParams(
+        action: event.action,
+        userData: event.userData,
+      ),
+    );
+
+    result.fold(
+      (failure) => emit(AuthError(failure.errorMessage)),
+      (_) => emit(const UserUpdated()),
     );
   }
 }
