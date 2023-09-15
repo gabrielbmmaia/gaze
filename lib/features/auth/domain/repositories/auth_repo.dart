@@ -1,7 +1,7 @@
 
 import 'package:gaze/core/enums/update_user.dart';
 import 'package:gaze/core/utils/typedefs.dart';
-import 'package:gaze/features/auth/domain/models/user.dart';
+import 'package:gaze/features/auth/domain/models/user_model.dart';
 
 /*
 * ResultFuture é um typedef de Future<Either<Failure, T>>
@@ -9,7 +9,7 @@ import 'package:gaze/features/auth/domain/models/user.dart';
 abstract class AuthRepo {
   const AuthRepo();
 
-  ResultFuture<User> signIn({
+  ResultFuture<UserModel> signIn({
     required String email,
     required String password,
   });
