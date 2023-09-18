@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gaze/core/common/widgets/rounded_button.dart';
 import 'package:gaze/core/res/fonts.dart';
 import 'package:gaze/core/res/string.dart';
+import 'package:gaze/features/auth/presentation/views/sign_up_screen.dart';
 import 'package:gaze/features/auth/presentation/widgets/sign_in_form.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -52,7 +53,12 @@ class _SignInScreenState extends State<SignInScreen> {
               Align(
                 alignment: Alignment.centerRight,
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushReplacementNamed(
+                      context,
+                      SignUpScreen.routeName,
+                    );
+                  },
                   child: const Text(
                     StringRes.createAccount,
                     style: TextStyle(

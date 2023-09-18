@@ -1,7 +1,20 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:gaze/features/auth/presentation/views/sign_in_screen.dart';
+import 'package:gaze/core/providers/user_provider.dart';
+import 'package:gaze/core/res/colours.dart';
+import 'package:gaze/core/res/fonts.dart';
+import 'package:gaze/core/res/string.dart';
+import 'package:gaze/core/services/generate_route.dart';
+import 'package:gaze/core/services/injection_container.dart';
+import 'package:gaze/firebase_options.dart';
+import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await init();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -10,13 +23,23 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => UserProvider()),
+      ],
+      child: MaterialApp(
+        title: StringRes.appTitle,
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSwatch(
+            accentColor: Colours.primaryColour,
+          ),
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+          useMaterial3: true,
+          appBarTheme: const AppBarTheme(color: Colors.transparent),
+          fontFamily: Fonts.aeonik,
+        ),
+        onGenerateRoute: generateRoute,
       ),
-      home: const SignInScreen(),
     );
   }
 }

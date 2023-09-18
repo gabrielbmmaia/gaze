@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "369421691278",
+    "project_id": "gbmm-education-flutter-app",
+    "storage_bucket": "gbmm-education-flutter-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:369421691278:android:021255278c2b48d3fddcdf",
+        "android_client_info": {
+          "package_name": "com.gbmm.education_app_bloc_tdd_clean"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "369421691278-tgtv5ils0umom6l58p9p19quv283ueu4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfMRzTtOS1L5rROC6aMj6eBW_0vJ3rNiM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "369421691278-tgtv5ils0umom6l58p9p19quv283ueu4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "369421691278-943or0kci025g4bagikpqubb7163636s.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.gbmm.educationAppBlocTddClean"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:369421691278:android:16f51a69a7ec9dd6fddcdf",
+        "android_client_info": {
+          "package_name": "com.gbmm.gaze"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "369421691278-tgtv5ils0umom6l58p9p19quv283ueu4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfMRzTtOS1L5rROC6aMj6eBW_0vJ3rNiM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "369421691278-tgtv5ils0umom6l58p9p19quv283ueu4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "369421691278-943or0kci025g4bagikpqubb7163636s.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.gbmm.educationAppBlocTddClean"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
