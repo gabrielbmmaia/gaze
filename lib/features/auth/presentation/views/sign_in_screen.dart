@@ -1,7 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gaze/core/common/widgets/rounded_button.dart';
 import 'package:gaze/core/res/fonts.dart';
 import 'package:gaze/core/res/string.dart';
+import 'package:gaze/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:gaze/features/auth/presentation/views/sign_up_screen.dart';
 import 'package:gaze/features/auth/presentation/widgets/sign_in_form.dart';
 
@@ -91,7 +94,21 @@ class _SignInScreenState extends State<SignInScreen> {
                 ),
               ),
               const SizedBox(height: 30),
-              RoundedButton(label: StringRes.signIn, onPressed: () {}),
+              RoundedButton(
+                label: StringRes.signIn,
+                onPressed: () {
+                  FocusManager.instance.primaryFocus?.unfocus();
+                  FirebaseAuth.instance.currentUser?.reload();
+                  if (formKey.currentState!.validate()) {
+                    context.read<AuthBloc>().add(
+                          SignInEvent(
+                            email: emailController.text,
+                            password: passwordController.text,
+                          ),
+                        );
+                  }
+                },
+              ),
             ],
           ),
         ),

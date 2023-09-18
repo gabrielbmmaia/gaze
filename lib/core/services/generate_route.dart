@@ -1,14 +1,41 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart' as fui;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gaze/core/common/views/page_under_construction.dart';
+import 'package:gaze/core/extensions/context_extension.dart';
 import 'package:gaze/core/services/injection_container.dart';
+import 'package:gaze/features/auth/data/models/user_entity.dart';
 import 'package:gaze/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:gaze/features/auth/presentation/views/sign_in_screen.dart';
 import 'package:gaze/features/auth/presentation/views/sign_up_screen.dart';
+import 'package:gaze/features/dashboard/presentation/views/dashboard.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
+    case '/':
+      return _pageBuilder(
+        (context) {
+          if (sl<FirebaseAuth>().currentUser != null) {
+            final user = sl<FirebaseAuth>().currentUser!;
+            final userEntity = UserEntity(
+              uid: user.uid,
+              email: user.email ?? '',
+              fullName: user.displayName ?? '',
+            );
+
+            context.userProvider.initUser(userEntity);
+            return const DashboardScreen();
+          }
+
+          return BlocProvider(
+            create: (_) => sl<AuthBloc>(),
+            child: const SignInScreen(),
+          );
+        },
+        settings: settings,
+      );
+
     case SignInScreen.routeName:
       return _pageBuilder(
         (_) => BlocProvider(

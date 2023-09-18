@@ -7,7 +7,7 @@ import 'package:gaze/core/res/fonts.dart';
 import 'package:gaze/core/res/string.dart';
 import 'package:gaze/core/services/generate_route.dart';
 import 'package:gaze/core/services/injection_container.dart';
-import 'package:gaze/features/auth/presentation/views/sign_in_screen.dart';
+import 'package:gaze/features/dashboard/presentation/providers/dashboard_controller.dart';
 import 'package:gaze/firebase_options.dart';
 import 'package:provider/provider.dart';
 
@@ -29,6 +29,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => UserProvider()),
+        ChangeNotifierProvider(create: (_) => DashboardController()),
       ],
       child: MaterialApp(
         title: StringRes.appTitle,
@@ -42,7 +43,6 @@ class MyApp extends StatelessWidget {
           fontFamily: Fonts.aeonik,
         ),
         onGenerateRoute: generateRoute,
-        initialRoute: SignInScreen.routeName,
       ),
     );
   }

@@ -9,6 +9,7 @@ import 'package:gaze/core/utils/core_utils.dart';
 import 'package:gaze/features/auth/data/models/user_entity.dart';
 import 'package:gaze/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:gaze/features/auth/presentation/widgets/sign_up_form.dart';
+import 'package:gaze/features/dashboard/presentation/views/dashboard.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -50,6 +51,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 );
           } else if (state is SignedIn) {
             context.read<UserProvider>().initUser(state.user as UserEntity);
+            Navigator.pushReplacementNamed(context, DashboardScreen.routeName);
           }
         },
         builder: (context, state) {
