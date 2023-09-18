@@ -54,7 +54,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 alignment: Alignment.centerRight,
                 child: TextButton(
                   onPressed: () {
-                    Navigator.pushReplacementNamed(
+                    Navigator.pushNamed(
                       context,
                       SignUpScreen.routeName,
                     );
@@ -78,7 +78,9 @@ class _SignInScreenState extends State<SignInScreen> {
               Align(
                 alignment: Alignment.centerRight,
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/forgot-password');
+                  },
                   child: const Text(
                     StringRes.forgotPassword,
                     style: TextStyle(

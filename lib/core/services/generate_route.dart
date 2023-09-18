@@ -1,5 +1,7 @@
+import 'package:firebase_ui_auth/firebase_ui_auth.dart' as fui;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gaze/core/common/views/page_under_construction.dart';
 import 'package:gaze/core/services/injection_container.dart';
 import 'package:gaze/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:gaze/features/auth/presentation/views/sign_in_screen.dart';
@@ -25,12 +27,15 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         settings: settings,
       );
 
+    case '/forgot-password':
+      return _pageBuilder(
+        (_) => const fui.ForgotPasswordScreen(),
+        settings: settings,
+      );
+
     default:
       return _pageBuilder(
-        (_) => BlocProvider(
-          create: (_) => sl<AuthBloc>(),
-          child: const SignInScreen(),
-        ),
+        (_) => const PageUnderConstruction(),
         settings: settings,
       );
   }

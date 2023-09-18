@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_ui_auth/firebase_ui_auth.dart' as fui;
 import 'package:flutter/material.dart';
 import 'package:gaze/core/providers/user_provider.dart';
 import 'package:gaze/core/res/colours.dart';
@@ -6,15 +7,17 @@ import 'package:gaze/core/res/fonts.dart';
 import 'package:gaze/core/res/string.dart';
 import 'package:gaze/core/services/generate_route.dart';
 import 'package:gaze/core/services/injection_container.dart';
+import 'package:gaze/features/auth/presentation/views/sign_in_screen.dart';
 import 'package:gaze/firebase_options.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await init();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  fui.FirebaseUIAuth.configureProviders([fui.EmailAuthProvider()]);
+  await init();
   runApp(const MyApp());
 }
 
@@ -39,6 +42,7 @@ class MyApp extends StatelessWidget {
           fontFamily: Fonts.aeonik,
         ),
         onGenerateRoute: generateRoute,
+        initialRoute: SignInScreen.routeName,
       ),
     );
   }
