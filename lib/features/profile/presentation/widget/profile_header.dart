@@ -18,6 +18,7 @@ class ProfileHeader extends StatelessWidget {
 
         return Column(
           children: [
+            const SizedBox(height: 20),
             CircleAvatar(
               radius: 50,
               backgroundImage: image != null

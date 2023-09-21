@@ -153,6 +153,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             child: ListView(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               children: [
+                const SizedBox(height: 20),
                 Builder(
                   builder: (context) {
                     final user = context.currentUser!;
