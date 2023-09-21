@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gaze/core/res/colours.dart';
-import 'package:gaze/core/res/fonts.dart';
 
 class RoundedButton extends StatelessWidget {
   const RoundedButton({
@@ -30,10 +29,7 @@ class RoundedButton extends StatelessWidget {
       child: Text(
         label,
         style: textStyle ??
-            const TextStyle(
-              fontFamily: Fonts.aeonik,
-              fontSize: 16,
-            ),
+            const TextStyle(fontSize: 16),
       ),
     );
   }

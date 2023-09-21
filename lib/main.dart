@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
           visualDensity: VisualDensity.adaptivePlatformDensity,
           useMaterial3: true,
           appBarTheme: const AppBarTheme(color: Colors.transparent),
-          fontFamily: Fonts.aeonik,
+          fontFamily: Fonts.poppins,
         ),
         onGenerateRoute: generateRoute,
       ),

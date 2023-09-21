@@ -34,6 +34,8 @@ dependencies:
   smooth_page_indicator: ^1.1.0
   swipe_to: ^1.0.2
   url_launcher: ^6.1.14
+  image_picker: ^1.0.4
+
 
 dev_dependencies:
   flutter_test:
@@ -54,6 +56,7 @@ flutter:
 
   assets:
     - asset/lottie/
+    - asset/images/
 
   fonts:
     - family: Aeonik
@@ -77,3 +80,21 @@ flutter:
       fonts:
         - asset: asset/fonts/satisfy/Satisfy-Regular.ttf
           weight: 400
+    - family: Poppins
+      fonts:
+        - asset: asset/fonts/poppins/Poppins-Thin.ttf
+          weight: 100
+        - asset: asset/fonts/poppins/Poppins-ExtraLight.ttf
+          weight: 200
+        - asset: asset/fonts/poppins/Poppins-Light.ttf
+          weight: 300
+        - asset: asset/fonts/poppins/Poppins-Regular.ttf
+          weight: 400
+        - asset: asset/fonts/poppins/Poppins-Medium.ttf
+          weight: 500
+        - asset: asset/fonts/poppins/Poppins-SemiBold.ttf
+          weight: 600
+        - asset: asset/fonts/poppins/Poppins-Bold.ttf
+          weight: 700
+        - asset: asset/fonts/poppins/Poppins-ExtraBold.ttf
+          weight: 800

@@ -5,4 +5,5 @@ class Colours {
   const Colours._();
 
   static const primaryColour = Color(0xFF458cFF);
+  static const neutralTextColour = Color(0xFF757C8E);
 }
