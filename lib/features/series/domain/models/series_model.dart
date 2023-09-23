@@ -10,7 +10,7 @@ class SeriesModel extends Equatable {
 
   const SeriesModel.empty()
       : this(
-          id: 0,
+          id: '',
           posterPath: '',
           voteAverage: '',
           originalName: '',
@@ -18,7 +18,7 @@ class SeriesModel extends Equatable {
 
   final String posterPath;
   final String voteAverage;
-  final int id;
+  final String id;
   final String originalName;
 
   @override

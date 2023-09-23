@@ -52,7 +52,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 );
           } else if (state is SignedIn) {
             context.read<UserProvider>().initUser(state.user as UserEntity);
-            Navigator.pushReplacementNamed(context, DashboardScreen.routeName);
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              DashboardScreen.routeName,
+              (route) => false,
+            );
           }
         },
         builder: (context, state) {
