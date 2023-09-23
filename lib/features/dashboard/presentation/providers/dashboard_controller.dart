@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gaze/core/common/views/persistent_view.dart';
 import 'package:gaze/core/providers/tab_navigator.dart';
 import 'package:gaze/features/profile/presentation/views/profile_screen.dart';
+import 'package:gaze/features/series/presentation/views/series_screen.dart';
 import 'package:provider/provider.dart';
 
 class DashboardController extends ChangeNotifier {
@@ -9,7 +10,7 @@ class DashboardController extends ChangeNotifier {
 
   final List<Widget> _screens = [
     ChangeNotifierProvider(
-      create: (_) => TabNavigator(TabItem(child: const Placeholder())),
+      create: (_) => TabNavigator(TabItem(child: const SeriesScreen())),
       child: const PersistentView(),
     ),
     ChangeNotifierProvider(

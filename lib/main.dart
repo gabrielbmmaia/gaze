@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => DashboardController()),
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: StringRes.appTitle,
         theme: ThemeData(
           colorScheme: ColorScheme.fromSwatch(
