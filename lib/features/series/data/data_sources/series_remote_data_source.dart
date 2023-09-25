@@ -1,13 +1,14 @@
 import 'dart:convert';
+
 import 'package:gaze/core/errors/exceptions.dart';
-import 'package:gaze/core/utils/typedefs.dart';
+import 'package:gaze/features/series/data/data_sources/interceptor.dart';
 import 'package:gaze/features/series/data/models/series_entity.dart';
-import 'package:gaze/features/series/data/models/series_request.dart';
-import 'package:http/http.dart' as http;
+import 'package:http_interceptor/http_interceptor.dart';
 
 const String kBaseUrl = 'http://api.themoviedb.org/3';
 const kGetPopularSeriesEndpoint = '/tv/popular';
 const kTmdbApiKey = '24e29501a7520a99e65304fad758b78b';
+const kImageBaseUrl = 'https://image.tmdb.org/t/p/w500';
 
 abstract class SeriesRemoteDataSource {
   const SeriesRemoteDataSource();
@@ -16,9 +17,9 @@ abstract class SeriesRemoteDataSource {
 }
 
 class SeriesRemoteDataSourceImpl extends SeriesRemoteDataSource {
-  const SeriesRemoteDataSourceImpl(this._client);
+  SeriesRemoteDataSourceImpl();
 
-  final http.Client _client;
+  final _client = InterceptedClient.build(interceptors: [LoggingInterceptor()]);
 
   @override
   Future<List<SeriesEntity>> getPopularSeries() async {
@@ -32,11 +33,13 @@ class SeriesRemoteDataSourceImpl extends SeriesRemoteDataSource {
           statusCode: response.statusCode.toString(),
         );
       }
-      final seriesRequest = SeriesRequest.fromJson(
-        jsonDecode(response.body) as DataMap,
-      );
-      print(seriesRequest.runtimeType);
-      return seriesRequest.result;
+
+      final data = jsonDecode(response.body)['results'] as List<dynamic>;
+      return data
+          .map<SeriesEntity>(
+            (series) => SeriesEntity.fromJson(series as Map<String, dynamic>),
+          )
+          .toList();
     } on ServerException {
       rethrow;
     } catch (e) {

@@ -16,7 +16,12 @@ class LoadingPopularSeries extends SeriesState {
 }
 
 class LoadedPopularSeries extends SeriesState {
-  const LoadedPopularSeries();
+  const LoadedPopularSeries({required this.popularList});
+
+  final List<SeriesModel> popularList;
+
+  @override
+  List<Object> get props => [popularList];
 }
 
 class ErrorPopularSeries extends SeriesState {

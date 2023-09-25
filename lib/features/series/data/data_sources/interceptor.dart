@@ -34,3 +34,5 @@ class LoggingInterceptor implements InterceptorContract {
     return data;
   }
 }
+
+ final client = InterceptedClient.build(interceptors: [LoggingInterceptor()]);

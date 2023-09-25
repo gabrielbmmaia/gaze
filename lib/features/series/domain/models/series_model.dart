@@ -5,7 +5,7 @@ class SeriesModel extends Equatable {
     required this.posterPath,
     required this.voteAverage,
     required this.id,
-    required this.originalName,
+    required this.name,
   });
 
   const SeriesModel.empty()
@@ -13,20 +13,20 @@ class SeriesModel extends Equatable {
           id: '',
           posterPath: '',
           voteAverage: '',
-          originalName: '',
+          name: '',
         );
 
-  final String posterPath;
+  final String? posterPath;
   final String voteAverage;
   final String id;
-  final String originalName;
+  final String name;
 
   @override
   String toString() {
     return 'SeriesModel{posterPath: $posterPath, voteAverage: $voteAverage, '
-        'id: $id, originalName: $originalName}';
+        'id: $id, originalName: $name}';
   }
 
   @override
-  List<dynamic> get props => [posterPath, voteAverage, id, originalName];
+  List<dynamic> get props => [posterPath, voteAverage, id, name];
 }

@@ -6,21 +6,21 @@ class SeriesEntity extends SeriesModel {
     required super.posterPath,
     required super.voteAverage,
     required super.id,
-    required super.originalName,
+    required super.name,
   });
 
-  factory SeriesEntity.fromJson(DataMap json) {
+  factory SeriesEntity.fromJson(Map<String, dynamic> json) {
     return SeriesEntity(
-      posterPath: json['posterPath'] as String,
-      voteAverage: json['voteAverage'].toString(),
+      posterPath: json['poster_path'] as String? ?? '',
+      voteAverage: json['vote_average'].toString(),
       id: json['id'].toString(),
-      originalName: json['originalName'] as String,
+      name: json['name'] as String,
     );
   }
 
   const SeriesEntity.empty()
       : this(
-          originalName: '',
+          name: '',
           voteAverage: '',
           posterPath: '',
           id: '',
@@ -28,10 +28,10 @@ class SeriesEntity extends SeriesModel {
 
   DataMap toMap() {
     return {
-      'posterPath': posterPath,
-      'voteAverage': voteAverage,
+      'poster_path': posterPath,
+      'vote_average': voteAverage,
       'id': id,
-      'originalName': originalName,
+      'name': name,
     };
   }
 }

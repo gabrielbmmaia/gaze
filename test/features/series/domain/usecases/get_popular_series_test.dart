@@ -9,11 +9,11 @@ import 'series_repo.mock.dart';
 
 void main() {
   late SeriesRepo repo;
-  late GetPopularSeries useCase;
+  late GetPopularSeriesUseCase useCase;
 
   setUp(() {
     repo = MockSeriesRepo();
-    useCase = GetPopularSeries(repo);
+    useCase = GetPopularSeriesUseCase(repo);
   });
 
   const tSeriesList = [SeriesModel.empty()];

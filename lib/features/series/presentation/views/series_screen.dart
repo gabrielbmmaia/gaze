@@ -1,8 +1,11 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gaze/core/res/colours.dart';
 import 'package:gaze/core/res/fonts.dart';
 import 'package:gaze/core/res/string.dart';
+import 'package:gaze/features/series/presentation/bloc/series_bloc.dart';
+import 'package:gaze/features/series/presentation/widgets/series_list.dart';
 
 class SeriesScreen extends StatefulWidget {
   const SeriesScreen({super.key});
@@ -12,6 +15,12 @@ class SeriesScreen extends StatefulWidget {
 }
 
 class _SeriesScreenState extends State<SeriesScreen> {
+  @override
+  void initState() {
+    context.read<SeriesBloc>().add(const LoadPopularListEvent());
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,70 +37,50 @@ class _SeriesScreenState extends State<SeriesScreen> {
           ),
         ),
       ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                width: double.infinity,
-                child: CarouselSlider.builder(
-                  itemCount: 10,
-                  options: CarouselOptions(
-                    height: 300,
-                    autoPlay: true,
-                    enlargeCenterPage: true,
-                    pageSnapping: true,
-                    viewportFraction: 0.55,
-                    autoPlayCurve: Curves.fastOutSlowIn,
-                    autoPlayAnimationDuration: const Duration(seconds: 1),
-                  ),
-                  itemBuilder: (context, itemIndex, pageViewIndex) {
-                    return ClipRRect(
-                      borderRadius: BorderRadius.circular(12),
-                      child: Container(
-                        width: 200,
+      body: BlocConsumer<SeriesBloc, SeriesState>(
+        listener: (context, state) {
+          print(state);
+        },
+        builder: (context, state) {
+          return SafeArea(
+            child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: double.infinity,
+                    child: CarouselSlider.builder(
+                      itemCount: 10,
+                      options: CarouselOptions(
                         height: 300,
-                        color: Colors.amber,
+                        autoPlay: true,
+                        enlargeCenterPage: true,
+                        pageSnapping: true,
+                        viewportFraction: 0.55,
+                        autoPlayCurve: Curves.fastOutSlowIn,
+                        autoPlayAnimationDuration: const Duration(seconds: 1),
                       ),
-                    );
-                  },
-                ),
+                      itemBuilder: (context, itemIndex, pageViewIndex) {
+                        return ClipRRect(
+                          borderRadius: BorderRadius.circular(12),
+                          child: Container(
+                            width: 200,
+                            height: 300,
+                            color: Colors.amber,
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                  const SizedBox(height: 30),
+                  if (state is LoadedPopularSeries)
+                    SeriesList(title: 'Popular', seriesList: state.popularList),
+                ],
               ),
-              const SizedBox(height: 30),
-              const Text(
-                'Popular',
-                style: TextStyle(
-                  fontSize: 26,
-                  color: Colors.white,
-                ),
-              ),
-              SizedBox(
-                height: 200,
-                width: double.infinity,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  physics: const BouncingScrollPhysics(),
-                  itemCount: 10,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: Container(
-                          color: Colors.amber,
-                          height: 300,
-                          width: 200,
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ],
-          ),
-        ),
+            ),
+          );
+        },
       ),
     );
   }

@@ -13,7 +13,7 @@ void main() {
 
   setUp(() {
     client = MockClient();
-    remoteDataSource = SeriesRemoteDataSourceImpl(client);
+    remoteDataSource = SeriesRemoteDataSourceImpl();
     registerFallbackValue(Uri());
   });
 

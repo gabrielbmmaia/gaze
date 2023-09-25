@@ -10,6 +10,7 @@ import 'package:gaze/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:gaze/features/auth/presentation/views/sign_in_screen.dart';
 import 'package:gaze/features/auth/presentation/views/sign_up_screen.dart';
 import 'package:gaze/features/dashboard/presentation/views/dashboard.dart';
+import 'package:gaze/features/series/presentation/bloc/series_bloc.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -56,7 +57,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
 
     case DashboardScreen.routeName:
       return _pageBuilder(
-        (_) => const DashboardScreen(),
+        (_) => BlocProvider(
+          create: (_) => sl<SeriesBloc>(),
+          child: const DashboardScreen(),
+        ),
         settings: settings,
       );
 
