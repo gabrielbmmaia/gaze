@@ -77,10 +77,13 @@ class _SeriesScreenState extends State<SeriesScreen> {
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: const EdgeInsets.all(8),
-                      child: Container(
-                        color: Colors.amber,
-                        height: 200,
-                        width: 200,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: Container(
+                          color: Colors.amber,
+                          height: 300,
+                          width: 200,
+                        ),
                       ),
                     );
                   },
