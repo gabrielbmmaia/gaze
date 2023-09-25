@@ -20,4 +20,14 @@ class SeriesRepoImpl implements SeriesRepo {
       return Left(ServerFailure.fromException(e));
     }
   }
+
+  @override
+  ResultFuture<List<SeriesModel>> getTrendingSeries() async {
+    try {
+      final result = await _remoteDataSource.getTrendingSeries();
+      return Right(result);
+    } on ServerException catch (e) {
+      return Left(ServerFailure.fromException(e));
+    }
+  }
 }

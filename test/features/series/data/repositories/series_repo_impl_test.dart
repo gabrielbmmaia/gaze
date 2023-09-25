@@ -42,7 +42,7 @@ void main() {
           result,
           isA<Right<dynamic, List<SeriesModel>>>(),
         );
-        verify(() => remoteDataSource.getPopularSeries());
+        verify(() => remoteDataSource.getPopularSeries()).called(1);
         verifyNoMoreInteractions(remoteDataSource);
       },
     );
@@ -61,6 +61,42 @@ void main() {
           ),
         );
         verify(() => remoteDataSource.getPopularSeries()).called(1);
+        verifyNoMoreInteractions(remoteDataSource);
+      },
+    );
+  });
+
+  group('getTrendingSeries', () {
+    test(
+      'should call [SeriesRemoteDataSource.getTrendingSeries] and return '
+      '[Right<List<SeriesModel>>] when the call is successful',
+      () async {
+        when(() => remoteDataSource.getTrendingSeries()).thenAnswer(
+          (_) async => tSeriesEntityList,
+        );
+
+        final result = await repo.getTrendingSeries();
+
+        expect(result, isA<Right<dynamic, List<SeriesModel>>>());
+        verify(() => remoteDataSource.getTrendingSeries()).called(1);
+        verifyNoMoreInteractions(remoteDataSource);
+      },
+    );
+    test(
+      'should return [Left<ServerFailure>] when the call is unsuccessful',
+      () async {
+        when(() => remoteDataSource.getTrendingSeries())
+            .thenThrow(tServerException);
+
+        final result = await repo.getTrendingSeries();
+
+        expect(
+          result,
+          Left<ServerFailure, dynamic>(
+            ServerFailure.fromException(tServerException),
+          ),
+        );
+        verify(() => remoteDataSource.getTrendingSeries()).called(1);
         verifyNoMoreInteractions(remoteDataSource);
       },
     );
