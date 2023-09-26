@@ -9,4 +9,6 @@ abstract class SeriesRepo {
   ResultFuture<List<SeriesModel>> getTrendingSeries();
 
   ResultFuture<List<SeriesModel>> getTopRatedSeries();
+
+  ResultFuture<List<SeriesModel>> getNetflixSeries();
 }

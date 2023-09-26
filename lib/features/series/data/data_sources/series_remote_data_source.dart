@@ -9,6 +9,7 @@ const String kBaseUrl = 'http://api.themoviedb.org/3';
 const kGetPopularSeriesEndpoint = '/tv/popular';
 const kGetTrendingSeriesEndpoint = '/trending/tv';
 const kGetTopRatedSeriesEndpoint = '/tv/top_rated';
+const kGetDiscoverSeriesEndpoint = '/discover/tv';
 const kTmdbApiKey = '24e29501a7520a99e65304fad758b78b';
 const kImageBaseUrl = 'https://image.tmdb.org/t/p/w500';
 
@@ -20,6 +21,8 @@ abstract class SeriesRemoteDataSource {
   Future<List<SeriesEntity>> getTrendingSeries();
 
   Future<List<SeriesEntity>> getTopRatedSeries();
+
+  Future<List<SeriesEntity>> getNetflixSeries();
 }
 
 class SeriesRemoteDataSourceImpl extends SeriesRemoteDataSource {
@@ -85,6 +88,34 @@ class SeriesRemoteDataSourceImpl extends SeriesRemoteDataSource {
       final response = await _client.get(
         Uri.parse(
           '$kBaseUrl$kGetTopRatedSeriesEndpoint?api_key=$kTmdbApiKey',
+        ),
+      );
+      if (response.statusCode != 200) {
+        throw ServerException(
+          message: response.body,
+          statusCode: response.statusCode.toString(),
+        );
+      }
+      final data = jsonDecode(response.body)['results'] as List<dynamic>;
+      return data
+          .map(
+            (series) => SeriesEntity.fromJson(series as Map<String, dynamic>),
+          )
+          .toList();
+    } on ServerException {
+      rethrow;
+    } catch (e) {
+      throw ServerException(message: e.toString(), statusCode: '505');
+    }
+  }
+
+  @override
+  Future<List<SeriesEntity>> getNetflixSeries() async {
+    try {
+      final response = await _client.get(
+        Uri.parse(
+          '$kBaseUrl$kGetTopRatedSeriesEndpoint?api_key=$kTmdbApiKey'
+          '&with_watch_providers=8&watch_region=US',
         ),
       );
       if (response.statusCode != 200) {

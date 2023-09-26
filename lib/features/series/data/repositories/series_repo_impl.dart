@@ -40,4 +40,14 @@ class SeriesRepoImpl implements SeriesRepo {
       return Left(ServerFailure.fromException(e));
     }
   }
+
+  @override
+  ResultFuture<List<SeriesModel>> getNetflixSeries() async {
+    try {
+      final result = await _remoteDataSource.getNetflixSeries();
+      return Right(result);
+    } on ServerException catch (e) {
+      return Left(ServerFailure.fromException(e));
+    }
+  }
 }

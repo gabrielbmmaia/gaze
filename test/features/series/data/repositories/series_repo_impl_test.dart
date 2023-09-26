@@ -151,4 +151,43 @@ void main() {
       },
     );
   });
+
+  group('getNetflixSeries', () {
+    test(
+      'should call [SeriesRemoteDataSource.getNetflixSeries] and return '
+          '[Right<List<SeriesModel>] when the call is successful',
+          () async {
+        when(() => remoteDataSource.getNetflixSeries()).thenAnswer(
+              (_) async => tSeriesEntityList,
+        );
+
+        final result = await repo.getNetflixSeries();
+
+        expect(
+          result,
+          isA<Right<dynamic, List<SeriesModel>>>(),
+        );
+        verify(() => remoteDataSource.getNetflixSeries()).called(1);
+        verifyNoMoreInteractions(remoteDataSource);
+      },
+    );
+    test(
+      'should return [Left<ServerFailure>] when the call is unsuccessful',
+          () async {
+        when(() => remoteDataSource.getNetflixSeries())
+            .thenThrow(tServerException);
+
+        final result = await repo.getNetflixSeries();
+
+        expect(
+          result,
+          Left<ServerFailure, dynamic>(
+            ServerFailure.fromException(tServerException),
+          ),
+        );
+        verify(() => remoteDataSource.getNetflixSeries()).called(1);
+        verifyNoMoreInteractions(remoteDataSource);
+      },
+    );
+  });
 }
