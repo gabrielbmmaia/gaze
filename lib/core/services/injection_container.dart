@@ -11,9 +11,11 @@ import 'package:gaze/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:gaze/features/series/data/data_sources/series_remote_data_source.dart';
 import 'package:gaze/features/series/data/repositories/series_repo_impl.dart';
 import 'package:gaze/features/series/domain/repositories/series_repo.dart';
+import 'package:gaze/features/series/domain/usecases/get_netflix_series.dart';
 import 'package:gaze/features/series/domain/usecases/get_popular_series.dart';
 import 'package:gaze/features/series/domain/usecases/get_top_rated_series.dart';
 import 'package:gaze/features/series/domain/usecases/get_trending_series.dart';
+import 'package:gaze/features/series/presentation/bloc/netflix/netflix_bloc.dart';
 import 'package:gaze/features/series/presentation/bloc/popular/popular_bloc.dart';
 import 'package:gaze/features/series/presentation/bloc/top_rated/top_rated_bloc.dart';
 import 'package:gaze/features/series/presentation/bloc/trending/trending_bloc.dart';
@@ -31,10 +33,12 @@ Future<void> _seriesInit() async {
     ..registerFactory(() => TopRatedBloc(getTopRatedSeries: sl()))
     ..registerFactory(() => PopularBloc(getPopularSeries: sl()))
     ..registerFactory(() => TrendingBloc(getTrendingSeries: sl()))
+    ..registerFactory(() => NetflixBloc(getNetflixSeries: sl()))
 
     ..registerLazySingleton(() => GetPopularSeriesUseCase(sl()))
     ..registerLazySingleton(() => GetTrendingSeriesUseCase(sl()))
     ..registerLazySingleton(() => GetTopRatedSeriesUseCase(sl()))
+    ..registerLazySingleton(() => GetNetflixSeriesUseCase(sl()))
 
     ..registerLazySingleton<SeriesRepo>(() => SeriesRepoImpl(sl()))
     ..registerLazySingleton<SeriesRemoteDataSource>(
