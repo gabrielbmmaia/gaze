@@ -50,4 +50,14 @@ class SeriesRepoImpl implements SeriesRepo {
       return Left(ServerFailure.fromException(e));
     }
   }
+
+  @override
+  ResultFuture<List<SeriesModel>> getAmazonSeries() async {
+    try {
+      final result = await _remoteDataSource.getAmazonSeries();
+      return Right(result);
+    } on ServerException catch (e) {
+      return Left(ServerFailure.fromException(e));
+    }
+  }
 }

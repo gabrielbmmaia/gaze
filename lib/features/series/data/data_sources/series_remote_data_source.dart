@@ -23,6 +23,8 @@ abstract class SeriesRemoteDataSource {
   Future<List<SeriesEntity>> getTopRatedSeries();
 
   Future<List<SeriesEntity>> getNetflixSeries();
+
+  Future<List<SeriesEntity>> getAmazonSeries();
 }
 
 class SeriesRemoteDataSourceImpl extends SeriesRemoteDataSource {
@@ -116,6 +118,34 @@ class SeriesRemoteDataSourceImpl extends SeriesRemoteDataSource {
         Uri.parse(
           '$kBaseUrl$kGetTopRatedSeriesEndpoint?api_key=$kTmdbApiKey'
           '&with_watch_providers=8&watch_region=US',
+        ),
+      );
+      if (response.statusCode != 200) {
+        throw ServerException(
+          message: response.body,
+          statusCode: response.statusCode.toString(),
+        );
+      }
+      final data = jsonDecode(response.body)['results'] as List<dynamic>;
+      return data
+          .map(
+            (series) => SeriesEntity.fromJson(series as Map<String, dynamic>),
+          )
+          .toList();
+    } on ServerException {
+      rethrow;
+    } catch (e) {
+      throw ServerException(message: e.toString(), statusCode: '505');
+    }
+  }
+
+  @override
+  Future<List<SeriesEntity>> getAmazonSeries() async {
+    try {
+      final response = await _client.get(
+        Uri.parse(
+          '$kBaseUrl$kGetTopRatedSeriesEndpoint?api_key=$kTmdbApiKey'
+          '&with_watch_providers=9,10&watch_region=US',
         ),
       );
       if (response.statusCode != 200) {

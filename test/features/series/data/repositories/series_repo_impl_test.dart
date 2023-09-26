@@ -155,10 +155,10 @@ void main() {
   group('getNetflixSeries', () {
     test(
       'should call [SeriesRemoteDataSource.getNetflixSeries] and return '
-          '[Right<List<SeriesModel>] when the call is successful',
-          () async {
+      '[Right<List<SeriesModel>] when the call is successful',
+      () async {
         when(() => remoteDataSource.getNetflixSeries()).thenAnswer(
-              (_) async => tSeriesEntityList,
+          (_) async => tSeriesEntityList,
         );
 
         final result = await repo.getNetflixSeries();
@@ -173,7 +173,7 @@ void main() {
     );
     test(
       'should return [Left<ServerFailure>] when the call is unsuccessful',
-          () async {
+      () async {
         when(() => remoteDataSource.getNetflixSeries())
             .thenThrow(tServerException);
 
@@ -186,6 +186,45 @@ void main() {
           ),
         );
         verify(() => remoteDataSource.getNetflixSeries()).called(1);
+        verifyNoMoreInteractions(remoteDataSource);
+      },
+    );
+  });
+
+  group('getAmazonSeries', () {
+    test(
+      'should call [SeriesRemoteDataSource.getAmazonSeries] and return '
+      '[Right<List<SeriesModel>] when the call is successful',
+      () async {
+        when(() => remoteDataSource.getAmazonSeries()).thenAnswer(
+          (_) async => tSeriesEntityList,
+        );
+
+        final result = await repo.getAmazonSeries();
+
+        expect(
+          result,
+          isA<Right<dynamic, List<SeriesModel>>>(),
+        );
+        verify(() => remoteDataSource.getAmazonSeries()).called(1);
+        verifyNoMoreInteractions(remoteDataSource);
+      },
+    );
+    test(
+      'should return [Left<ServerFailure>] when the call is unsuccessful',
+      () async {
+        when(() => remoteDataSource.getAmazonSeries())
+            .thenThrow(tServerException);
+
+        final result = await repo.getAmazonSeries();
+
+        expect(
+          result,
+          Left<ServerFailure, dynamic>(
+            ServerFailure.fromException(tServerException),
+          ),
+        );
+        verify(() => remoteDataSource.getAmazonSeries()).called(1);
         verifyNoMoreInteractions(remoteDataSource);
       },
     );
