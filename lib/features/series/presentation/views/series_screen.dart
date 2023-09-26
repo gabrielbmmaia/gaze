@@ -50,16 +50,19 @@ class _SeriesScreenState extends State<SeriesScreen> {
                   if (state is LoadedTrendingSeries) {
                     return TrendingSlider(trendingList: state.trendingList);
                   }
-                  return const Placeholder();
+                  return const CircularProgressIndicator();
                 },
               ),
               const SizedBox(height: 30),
               BlocBuilder<PopularBloc, PopularState>(
                 builder: (context, state) {
                   if (state is LoadedPopularSeries) {
-                    return SeriesList(
-                      title: 'Popular',
-                      seriesList: state.popularList,
+                    return Padding(
+                      padding: const EdgeInsets.only(left: 8, right: 8),
+                      child: SeriesList(
+                        title: 'Popular',
+                        seriesList: state.popularList,
+                      ),
                     );
                   }
                   return const CircularProgressIndicator();

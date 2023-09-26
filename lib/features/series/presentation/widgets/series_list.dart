@@ -15,12 +15,16 @@ class SeriesList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          title,
-          style: const TextStyle(
-            fontSize: 26,
-            color: Colors.white,
+        Padding(
+          padding: const EdgeInsets.only(left: 8),
+          child: Text(
+            title,
+            style: const TextStyle(
+              fontSize: 26,
+              color: Colors.white,
+            ),
           ),
         ),
         SizedBox(

@@ -21,7 +21,18 @@ void main() {
     repo = SeriesRepoImpl(remoteDataSource);
   });
 
-  const tSeriesEntityList = [SeriesEntity.empty()];
+  const tSeriesEntityList = [
+    SeriesEntity.empty(),
+    SeriesEntity.empty(),
+    SeriesEntity.empty(),
+    SeriesEntity.empty(),
+    SeriesEntity.empty(),
+    SeriesEntity.empty(),
+    SeriesEntity.empty(),
+    SeriesEntity.empty(),
+    SeriesEntity.empty(),
+    SeriesEntity.empty(),
+  ];
   const tServerException = ServerException(
     message: 'Test Exception',
     statusCode: '505',
@@ -97,6 +108,45 @@ void main() {
           ),
         );
         verify(() => remoteDataSource.getTrendingSeries()).called(1);
+        verifyNoMoreInteractions(remoteDataSource);
+      },
+    );
+  });
+
+  group('getTopRatedSeries', () {
+    test(
+      'should call [SeriesRemoteDataSource.getTopRatedSeries] and return '
+      '[Right<List<SeriesModel>] when the call is successful',
+      () async {
+        when(() => remoteDataSource.getTopRatedSeries()).thenAnswer(
+          (_) async => tSeriesEntityList,
+        );
+
+        final result = await repo.getTopRatedSeries();
+
+        expect(
+          result,
+          isA<Right<dynamic, List<SeriesModel>>>(),
+        );
+        verify(() => remoteDataSource.getTopRatedSeries()).called(1);
+        verifyNoMoreInteractions(remoteDataSource);
+      },
+    );
+    test(
+      'should return [Left<ServerFailure>] when the call is unsuccessful',
+      () async {
+        when(() => remoteDataSource.getTopRatedSeries())
+            .thenThrow(tServerException);
+
+        final result = await repo.getTopRatedSeries();
+
+        expect(
+          result,
+          Left<ServerFailure, dynamic>(
+            ServerFailure.fromException(tServerException),
+          ),
+        );
+        verify(() => remoteDataSource.getTopRatedSeries()).called(1);
         verifyNoMoreInteractions(remoteDataSource);
       },
     );

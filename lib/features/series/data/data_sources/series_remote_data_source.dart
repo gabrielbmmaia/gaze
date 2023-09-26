@@ -8,6 +8,7 @@ import 'package:http_interceptor/http_interceptor.dart';
 const String kBaseUrl = 'http://api.themoviedb.org/3';
 const kGetPopularSeriesEndpoint = '/tv/popular';
 const kGetTrendingSeriesEndpoint = '/trending/tv';
+const kGetTopRatedSeriesEndpoint = '/tv/top_rated';
 const kTmdbApiKey = '24e29501a7520a99e65304fad758b78b';
 const kImageBaseUrl = 'https://image.tmdb.org/t/p/w500';
 
@@ -17,6 +18,8 @@ abstract class SeriesRemoteDataSource {
   Future<List<SeriesEntity>> getPopularSeries();
 
   Future<List<SeriesEntity>> getTrendingSeries();
+
+  Future<List<SeriesEntity>> getTopRatedSeries();
 }
 
 class SeriesRemoteDataSourceImpl extends SeriesRemoteDataSource {
@@ -54,7 +57,8 @@ class SeriesRemoteDataSourceImpl extends SeriesRemoteDataSource {
   Future<List<SeriesEntity>> getTrendingSeries() async {
     try {
       final response = await _client.get(
-        Uri.parse('$kBaseUrl$kGetTrendingSeriesEndpoint/day?api_key=$kTmdbApiKey'),
+        Uri.parse(
+            '$kBaseUrl$kGetTrendingSeriesEndpoint/day?api_key=$kTmdbApiKey'),
       );
       if (response.statusCode != 200) {
         throw ServerException(
@@ -65,6 +69,33 @@ class SeriesRemoteDataSourceImpl extends SeriesRemoteDataSource {
       final data = jsonDecode(response.body)['results'] as List<dynamic>;
       return data
           .map<SeriesEntity>(
+            (series) => SeriesEntity.fromJson(series as Map<String, dynamic>),
+          )
+          .toList();
+    } on ServerException {
+      rethrow;
+    } catch (e) {
+      throw ServerException(message: e.toString(), statusCode: '505');
+    }
+  }
+
+  @override
+  Future<List<SeriesEntity>> getTopRatedSeries() async {
+    try {
+      final response = await _client.get(
+        Uri.parse(
+          '$kBaseUrl$kGetTopRatedSeriesEndpoint?api_key=$kTmdbApiKey',
+        ),
+      );
+      if (response.statusCode != 200) {
+        throw ServerException(
+          message: response.body,
+          statusCode: response.statusCode.toString(),
+        );
+      }
+      final data = jsonDecode(response.body)['results'] as List<dynamic>;
+      return data
+          .map(
             (series) => SeriesEntity.fromJson(series as Map<String, dynamic>),
           )
           .toList();
