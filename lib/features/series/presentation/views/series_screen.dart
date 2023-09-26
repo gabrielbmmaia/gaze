@@ -4,6 +4,7 @@ import 'package:gaze/core/res/colours.dart';
 import 'package:gaze/core/res/fonts.dart';
 import 'package:gaze/core/res/string.dart';
 import 'package:gaze/features/series/presentation/bloc/popular/popular_bloc.dart';
+import 'package:gaze/features/series/presentation/bloc/top_rated/top_rated_bloc.dart';
 import 'package:gaze/features/series/presentation/bloc/trending/trending_bloc.dart';
 import 'package:gaze/features/series/presentation/widgets/series_list.dart';
 import 'package:gaze/features/series/presentation/widgets/trending_slider.dart';
@@ -20,6 +21,7 @@ class _SeriesScreenState extends State<SeriesScreen> {
   void initState() {
     context.read<PopularBloc>().add(const LoadPopularListEvent());
     context.read<TrendingBloc>().add(const LoadTrendingListEvent());
+    context.read<TopRatedBloc>().add(const LoadTopRatedListEvent());
     super.initState();
   }
 
@@ -49,6 +51,21 @@ class _SeriesScreenState extends State<SeriesScreen> {
                 builder: (context, state) {
                   if (state is LoadedTrendingSeries) {
                     return TrendingSlider(trendingList: state.trendingList);
+                  }
+                  return const CircularProgressIndicator();
+                },
+              ),
+              const SizedBox(height: 30),
+              BlocBuilder<TopRatedBloc, TopRatedState>(
+                builder: (context, state) {
+                  if (state is LoadedTopRatedSeries) {
+                    return Padding(
+                      padding: const EdgeInsets.only(left: 8, right: 8),
+                      child: SeriesList(
+                        title: 'Bem Avaliados',
+                        seriesList: state.topRatedList,
+                      ),
+                    );
                   }
                   return const CircularProgressIndicator();
                 },

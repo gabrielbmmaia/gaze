@@ -5,6 +5,7 @@ import 'package:gaze/core/providers/tab_navigator.dart';
 import 'package:gaze/core/services/injection_container.dart';
 import 'package:gaze/features/profile/presentation/views/profile_screen.dart';
 import 'package:gaze/features/series/presentation/bloc/popular/popular_bloc.dart';
+import 'package:gaze/features/series/presentation/bloc/top_rated/top_rated_bloc.dart';
 import 'package:gaze/features/series/presentation/bloc/trending/trending_bloc.dart';
 import 'package:gaze/features/series/presentation/views/series_screen.dart';
 import 'package:provider/provider.dart';
@@ -23,6 +24,9 @@ class DashboardController extends ChangeNotifier {
               ),
               BlocProvider(
                 create: (_) => sl<TrendingBloc>(),
+              ),
+              BlocProvider(
+                create: (_) => sl<TopRatedBloc>(),
               ),
             ],
             child: const SeriesScreen(),
