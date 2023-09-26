@@ -3,7 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:gaze/core/errors/failures.dart';
 import 'package:gaze/features/series/domain/models/series_model.dart';
 import 'package:gaze/features/series/domain/usecases/get_popular_series.dart';
-import 'package:gaze/features/series/presentation/bloc/series_bloc.dart';
+import 'package:gaze/features/series/presentation/bloc/popular/popular_bloc.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
 
@@ -11,18 +11,18 @@ class MockGetPopularSeriesUseCase extends Mock
     implements GetPopularSeriesUseCase {}
 
 void main() {
-  late GetPopularSeriesUseCase useCase;
-  late SeriesBloc bloc;
+  late GetPopularSeriesUseCase popularSeries;
+  late PopularBloc bloc;
 
   setUp(() {
-    useCase = MockGetPopularSeriesUseCase();
-    bloc = SeriesBloc(getPopularSeries: useCase);
+    popularSeries = MockGetPopularSeriesUseCase();
+    bloc = PopularBloc(getPopularSeries: popularSeries);
   });
 
   tearDown(() => bloc.close());
 
-  test('initial state must be [SeriesInitial]', () {
-    expect(bloc.state, const SeriesInitial());
+  test('initial state must be [PopularInitial]', () {
+    expect(bloc.state, const PopularInitial());
   });
 
   const tSeriesList = [SeriesModel.empty()];
@@ -32,38 +32,41 @@ void main() {
   );
 
   group('getPopularSeries', () {
-    blocTest<SeriesBloc, SeriesState>(
+    blocTest<PopularBloc, PopularState>(
       'should emit [LoadingPopularSeries, LoadedPopularSeries] when '
       '[LoadPopularListEvent] is added',
       build: () {
-        when(() => useCase()).thenAnswer((_) async => const Right(tSeriesList));
+        when(() => popularSeries())
+            .thenAnswer((_) async => const Right(tSeriesList));
         return bloc;
       },
       act: (bloc) => bloc.add(const LoadPopularListEvent()),
-      expect: () => const <SeriesState>[
+      expect: () => const <PopularState>[
         LoadingPopularSeries(),
         LoadedPopularSeries(popularList: tSeriesList),
       ],
       verify: (_) {
-        verify(() => useCase()).called(1);
-        verifyNoMoreInteractions(useCase);
+        verify(() => popularSeries()).called(1);
+        verifyNoMoreInteractions(popularSeries);
       },
     );
 
-    blocTest<SeriesBloc, SeriesState>(
-      'TODO: description',
+    blocTest<PopularBloc, PopularState>(
+      'should emit [LoadingPopularSeries, ErrorPopularSeries] when '
+      '[LoadPopularListEvent] is added',
       build: () {
-        when(() => useCase()).thenAnswer((_) async => Left(tServerFailure));
+        when(() => popularSeries())
+            .thenAnswer((_) async => Left(tServerFailure));
         return bloc;
       },
       act: (bloc) => bloc.add(const LoadPopularListEvent()),
-      expect: () => const <SeriesState>[
+      expect: () => const <PopularState>[
         LoadingPopularSeries(),
         ErrorPopularSeries(),
       ],
       verify: (_) {
-        verify(() => useCase()).called(1);
-        verifyNoMoreInteractions(useCase);
+        verify(() => popularSeries()).called(1);
+        verifyNoMoreInteractions(popularSeries);
       },
     );
   });

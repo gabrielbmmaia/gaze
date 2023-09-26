@@ -4,7 +4,8 @@ import 'package:gaze/core/common/views/persistent_view.dart';
 import 'package:gaze/core/providers/tab_navigator.dart';
 import 'package:gaze/core/services/injection_container.dart';
 import 'package:gaze/features/profile/presentation/views/profile_screen.dart';
-import 'package:gaze/features/series/presentation/bloc/series_bloc.dart';
+import 'package:gaze/features/series/presentation/bloc/popular/popular_bloc.dart';
+import 'package:gaze/features/series/presentation/bloc/trending/trending_bloc.dart';
 import 'package:gaze/features/series/presentation/views/series_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -13,9 +14,21 @@ class DashboardController extends ChangeNotifier {
 
   final List<Widget> _screens = [
     ChangeNotifierProvider(
-      create: (_) => TabNavigator(TabItem(
-          child: BlocProvider(
-              create: (_) => sl<SeriesBloc>(), child: const SeriesScreen()))),
+      create: (_) => TabNavigator(
+        TabItem(
+          child: MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (_) => sl<PopularBloc>(),
+              ),
+              BlocProvider(
+                create: (_) => sl<TrendingBloc>(),
+              ),
+            ],
+            child: const SeriesScreen(),
+          ),
+        ),
+      ),
       child: const PersistentView(),
     ),
     ChangeNotifierProvider(

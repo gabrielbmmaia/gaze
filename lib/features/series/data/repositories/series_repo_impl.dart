@@ -25,7 +25,7 @@ class SeriesRepoImpl implements SeriesRepo {
   ResultFuture<List<SeriesModel>> getTrendingSeries() async {
     try {
       final result = await _remoteDataSource.getTrendingSeries();
-      return Right(result);
+      return Right(result.getRange(0, 10).toList());
     } on ServerException catch (e) {
       return Left(ServerFailure.fromException(e));
     }

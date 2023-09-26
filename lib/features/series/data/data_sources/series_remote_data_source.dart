@@ -54,10 +54,7 @@ class SeriesRemoteDataSourceImpl extends SeriesRemoteDataSource {
   Future<List<SeriesEntity>> getTrendingSeries() async {
     try {
       final response = await _client.get(
-        Uri.parse('$kBaseUrl$kGetTrendingSeriesEndpoint?api_key=$kTmdbApiKey'),
-        params: {
-          'time_window': 'week',
-        },
+        Uri.parse('$kBaseUrl$kGetTrendingSeriesEndpoint/day?api_key=$kTmdbApiKey'),
       );
       if (response.statusCode != 200) {
         throw ServerException(

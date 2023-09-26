@@ -12,29 +12,37 @@ import 'package:gaze/features/series/data/data_sources/series_remote_data_source
 import 'package:gaze/features/series/data/repositories/series_repo_impl.dart';
 import 'package:gaze/features/series/domain/repositories/series_repo.dart';
 import 'package:gaze/features/series/domain/usecases/get_popular_series.dart';
-import 'package:gaze/features/series/presentation/bloc/series_bloc.dart';
+import 'package:gaze/features/series/domain/usecases/get_trending_series.dart';
+import 'package:gaze/features/series/presentation/bloc/popular/popular_bloc.dart';
+import 'package:gaze/features/series/presentation/bloc/trending/trending_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 final sl = GetIt.instance;
 
 Future<void> init() async {
-  await _seriesInit();
+  await _popularInit();
   await _authInit();
+  await _trendingInit();
 }
 
-Future<void> _seriesInit() async {
+Future<void> _trendingInit() async {
   sl
-    ..registerFactory(() => SeriesBloc(getPopularSeries: sl()))
+    ..registerFactory(() => TrendingBloc(getTrendingSeries: sl()))
+
+    ..registerLazySingleton(() => GetTrendingSeriesUseCase(sl()));
+
+}
+
+Future<void> _popularInit() async {
+  sl
+    ..registerFactory(() => PopularBloc(getPopularSeries: sl()))
 
     ..registerLazySingleton(() => GetPopularSeriesUseCase(sl()))
 
     ..registerLazySingleton<SeriesRepo>(() => SeriesRepoImpl(sl()))
-
     ..registerLazySingleton<SeriesRemoteDataSource>(
       SeriesRemoteDataSourceImpl.new,
     );
-
-
 }
 
 Future<void> _authInit() async {
