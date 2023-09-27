@@ -12,6 +12,7 @@ import 'package:gaze/features/series/data/data_sources/series_remote_data_source
 import 'package:gaze/features/series/data/repositories/series_repo_impl.dart';
 import 'package:gaze/features/series/domain/repositories/series_repo.dart';
 import 'package:gaze/features/series/domain/usecases/get_amazon_series.dart';
+import 'package:gaze/features/series/domain/usecases/get_apple_series.dart';
 import 'package:gaze/features/series/domain/usecases/get_disney_series.dart';
 import 'package:gaze/features/series/domain/usecases/get_hbo_series.dart';
 import 'package:gaze/features/series/domain/usecases/get_netflix_series.dart';
@@ -19,6 +20,7 @@ import 'package:gaze/features/series/domain/usecases/get_popular_series.dart';
 import 'package:gaze/features/series/domain/usecases/get_top_rated_series.dart';
 import 'package:gaze/features/series/domain/usecases/get_trending_series.dart';
 import 'package:gaze/features/series/presentation/bloc/amazon/amazon_bloc.dart';
+import 'package:gaze/features/series/presentation/bloc/apple/apple_bloc.dart';
 import 'package:gaze/features/series/presentation/bloc/disney/disney_bloc.dart';
 import 'package:gaze/features/series/presentation/bloc/hbo/hbo_bloc.dart';
 import 'package:gaze/features/series/presentation/bloc/netflix/netflix_bloc.dart';
@@ -43,6 +45,7 @@ Future<void> _seriesInit() async {
     ..registerFactory(() => AmazonBloc(getAmazonSeries: sl()))
     ..registerFactory(() => DisneyBloc(getDisneySeries: sl()))
     ..registerFactory(() => HboBloc(getHBOSeries: sl()))
+    ..registerFactory(() => AppleBloc(getAppleSeries: sl()))
 
     ..registerLazySingleton(() => GetPopularSeriesUseCase(sl()))
     ..registerLazySingleton(() => GetTrendingSeriesUseCase(sl()))
@@ -51,6 +54,7 @@ Future<void> _seriesInit() async {
     ..registerLazySingleton(() => GetAmazonSeriesUseCase(sl()))
     ..registerLazySingleton(() => GetDisneySeriesUseCase(sl()))
     ..registerLazySingleton(() => GetHBOSeriesUseCase(sl()))
+    ..registerLazySingleton(() => GetAppleSeriesUseCase(sl()))
 
     ..registerLazySingleton<SeriesRepo>(() => SeriesRepoImpl(sl()))
     ..registerLazySingleton<SeriesRemoteDataSource>(

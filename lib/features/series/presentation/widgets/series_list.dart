@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gaze/features/series/data/data_sources/series_remote_data_source.dart';
 import 'package:gaze/features/series/domain/models/series_model.dart';
+import 'package:gaze/features/series/presentation/widgets/series_item.dart';
 
 class SeriesList extends StatelessWidget {
   const SeriesList({
@@ -38,17 +38,10 @@ class SeriesList extends StatelessWidget {
             itemBuilder: (context, index) {
               return Padding(
                 padding: const EdgeInsets.all(8),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
-                  child: SizedBox(
-                    height: 225,
-                    width: 150,
-                    child: Image.network(
-                      '$kImageBaseUrl${seriesList[index].posterPath}',
-                      filterQuality: FilterQuality.high,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+                child: SeriesItem(
+                  seriesModel: seriesList[index],
+                  imageHeight: 225,
+                  imageWidth: 150,
                 ),
               );
             },

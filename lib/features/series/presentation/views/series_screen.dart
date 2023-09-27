@@ -4,6 +4,7 @@ import 'package:gaze/core/res/colours.dart';
 import 'package:gaze/core/res/fonts.dart';
 import 'package:gaze/core/res/string.dart';
 import 'package:gaze/features/series/presentation/bloc/amazon/amazon_bloc.dart';
+import 'package:gaze/features/series/presentation/bloc/apple/apple_bloc.dart';
 import 'package:gaze/features/series/presentation/bloc/disney/disney_bloc.dart';
 import 'package:gaze/features/series/presentation/bloc/hbo/hbo_bloc.dart';
 import 'package:gaze/features/series/presentation/bloc/netflix/netflix_bloc.dart';
@@ -30,6 +31,7 @@ class _SeriesScreenState extends State<SeriesScreen> {
     context.read<AmazonBloc>().add(const LoadAmazonListEvent());
     context.read<DisneyBloc>().add(const LoadDisneyListEvent());
     context.read<HboBloc>().add(const LoadHboListEvent());
+    context.read<AppleBloc>().add(const LoadAppleListEvent());
     super.initState();
   }
 
@@ -85,7 +87,7 @@ class _SeriesScreenState extends State<SeriesScreen> {
                     return Padding(
                       padding: const EdgeInsets.only(left: 8, right: 8),
                       child: SeriesList(
-                        title: 'Amazon',
+                        title: 'Amazon Prime',
                         seriesList: state.amazonList,
                       ),
                     );
@@ -100,7 +102,7 @@ class _SeriesScreenState extends State<SeriesScreen> {
                     return Padding(
                       padding: const EdgeInsets.only(left: 8, right: 8),
                       child: SeriesList(
-                        title: 'HBO',
+                        title: 'HBO Max',
                         seriesList: state.hboList,
                       ),
                     );
@@ -117,6 +119,21 @@ class _SeriesScreenState extends State<SeriesScreen> {
                       child: SeriesList(
                         title: 'Disney+',
                         seriesList: state.disneyList,
+                      ),
+                    );
+                  }
+                  return const CircularProgressIndicator();
+                },
+              ),
+              const SizedBox(height: 30),
+              BlocBuilder<AppleBloc, AppleState>(
+                builder: (context, state) {
+                  if (state is LoadedAppleSeries) {
+                    return Padding(
+                      padding: const EdgeInsets.only(left: 8, right: 8),
+                      child: SeriesList(
+                        title: 'Apple TV+',
+                        seriesList: state.appleList,
                       ),
                     );
                   }

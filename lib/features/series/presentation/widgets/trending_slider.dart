@@ -1,8 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
-import 'package:gaze/features/series/data/data_sources/series_remote_data_source.dart';
 import 'package:gaze/features/series/domain/models/series_model.dart';
+import 'package:gaze/features/series/presentation/widgets/series_item.dart';
 
 class TrendingSlider extends StatefulWidget {
   const TrendingSlider({required this.trendingList, super.key});
@@ -30,17 +30,10 @@ class _TrendingSliderState extends State<TrendingSlider> {
           autoPlayAnimationDuration: const Duration(seconds: 1),
         ),
         itemBuilder: (context, itemIndex, pageViewIndex) {
-          return ClipRRect(
-            borderRadius: BorderRadius.circular(12),
-            child: SizedBox(
-              height: 250,
-              width: 200,
-              child: Image.network(
-                '$kImageBaseUrl${widget.trendingList[itemIndex].posterPath}',
-                filterQuality: FilterQuality.high,
-                fit: BoxFit.cover,
-              ),
-            ),
+          return SeriesItem(
+            seriesModel: widget.trendingList[itemIndex],
+            imageHeight: 250,
+            imageWidth: 200,
           );
         },
       ),
