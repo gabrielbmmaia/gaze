@@ -31,7 +31,7 @@ class SeriesList extends StatelessWidget {
           height: 240,
           width: double.infinity,
           child: ListView.builder(
-            shrinkWrap: true,
+            // shrinkWrap: true,
             scrollDirection: Axis.horizontal,
             physics: const BouncingScrollPhysics(),
             itemCount: seriesList.length,
