@@ -268,4 +268,43 @@ void main() {
       },
     );
   });
+
+  group('getHBOSeries', () {
+    test(
+      'should call [SeriesRemoteDataSource.getHBOSeries] and return '
+          '[Right<List<SeriesModel>] when the call is successful',
+          () async {
+        when(() => remoteDataSource.getHBOSeries()).thenAnswer(
+              (_) async => tSeriesEntityList,
+        );
+
+        final result = await repo.getHBOSeries();
+
+        expect(
+          result,
+          isA<Right<dynamic, List<SeriesModel>>>(),
+        );
+        verify(() => remoteDataSource.getHBOSeries()).called(1);
+        verifyNoMoreInteractions(remoteDataSource);
+      },
+    );
+    test(
+      'should return [Left<ServerFailure>] when the call is unsuccessful',
+          () async {
+        when(() => remoteDataSource.getHBOSeries())
+            .thenThrow(tServerException);
+
+        final result = await repo.getHBOSeries();
+
+        expect(
+          result,
+          Left<ServerFailure, dynamic>(
+            ServerFailure.fromException(tServerException),
+          ),
+        );
+        verify(() => remoteDataSource.getHBOSeries()).called(1);
+        verifyNoMoreInteractions(remoteDataSource);
+      },
+    );
+  });
 }

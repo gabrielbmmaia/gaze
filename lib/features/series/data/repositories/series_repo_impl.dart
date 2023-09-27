@@ -70,4 +70,14 @@ class SeriesRepoImpl implements SeriesRepo {
       return Left(ServerFailure.fromException(e));
     }
   }
+
+  @override
+  ResultFuture<List<SeriesModel>> getHBOSeries() async {
+    try {
+      final result = await _remoteDataSource.getHBOSeries();
+      return Right(result);
+    } on ServerException catch (e) {
+      return Left(ServerFailure.fromException(e));
+    }
+  }
 }
