@@ -233,10 +233,10 @@ void main() {
   group('getDisneySeries', () {
     test(
       'should call [SeriesRemoteDataSource.getDisneySeries] and return '
-          '[Right<List<SeriesModel>] when the call is successful',
-          () async {
+      '[Right<List<SeriesModel>] when the call is successful',
+      () async {
         when(() => remoteDataSource.getDisneySeries()).thenAnswer(
-              (_) async => tSeriesEntityList,
+          (_) async => tSeriesEntityList,
         );
 
         final result = await repo.getDisneySeries();
@@ -251,7 +251,7 @@ void main() {
     );
     test(
       'should return [Left<ServerFailure>] when the call is unsuccessful',
-          () async {
+      () async {
         when(() => remoteDataSource.getDisneySeries())
             .thenThrow(tServerException);
 
@@ -272,10 +272,10 @@ void main() {
   group('getHBOSeries', () {
     test(
       'should call [SeriesRemoteDataSource.getHBOSeries] and return '
-          '[Right<List<SeriesModel>] when the call is successful',
-          () async {
+      '[Right<List<SeriesModel>] when the call is successful',
+      () async {
         when(() => remoteDataSource.getHBOSeries()).thenAnswer(
-              (_) async => tSeriesEntityList,
+          (_) async => tSeriesEntityList,
         );
 
         final result = await repo.getHBOSeries();
@@ -290,9 +290,8 @@ void main() {
     );
     test(
       'should return [Left<ServerFailure>] when the call is unsuccessful',
-          () async {
-        when(() => remoteDataSource.getHBOSeries())
-            .thenThrow(tServerException);
+      () async {
+        when(() => remoteDataSource.getHBOSeries()).thenThrow(tServerException);
 
         final result = await repo.getHBOSeries();
 
@@ -303,6 +302,45 @@ void main() {
           ),
         );
         verify(() => remoteDataSource.getHBOSeries()).called(1);
+        verifyNoMoreInteractions(remoteDataSource);
+      },
+    );
+  });
+
+  group('getAppleSeries', () {
+    test(
+      'should call [SeriesRemoteDataSource.getAppleSeries] and return '
+      '[Right<List<SeriesModel>] when the call is successful',
+      () async {
+        when(() => remoteDataSource.getAppleSeries()).thenAnswer(
+          (_) async => tSeriesEntityList,
+        );
+
+        final result = await repo.getAppleSeries();
+
+        expect(
+          result,
+          isA<Right<dynamic, List<SeriesModel>>>(),
+        );
+        verify(() => remoteDataSource.getAppleSeries()).called(1);
+        verifyNoMoreInteractions(remoteDataSource);
+      },
+    );
+    test(
+      'should return [Left<ServerFailure>] when the call is unsuccessful',
+      () async {
+        when(() => remoteDataSource.getAppleSeries())
+            .thenThrow(tServerException);
+
+        final result = await repo.getAppleSeries();
+
+        expect(
+          result,
+          Left<ServerFailure, dynamic>(
+            ServerFailure.fromException(tServerException),
+          ),
+        );
+        verify(() => remoteDataSource.getAppleSeries()).called(1);
         verifyNoMoreInteractions(remoteDataSource);
       },
     );
