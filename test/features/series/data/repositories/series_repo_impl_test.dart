@@ -229,4 +229,43 @@ void main() {
       },
     );
   });
+
+  group('getDisneySeries', () {
+    test(
+      'should call [SeriesRemoteDataSource.getDisneySeries] and return '
+          '[Right<List<SeriesModel>] when the call is successful',
+          () async {
+        when(() => remoteDataSource.getDisneySeries()).thenAnswer(
+              (_) async => tSeriesEntityList,
+        );
+
+        final result = await repo.getDisneySeries();
+
+        expect(
+          result,
+          isA<Right<dynamic, List<SeriesModel>>>(),
+        );
+        verify(() => remoteDataSource.getDisneySeries()).called(1);
+        verifyNoMoreInteractions(remoteDataSource);
+      },
+    );
+    test(
+      'should return [Left<ServerFailure>] when the call is unsuccessful',
+          () async {
+        when(() => remoteDataSource.getDisneySeries())
+            .thenThrow(tServerException);
+
+        final result = await repo.getDisneySeries();
+
+        expect(
+          result,
+          Left<ServerFailure, dynamic>(
+            ServerFailure.fromException(tServerException),
+          ),
+        );
+        verify(() => remoteDataSource.getDisneySeries()).called(1);
+        verifyNoMoreInteractions(remoteDataSource);
+      },
+    );
+  });
 }

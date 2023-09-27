@@ -13,4 +13,6 @@ abstract class SeriesRepo {
   ResultFuture<List<SeriesModel>> getNetflixSeries();
 
   ResultFuture<List<SeriesModel>> getAmazonSeries();
+
+  ResultFuture<List<SeriesModel>> getDisneySeries();
 }

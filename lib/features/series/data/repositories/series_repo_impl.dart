@@ -60,4 +60,14 @@ class SeriesRepoImpl implements SeriesRepo {
       return Left(ServerFailure.fromException(e));
     }
   }
+
+  @override
+  ResultFuture<List<SeriesModel>> getDisneySeries() async {
+    try {
+      final result = await _remoteDataSource.getDisneySeries();
+      return Right(result);
+    } on ServerException catch (e) {
+      return Left(ServerFailure.fromException(e));
+    }
+  }
 }
