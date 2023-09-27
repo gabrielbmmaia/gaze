@@ -116,8 +116,8 @@ class SeriesRemoteDataSourceImpl extends SeriesRemoteDataSource {
     try {
       final response = await _client.get(
         Uri.parse(
-          '$kBaseUrl$kGetTopRatedSeriesEndpoint?api_key=$kTmdbApiKey'
-          '&with_watch_providers=8&watch_region=US',
+          '$kBaseUrl$kGetDiscoverSeriesEndpoint?api_key=$kTmdbApiKey'
+          '&with_networks=213',
         ),
       );
       if (response.statusCode != 200) {
@@ -144,8 +144,8 @@ class SeriesRemoteDataSourceImpl extends SeriesRemoteDataSource {
     try {
       final response = await _client.get(
         Uri.parse(
-          '$kBaseUrl$kGetTopRatedSeriesEndpoint?api_key=$kTmdbApiKey'
-          '&with_watch_providers=9,10&watch_region=US',
+          '$kBaseUrl$kGetDiscoverSeriesEndpoint?api_key=$kTmdbApiKey'
+          '&with_networks=1024',
         ),
       );
       if (response.statusCode != 200) {

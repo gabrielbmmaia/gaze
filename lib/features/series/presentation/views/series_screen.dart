@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gaze/core/res/colours.dart';
 import 'package:gaze/core/res/fonts.dart';
 import 'package:gaze/core/res/string.dart';
+import 'package:gaze/features/series/presentation/bloc/amazon/amazon_bloc.dart';
 import 'package:gaze/features/series/presentation/bloc/netflix/netflix_bloc.dart';
 import 'package:gaze/features/series/presentation/bloc/popular/popular_bloc.dart';
 import 'package:gaze/features/series/presentation/bloc/top_rated/top_rated_bloc.dart';
@@ -24,6 +25,7 @@ class _SeriesScreenState extends State<SeriesScreen> {
     context.read<TrendingBloc>().add(const LoadTrendingListEvent());
     context.read<TopRatedBloc>().add(const LoadTopRatedListEvent());
     context.read<NetflixBloc>().add(const LoadNetflixListEvent());
+    context.read<AmazonBloc>().add(const LoadAmazonListEvent());
     super.initState();
   }
 
@@ -66,6 +68,21 @@ class _SeriesScreenState extends State<SeriesScreen> {
                       child: SeriesList(
                         title: 'Netflix',
                         seriesList: state.netflixList,
+                      ),
+                    );
+                  }
+                  return const CircularProgressIndicator();
+                },
+              ),
+              const SizedBox(height: 30),
+              BlocBuilder<AmazonBloc, AmazonState>(
+                builder: (context, state) {
+                  if (state is LoadedAmazonSeries) {
+                    return Padding(
+                      padding: const EdgeInsets.only(left: 8, right: 8),
+                      child: SeriesList(
+                        title: 'Amazon',
+                        seriesList: state.amazonList,
                       ),
                     );
                   }
