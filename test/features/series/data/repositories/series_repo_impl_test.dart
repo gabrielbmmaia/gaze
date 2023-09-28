@@ -351,7 +351,7 @@ void main() {
   group('getSeriesDetails', () {
     final tSeriesDetails = SeriesDetailsEntity.empty();
     test(
-      'should call [SeriesRepo.getSeriesDetails] and return '
+      'should call [SeriesRemoteDataSource.getSeriesDetails] and return '
       '[Right<SeriesDetailsModel>] when the call is successful',
       () async {
         when(() => remoteDataSource.getSeriesDetails(any())).thenAnswer(
