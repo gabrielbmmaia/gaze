@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gaze/features/series/data/data_sources/series_remote_data_source.dart';
 import 'package:gaze/features/series/domain/models/series_model.dart';
+import 'package:gaze/features/series/presentation/views/series_details_screen.dart';
 
 class SeriesItem extends StatefulWidget {
   const SeriesItem({
@@ -25,7 +26,7 @@ class _SeriesItemState extends State<SeriesItem> {
       height: widget.imageHeight,
       width: widget.imageWidth,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(6),
         image: DecorationImage(
           image: NetworkImage(
             '$kImageBaseUrl${widget.seriesModel.posterPath}',
@@ -35,9 +36,9 @@ class _SeriesItemState extends State<SeriesItem> {
         ),
       ),
       child: InkWell(
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(6),
         onTap: () {
-          print(widget.seriesModel.name);
+          Navigator.of(context).pushNamed(SeriesDetailsScreen.routeName);
         },
       ),
     );

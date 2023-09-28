@@ -11,6 +11,7 @@ import 'package:gaze/features/auth/presentation/views/sign_in_screen.dart';
 import 'package:gaze/features/auth/presentation/views/sign_up_screen.dart';
 import 'package:gaze/features/dashboard/presentation/views/dashboard.dart';
 import 'package:gaze/features/series/presentation/bloc/popular/popular_bloc.dart';
+import 'package:gaze/features/series/presentation/views/series_details_screen.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -67,6 +68,12 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case '/forgot-password':
       return _pageBuilder(
         (_) => const fui.ForgotPasswordScreen(),
+        settings: settings,
+      );
+
+    case SeriesDetailsScreen.routeName:
+      return _pageBuilder(
+        (_) => const SeriesDetailsScreen(),
         settings: settings,
       );
 
