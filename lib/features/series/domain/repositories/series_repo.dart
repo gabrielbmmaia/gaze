@@ -1,4 +1,5 @@
 import 'package:gaze/core/utils/typedefs.dart';
+import 'package:gaze/features/series/domain/models/series_details_model.dart';
 import 'package:gaze/features/series/domain/models/series_model.dart';
 
 abstract class SeriesRepo {
@@ -19,4 +20,6 @@ abstract class SeriesRepo {
   ResultFuture<List<SeriesModel>> getHBOSeries();
 
   ResultFuture<List<SeriesModel>> getAppleSeries();
+
+  ResultFuture<SeriesDetailsModel> getSeriesDetails(String seriesId);
 }
