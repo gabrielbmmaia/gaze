@@ -4,6 +4,7 @@ import 'package:gaze/core/errors/exceptions.dart';
 import 'package:gaze/features/series/data/data_sources/interceptor.dart';
 import 'package:gaze/features/series/data/models/series_details_entity.dart';
 import 'package:gaze/features/series/data/models/series_entity.dart';
+import 'package:gaze/features/series/data/models/youtube_trailers_entity.dart';
 import 'package:http_interceptor/http_interceptor.dart';
 
 const String kBaseUrl = 'http://api.themoviedb.org/3';
@@ -35,6 +36,8 @@ abstract class SeriesRemoteDataSource {
   Future<List<SeriesEntity>> getAppleSeries();
 
   Future<SeriesDetailsEntity> getSeriesDetails(String seriesId);
+
+  Future<List<YoutubeTrailersEntity>> getYoutubeTrailers(String seriesId);
 }
 
 class SeriesRemoteDataSourceImpl extends SeriesRemoteDataSource {
@@ -279,6 +282,33 @@ class SeriesRemoteDataSourceImpl extends SeriesRemoteDataSource {
       }
       final data = jsonDecode(response.body) as Map<String, dynamic>;
       return SeriesDetailsEntity.fromJson(data);
+    } on ServerException {
+      rethrow;
+    } catch (e) {
+      throw ServerException(message: e.toString(), statusCode: '505');
+    }
+  }
+
+  @override
+  Future<List<YoutubeTrailersEntity>> getYoutubeTrailers(
+      String seriesId) async {
+    try {
+      final response = await _client.get(
+        Uri.parse(
+          '$kBaseUrl/tv/$seriesId?api_key=$kTmdbApiKey/videos',
+        ),
+      );
+      if (response.statusCode != 200) {
+        throw ServerException(
+          message: response.body,
+          statusCode: response.statusCode.toString(),
+        );
+      }
+      final data = jsonDecode(response.body)['results'] as List<dynamic>;
+      return data
+          .map((videos) =>
+              YoutubeTrailersEntity.fromMap(videos as Map<String, dynamic>))
+          .toList();
     } on ServerException {
       rethrow;
     } catch (e) {

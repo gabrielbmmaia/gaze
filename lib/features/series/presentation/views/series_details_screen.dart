@@ -170,8 +170,7 @@ class _SeriesDetailsScreenState extends State<SeriesDetailsScreen> {
                                     ),
                                     Expanded(
                                       child: Text(
-                                        state.seriesDetails.firstAirDate
-                                            .toBrazilianDate,
+                                        state.seriesDetails.firstAirDate.toBrazilianDate,
                                         style: const TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.w500,
@@ -194,8 +193,7 @@ class _SeriesDetailsScreenState extends State<SeriesDetailsScreen> {
                                     ),
                                     Expanded(
                                       child: Text(
-                                        state.seriesDetails.lastAirDate
-                                            .toBrazilianDate,
+                                        state.seriesDetails.lastAirDate.toBrazilianDate,
                                         style: const TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.w500,
@@ -292,6 +290,7 @@ class _SeriesDetailsScreenState extends State<SeriesDetailsScreen> {
                               thickness: 1,
                             ),
                             const SizedBox(height: 15),
+
                           ],
                         ),
                       ),
