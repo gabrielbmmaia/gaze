@@ -38,7 +38,10 @@ class _SeriesItemState extends State<SeriesItem> {
       child: InkWell(
         borderRadius: BorderRadius.circular(6),
         onTap: () {
-          Navigator.of(context).pushNamed(SeriesDetailsScreen.routeName);
+          Navigator.of(context).pushNamed(
+            SeriesDetailsScreen.routeName,
+            arguments: widget.seriesModel.id,
+          );
         },
       ),
     );

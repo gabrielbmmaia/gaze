@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:gaze/features/series/domain/models/seasons_model.dart';
 
 class SeriesDetailsModel extends Equatable {
   const SeriesDetailsModel({
@@ -34,7 +35,7 @@ class SeriesDetailsModel extends Equatable {
           originalName: '',
           networks: [],
           episodes: 0,
-          seasons: 0,
+          seasons: [],
           overview: '',
           tagline: '',
           voteAverage: 0,
@@ -52,7 +53,7 @@ class SeriesDetailsModel extends Equatable {
   final String originalName;
   final List<String> networks;
   final int episodes;
-  final int seasons;
+  final List<SeasonsModel> seasons;
   final String overview;
   final String tagline;
   final double voteAverage;

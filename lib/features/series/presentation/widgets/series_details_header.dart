@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:gaze/core/res/colours.dart';
 import 'package:gaze/core/res/fonts.dart';
+import 'package:gaze/features/series/data/data_sources/series_remote_data_source.dart';
+import 'package:gaze/features/series/domain/models/series_details_model.dart';
 import 'package:gaze/features/series/presentation/widgets/text_tag.dart';
 
 class SeriesDetailsHeader extends StatelessWidget {
-  const SeriesDetailsHeader({super.key});
+  const SeriesDetailsHeader({required this.seriesDetails, super.key});
+
+  final SeriesDetailsModel seriesDetails;
 
   @override
   Widget build(BuildContext context) {
@@ -24,24 +28,24 @@ class SeriesDetailsHeader extends StatelessWidget {
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: NetworkImage(
-                    'https://image.tmdb.org/t/p/w500/ibNvtkuptjWB2KfE6Odt7wszKSQ.jpg',
+                    '$kImageBaseUrl${seriesDetails.backdropPath}',
                   ),
                   fit: BoxFit.cover,
                   filterQuality: FilterQuality.high,
                 ),
               ),
               child: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
                       Colours.defaultColor,
                       Colors.transparent,
                     ],
                     begin: Alignment.bottomCenter,
-                    end: Alignment.center
-                  )
+                    end: Alignment.center,
+                  ),
                 ),
-              )
+              ),
             ),
           ),
           Positioned(
@@ -58,7 +62,7 @@ class SeriesDetailsHeader extends StatelessWidget {
                     borderRadius: BorderRadius.circular(6),
                     image: DecorationImage(
                       image: NetworkImage(
-                        'https://image.tmdb.org/t/p/w500//1AZERr7KEJBpcchQ6vFcbUUC0Zw.jpg',
+                        '$kImageBaseUrl${seriesDetails.posterPath}',
                       ),
                       filterQuality: FilterQuality.high,
                       fit: BoxFit.cover,
@@ -71,19 +75,20 @@ class SeriesDetailsHeader extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Foundation',
-                        style: TextStyle(
+                        seriesDetails.name,
+                        style: const TextStyle(
                             color: Colors.white,
                             fontFamily: Fonts.aeonik,
-                            fontSize: 20),
+                            fontSize: 20,
+                        ),
                       ),
                       Row(
                         children: [
                           TextTag(text: '14'),
-                          SizedBox(width: 10),
+                          const SizedBox(width: 10),
                           Text(
-                            '2021',
-                            style: TextStyle(
+                            seriesDetails.firstAirDate,
+                            style: const TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w500),
                           )

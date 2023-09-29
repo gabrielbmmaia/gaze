@@ -1,3 +1,4 @@
+import 'package:gaze/features/series/data/models/seasons_entity.dart';
 import 'package:gaze/features/series/domain/models/series_details_model.dart';
 
 class SeriesDetailsEntity extends SeriesDetailsModel {
@@ -34,7 +35,7 @@ class SeriesDetailsEntity extends SeriesDetailsModel {
           originalName: '',
           networks: [],
           episodes: 0,
-          seasons: 0,
+          seasons: [],
           overview: '',
           tagline: '',
           voteAverage: 0,
@@ -47,6 +48,10 @@ class SeriesDetailsEntity extends SeriesDetailsModel {
         networksList.map((network) => network['name'] as String).toList();
     final genreNames =
         genresList.map((genre) => genre['name'] as String).toList();
+    final seasons = map['seasons'] as List<dynamic>;
+    final seasonsList = seasons.map(
+      (seasons) => SeasonsEntity.fromMap(seasons as Map<String, dynamic>),
+    ).toList();
 
     return SeriesDetailsEntity(
       id: map['id'].toString(),
@@ -61,7 +66,7 @@ class SeriesDetailsEntity extends SeriesDetailsModel {
       originalName: map['original_name'] as String,
       networks: networkNames,
       episodes: map['number_of_episodes'] as int,
-      seasons: map['number_of_seasons'] as int,
+      seasons: seasonsList,
       overview: map['overview'] as String,
       tagline: map['tagline'] as String,
       voteAverage: map['vote_average'] as double,

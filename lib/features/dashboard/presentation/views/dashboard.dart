@@ -44,9 +44,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
               ),
               bottomNavigationBar: BottomNavigationBar(
                 currentIndex: controller.currentIndex,
-                showSelectedLabels: true,
+                showSelectedLabels: false,
                 showUnselectedLabels: false,
-                backgroundColor: Colors.white,
+                backgroundColor: Colours.onDefaultColor,
                 elevation: 8,
                 onTap: controller.changeIndex,
                 items: [
@@ -56,8 +56,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           ? IconlyBold.home
                           : IconlyLight.home,
                       color: controller.currentIndex == 0
-                          ? Colours.primaryColour
-                          : Colours.primaryColour,
+                          ? Colours.secondaryColor
+                          : Colours.secondaryColor,
                     ),
                     label: 'Home',
                     backgroundColor: Colors.white,
@@ -68,8 +68,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           ? IconlyBold.search
                           : IconlyLight.search,
                       color: controller.currentIndex == 1
-                          ? Colours.primaryColour
-                          : Colours.primaryColour,
+                          ? Colours.secondaryColor
+                          : Colours.secondaryColor,
                     ),
                     label: 'Procurar',
                     backgroundColor: Colors.white,
@@ -80,8 +80,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           ? IconlyBold.profile
                           : IconlyLight.profile,
                       color: controller.currentIndex == 2
-                          ? Colours.primaryColour
-                          : Colours.primaryColour,
+                          ? Colours.secondaryColor
+                          : Colours.secondaryColor,
                     ),
                     label: 'Perfil',
                     backgroundColor: Colors.white,

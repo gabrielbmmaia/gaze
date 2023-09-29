@@ -11,7 +11,7 @@ const kGetPopularSeriesEndpoint = '/tv/popular';
 const kGetTrendingSeriesEndpoint = '/trending/tv';
 const kGetTopRatedSeriesEndpoint = '/tv/top_rated';
 const kGetDiscoverSeriesEndpoint = '/discover/tv';
-const kGetSeriesDetailsEndpoint = '/search/tv';
+const kGetSeriesDetailsEndpoint = '/tv';
 const kTmdbApiKey = '24e29501a7520a99e65304fad758b78b';
 const kImageBaseUrl = 'https://image.tmdb.org/t/p/w500';
 
@@ -268,7 +268,7 @@ class SeriesRemoteDataSourceImpl extends SeriesRemoteDataSource {
     try {
       final response = await _client.get(
         Uri.parse(
-          '$kBaseUrl$kGetSeriesDetailsEndpoint/$seriesId?api_key=$kTmdbApiKey',
+          '$kBaseUrl$kGetSeriesDetailsEndpoint/$seriesId?api_key=$kTmdbApiKey&language=pt-BR',
         ),
       );
       if (response.statusCode != 200) {
