@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 extension StringExt on String {
   String get obscureEmail {
     // Separando o email entre username e domínio ex: 'exemplo  gmail.com'
@@ -10,5 +12,15 @@ extension StringExt on String {
 
     // Junção do username obstruindo com o domínio
     return '$username@$emailDomain';
+  }
+
+  String get getYear {
+    final parsedDate = DateTime.parse(this);
+    return parsedDate.year.toString();
+  }
+
+  String get toBrazilianDate {
+    final parsedDate = DateTime.parse(this);
+    return DateFormat.yMMMMd('pt_BR').format(parsedDate);
   }
 }

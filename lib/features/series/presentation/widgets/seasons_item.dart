@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gaze/core/extensions/string_extensions.dart';
 import 'package:gaze/core/res/colours.dart';
 import 'package:gaze/features/series/data/data_sources/series_remote_data_source.dart';
 import 'package:gaze/features/series/domain/models/seasons_model.dart';
@@ -80,7 +81,7 @@ class SeasonsItem extends StatelessWidget {
                 ),
                 const SizedBox(width: 10),
                 Text(
-                  seasonsModel.airDate,
+                  seasonsModel.airDate.getYear,
                   style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w500,

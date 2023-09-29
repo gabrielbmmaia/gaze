@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gaze/core/extensions/string_extensions.dart';
 import 'package:gaze/core/res/colours.dart';
 import 'package:gaze/features/series/presentation/bloc/series_details/series_details_bloc.dart';
 import 'package:gaze/features/series/presentation/widgets/seasons_item.dart';
@@ -169,7 +170,8 @@ class _SeriesDetailsScreenState extends State<SeriesDetailsScreen> {
                                     ),
                                     Expanded(
                                       child: Text(
-                                        state.seriesDetails.firstAirDate,
+                                        state.seriesDetails.firstAirDate
+                                            .toBrazilianDate,
                                         style: const TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.w500,
@@ -192,7 +194,8 @@ class _SeriesDetailsScreenState extends State<SeriesDetailsScreen> {
                                     ),
                                     Expanded(
                                       child: Text(
-                                        state.seriesDetails.lastAirDate,
+                                        state.seriesDetails.lastAirDate
+                                            .toBrazilianDate,
                                         style: const TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.w500,
@@ -289,7 +292,6 @@ class _SeriesDetailsScreenState extends State<SeriesDetailsScreen> {
                               thickness: 1,
                             ),
                             const SizedBox(height: 15),
-
                           ],
                         ),
                       ),

@@ -9,6 +9,7 @@ import 'package:gaze/core/services/generate_route.dart';
 import 'package:gaze/core/services/injection_container.dart';
 import 'package:gaze/features/dashboard/presentation/providers/dashboard_controller.dart';
 import 'package:gaze/firebase_options.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -18,6 +19,7 @@ void main() async {
   );
   fui.FirebaseUIAuth.configureProviders([fui.EmailAuthProvider()]);
   await init();
+  await initializeDateFormatting('pt_BR');
   runApp(const MyApp());
 }
 
