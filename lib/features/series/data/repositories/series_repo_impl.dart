@@ -5,6 +5,7 @@ import 'package:gaze/core/utils/typedefs.dart';
 import 'package:gaze/features/series/data/data_sources/series_remote_data_source.dart';
 import 'package:gaze/features/series/domain/models/series_details_model.dart';
 import 'package:gaze/features/series/domain/models/series_model.dart';
+import 'package:gaze/features/series/domain/models/youtube_trailers_model.dart';
 import 'package:gaze/features/series/domain/repositories/series_repo.dart';
 
 class SeriesRepoImpl implements SeriesRepo {
@@ -96,6 +97,17 @@ class SeriesRepoImpl implements SeriesRepo {
   ResultFuture<SeriesDetailsModel> getSeriesDetails(String seriesId) async {
     try {
       final result = await _remoteDataSource.getSeriesDetails(seriesId);
+      return Right(result);
+    } on ServerException catch (e) {
+      return Left(ServerFailure.fromException(e));
+    }
+  }
+
+  @override
+  ResultFuture<List<YoutubeTrailersModel>> getYoutubeTrailers(
+      String seriesId) async {
+    try {
+      final result = await _remoteDataSource.getYoutubeTrailers(seriesId);
       return Right(result);
     } on ServerException catch (e) {
       return Left(ServerFailure.fromException(e));

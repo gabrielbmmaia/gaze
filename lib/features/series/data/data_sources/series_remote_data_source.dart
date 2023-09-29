@@ -291,7 +291,8 @@ class SeriesRemoteDataSourceImpl extends SeriesRemoteDataSource {
 
   @override
   Future<List<YoutubeTrailersEntity>> getYoutubeTrailers(
-      String seriesId) async {
+    String seriesId,
+  ) async {
     try {
       final response = await _client.get(
         Uri.parse(

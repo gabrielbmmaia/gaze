@@ -4,9 +4,11 @@ import 'package:gaze/core/errors/failures.dart';
 import 'package:gaze/features/series/data/data_sources/series_remote_data_source.dart';
 import 'package:gaze/features/series/data/models/series_details_entity.dart';
 import 'package:gaze/features/series/data/models/series_entity.dart';
+import 'package:gaze/features/series/data/models/youtube_trailers_entity.dart';
 import 'package:gaze/features/series/data/repositories/series_repo_impl.dart';
 import 'package:gaze/features/series/domain/models/series_details_model.dart';
 import 'package:gaze/features/series/domain/models/series_model.dart';
+import 'package:gaze/features/series/domain/models/youtube_trailers_model.dart';
 import 'package:gaze/features/series/domain/repositories/series_repo.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
@@ -380,6 +382,46 @@ void main() {
           ),
         );
         verify(() => remoteDataSource.getSeriesDetails('123456')).called(1);
+        verifyNoMoreInteractions(remoteDataSource);
+      },
+    );
+  });
+
+  group('getYoutubeTrailers', () {
+    const tTrailersList = [YoutubeTrailersEntity.empty()];
+    test(
+      'should call [SeriesRemoteDataSource.getYoutubeTrailers] and return '
+      '[Right<List<YoutubeTrailersEntity>>] when the call is successful',
+      () async {
+        when(() => remoteDataSource.getYoutubeTrailers(any())).thenAnswer(
+          (_) async => tTrailersList,
+        );
+
+        final result = await repo.getYoutubeTrailers('123456');
+
+        expect(
+          result,
+          const Right<dynamic, List<YoutubeTrailersModel>>(tTrailersList),
+        );
+        verify(() => remoteDataSource.getYoutubeTrailers('123456')).called(1);
+        verifyNoMoreInteractions(remoteDataSource);
+      },
+    );
+    test(
+      'should return [Left<ServerFailure>] when the call is unsuccessful',
+      () async {
+        when(() => remoteDataSource.getYoutubeTrailers(any()))
+            .thenThrow(tServerException);
+
+        final result = await repo.getYoutubeTrailers('123456');
+
+        expect(
+          result,
+          Left<Failure, dynamic>(
+            ServerFailure.fromException(tServerException),
+          ),
+        );
+        verify(() => remoteDataSource.getYoutubeTrailers('123456')).called(1);
         verifyNoMoreInteractions(remoteDataSource);
       },
     );
