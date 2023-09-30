@@ -20,6 +20,7 @@ import 'package:gaze/features/series/domain/usecases/get_popular_series.dart';
 import 'package:gaze/features/series/domain/usecases/get_series_details.dart';
 import 'package:gaze/features/series/domain/usecases/get_top_rated_series.dart';
 import 'package:gaze/features/series/domain/usecases/get_trending_series.dart';
+import 'package:gaze/features/series/domain/usecases/get_youtube_trailers.dart';
 import 'package:gaze/features/series/presentation/bloc/amazon/amazon_bloc.dart';
 import 'package:gaze/features/series/presentation/bloc/apple/apple_bloc.dart';
 import 'package:gaze/features/series/presentation/bloc/disney/disney_bloc.dart';
@@ -29,6 +30,7 @@ import 'package:gaze/features/series/presentation/bloc/popular/popular_bloc.dart
 import 'package:gaze/features/series/presentation/bloc/series_details/series_details_bloc.dart';
 import 'package:gaze/features/series/presentation/bloc/top_rated/top_rated_bloc.dart';
 import 'package:gaze/features/series/presentation/bloc/trending/trending_bloc.dart';
+import 'package:gaze/features/series/presentation/bloc/yt_trailers/yt_trailers_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 final sl = GetIt.instance;
@@ -49,6 +51,7 @@ Future<void> _seriesInit() async {
     ..registerFactory(() => HboBloc(getHBOSeries: sl()))
     ..registerFactory(() => AppleBloc(getAppleSeries: sl()))
     ..registerFactory(() => SeriesDetailsBloc(getSeriesDetails: sl()))
+    ..registerFactory(() => YtTrailersBloc(getYoutubeTrailers: sl()))
 
     ..registerLazySingleton(() => GetPopularSeriesUseCase(sl()))
     ..registerLazySingleton(() => GetTrendingSeriesUseCase(sl()))
@@ -59,6 +62,7 @@ Future<void> _seriesInit() async {
     ..registerLazySingleton(() => GetHBOSeriesUseCase(sl()))
     ..registerLazySingleton(() => GetAppleSeriesUseCase(sl()))
     ..registerLazySingleton(() => GetSeriesDetailsUseCase(sl()))
+    ..registerLazySingleton(() => GetYoutubeTrailersUseCase(sl()))
 
     ..registerLazySingleton<SeriesRepo>(() => SeriesRepoImpl(sl()))
     ..registerLazySingleton<SeriesRemoteDataSource>(

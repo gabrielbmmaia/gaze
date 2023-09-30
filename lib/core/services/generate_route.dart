@@ -12,6 +12,7 @@ import 'package:gaze/features/auth/presentation/views/sign_up_screen.dart';
 import 'package:gaze/features/dashboard/presentation/views/dashboard.dart';
 import 'package:gaze/features/series/presentation/bloc/popular/popular_bloc.dart';
 import 'package:gaze/features/series/presentation/bloc/series_details/series_details_bloc.dart';
+import 'package:gaze/features/series/presentation/bloc/yt_trailers/yt_trailers_bloc.dart';
 import 'package:gaze/features/series/presentation/views/series_details_screen.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
@@ -74,8 +75,11 @@ Route<dynamic> generateRoute(RouteSettings settings) {
 
     case SeriesDetailsScreen.routeName:
       return _pageBuilder(
-        (_) => BlocProvider(
-          create: (_) => sl<SeriesDetailsBloc>(),
+        (_) => MultiBlocProvider(
+          providers: [
+            BlocProvider(create: (_) => sl<SeriesDetailsBloc>()),
+            BlocProvider(create: (_) => sl<YtTrailersBloc>()),
+          ],
           child: SeriesDetailsScreen(seriesId: settings.arguments as String),
         ),
         settings: settings,

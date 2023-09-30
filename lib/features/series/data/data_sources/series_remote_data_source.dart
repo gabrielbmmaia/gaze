@@ -296,7 +296,7 @@ class SeriesRemoteDataSourceImpl extends SeriesRemoteDataSource {
     try {
       final response = await _client.get(
         Uri.parse(
-          '$kBaseUrl/tv/$seriesId?api_key=$kTmdbApiKey/videos',
+          '$kBaseUrl/tv/$seriesId/videos?api_key=$kTmdbApiKey',
         ),
       );
       if (response.statusCode != 200) {

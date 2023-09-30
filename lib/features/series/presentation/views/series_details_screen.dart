@@ -3,9 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gaze/core/extensions/string_extensions.dart';
 import 'package:gaze/core/res/colours.dart';
 import 'package:gaze/features/series/presentation/bloc/series_details/series_details_bloc.dart';
+import 'package:gaze/features/series/presentation/bloc/yt_trailers/yt_trailers_bloc.dart';
 import 'package:gaze/features/series/presentation/widgets/seasons_item.dart';
 import 'package:gaze/features/series/presentation/widgets/series_details_header.dart';
 import 'package:gaze/features/series/presentation/widgets/text_tag_slider.dart';
+import 'package:gaze/features/series/presentation/widgets/trailers_item.dart';
 
 class SeriesDetailsScreen extends StatefulWidget {
   const SeriesDetailsScreen({
@@ -26,6 +28,9 @@ class _SeriesDetailsScreenState extends State<SeriesDetailsScreen> {
     context
         .read<SeriesDetailsBloc>()
         .add(LoadSeriesDetailsEvent(seriesId: widget.seriesId));
+    context
+        .read<YtTrailersBloc>()
+        .add(LoadYtTrailersEvent(seriesId: widget.seriesId));
     super.initState();
   }
 
@@ -170,7 +175,8 @@ class _SeriesDetailsScreenState extends State<SeriesDetailsScreen> {
                                     ),
                                     Expanded(
                                       child: Text(
-                                        state.seriesDetails.firstAirDate.toBrazilianDate,
+                                        state.seriesDetails.firstAirDate
+                                            .toBrazilianDate,
                                         style: const TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.w500,
@@ -193,7 +199,8 @@ class _SeriesDetailsScreenState extends State<SeriesDetailsScreen> {
                                     ),
                                     Expanded(
                                       child: Text(
-                                        state.seriesDetails.lastAirDate.toBrazilianDate,
+                                        state.seriesDetails.lastAirDate
+                                            .toBrazilianDate,
                                         style: const TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.w500,
@@ -290,7 +297,39 @@ class _SeriesDetailsScreenState extends State<SeriesDetailsScreen> {
                               thickness: 1,
                             ),
                             const SizedBox(height: 15),
-
+                            const Text(
+                              'Mídias',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 20,
+                              ),
+                            ),
+                            const SizedBox(height: 15),
+                            BlocBuilder<YtTrailersBloc, YtTrailersState>(
+                              builder: (context, state) {
+                                if (state is LoadedYtTrailers) {
+                                  return SizedBox(
+                                    height: 200,
+                                    width: double.infinity,
+                                    child: ListView.builder(
+                                      itemCount: state.trailersList.length,
+                                      scrollDirection: Axis.horizontal,
+                                      itemBuilder: (context, index) {
+                                        return Padding(
+                                          padding:
+                                              const EdgeInsets.only(right: 20),
+                                          child: TrailersItem(
+                                            trailer: state.trailersList[index],
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  );
+                                }
+                                return CircularProgressIndicator();
+                              },
+                            ),
                           ],
                         ),
                       ),
