@@ -39,7 +39,7 @@ abstract class SeriesRemoteDataSource {
 
   Future<List<YoutubeTrailersEntity>> getYoutubeTrailers(String seriesId);
 
-  Future<int?> getSeriesClassification(String seriesId);
+  Future<String?> getSeriesClassification(String seriesId);
 }
 
 class SeriesRemoteDataSourceImpl extends SeriesRemoteDataSource {
@@ -320,7 +320,7 @@ class SeriesRemoteDataSourceImpl extends SeriesRemoteDataSource {
   }
 
   @override
-  Future<int?> getSeriesClassification(String seriesId) async {
+  Future<String?> getSeriesClassification(String seriesId) async {
     try {
       final response = await _client.get(
         Uri.parse(
@@ -334,16 +334,11 @@ class SeriesRemoteDataSourceImpl extends SeriesRemoteDataSource {
         );
       }
       final data = jsonDecode(response.body)['results'] as List<dynamic>;
-      final brRating = data.firstWhere(
+      final result = data.firstWhere(
         (rating) => rating['iso_3166_1'] == 'BR',
         orElse: () => null,
       );
-
-      return brRating != null
-          ? int.tryParse(
-              brRating['rating'] as String,
-            )
-          : null;
+      return result != null ? result['rating'] as String : null;
     } on ServerException {
       rethrow;
     } catch (e) {

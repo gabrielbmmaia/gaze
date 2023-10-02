@@ -116,7 +116,7 @@ class SeriesRepoImpl implements SeriesRepo {
   }
 
   @override
-  ResultFuture<int?> getSeriesClassification(String seriesId) async {
+  ResultFuture<String?> getSeriesClassification(String seriesId) async {
     try {
       final result = await _remoteDataSource.getSeriesClassification(seriesId);
       return Right(result);

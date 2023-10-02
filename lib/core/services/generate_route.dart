@@ -10,6 +10,7 @@ import 'package:gaze/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:gaze/features/auth/presentation/views/sign_in_screen.dart';
 import 'package:gaze/features/auth/presentation/views/sign_up_screen.dart';
 import 'package:gaze/features/dashboard/presentation/views/dashboard.dart';
+import 'package:gaze/features/series/presentation/bloc/classification/classification_bloc.dart';
 import 'package:gaze/features/series/presentation/bloc/popular/popular_bloc.dart';
 import 'package:gaze/features/series/presentation/bloc/series_details/series_details_bloc.dart';
 import 'package:gaze/features/series/presentation/bloc/yt_trailers/yt_trailers_bloc.dart';
@@ -79,6 +80,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
           providers: [
             BlocProvider(create: (_) => sl<SeriesDetailsBloc>()),
             BlocProvider(create: (_) => sl<YtTrailersBloc>()),
+            BlocProvider(create: (_) => sl<ClassificationBloc>())
           ],
           child: SeriesDetailsScreen(seriesId: settings.arguments as String),
         ),

@@ -433,14 +433,14 @@ void main() {
       '[Right<int?>] when the call is successful',
       () async {
         when(() => remoteDataSource.getSeriesClassification(any())).thenAnswer(
-          (_) async => 14,
+          (_) async => '14',
         );
 
         final result = await repo.getSeriesClassification('123456');
 
         expect(
           result,
-          const Right<dynamic, int?>(14),
+          const Right<dynamic, String?>('14'),
         );
         verify(() => remoteDataSource.getSeriesClassification('123456'))
             .called(1);
