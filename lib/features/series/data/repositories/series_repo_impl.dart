@@ -105,11 +105,22 @@ class SeriesRepoImpl implements SeriesRepo {
 
   @override
   ResultFuture<List<YoutubeTrailersModel>> getYoutubeTrailers(
-      String seriesId) async {
+    String seriesId,
+  ) async {
     try {
       final result = await _remoteDataSource.getYoutubeTrailers(seriesId);
       return Right(result);
     } on ServerException catch (e) {
+      return Left(ServerFailure.fromException(e));
+    }
+  }
+
+  @override
+  ResultFuture<int?> getSeriesClassification(String seriesId) async {
+    try {
+      final result = await _remoteDataSource.getSeriesClassification(seriesId);
+      return Right(result);
+    }on ServerException catch (e) {
       return Left(ServerFailure.fromException(e));
     }
   }

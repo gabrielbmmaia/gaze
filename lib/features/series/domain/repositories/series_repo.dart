@@ -25,4 +25,6 @@ abstract class SeriesRepo {
   ResultFuture<SeriesDetailsModel> getSeriesDetails(String seriesId);
 
   ResultFuture<List<YoutubeTrailersModel>> getYoutubeTrailers(String seriesId);
+
+  ResultFuture<int?> getSeriesClassification(String seriesId);
 }

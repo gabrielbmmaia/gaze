@@ -426,4 +426,45 @@ void main() {
       },
     );
   });
+
+  group('getSeriesClassification', () {
+    test(
+      'should call [SeriesRemoteDataSource.getSeriesClassification] and return '
+      '[Right<int?>] when the call is successful',
+      () async {
+        when(() => remoteDataSource.getSeriesClassification(any())).thenAnswer(
+          (_) async => 14,
+        );
+
+        final result = await repo.getSeriesClassification('123456');
+
+        expect(
+          result,
+          const Right<dynamic, int?>(14),
+        );
+        verify(() => remoteDataSource.getSeriesClassification('123456'))
+            .called(1);
+        verifyNoMoreInteractions(remoteDataSource);
+      },
+    );
+    test(
+      'should return [Left<ServerFailure>] when the call is unsuccessful',
+      () async {
+        when(() => remoteDataSource.getSeriesClassification(any()))
+            .thenThrow(tServerException);
+
+        final result = await repo.getSeriesClassification('123456');
+
+        expect(
+          result,
+          Left<Failure, dynamic>(
+            ServerFailure.fromException(tServerException),
+          ),
+        );
+        verify(() => remoteDataSource.getSeriesClassification('123456'))
+            .called(1);
+        verifyNoMoreInteractions(remoteDataSource);
+      },
+    );
+  });
 }

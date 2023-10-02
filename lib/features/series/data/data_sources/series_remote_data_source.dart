@@ -38,6 +38,8 @@ abstract class SeriesRemoteDataSource {
   Future<SeriesDetailsEntity> getSeriesDetails(String seriesId);
 
   Future<List<YoutubeTrailersEntity>> getYoutubeTrailers(String seriesId);
+
+  Future<int?> getSeriesClassification(String seriesId);
 }
 
 class SeriesRemoteDataSourceImpl extends SeriesRemoteDataSource {
@@ -310,6 +312,38 @@ class SeriesRemoteDataSourceImpl extends SeriesRemoteDataSource {
           .map((videos) =>
               YoutubeTrailersEntity.fromMap(videos as Map<String, dynamic>))
           .toList();
+    } on ServerException {
+      rethrow;
+    } catch (e) {
+      throw ServerException(message: e.toString(), statusCode: '505');
+    }
+  }
+
+  @override
+  Future<int?> getSeriesClassification(String seriesId) async {
+    try {
+      final response = await _client.get(
+        Uri.parse(
+          '$kBaseUrl/tv/$seriesId/content_ratings?api_key=$kTmdbApiKey',
+        ),
+      );
+      if (response.statusCode != 200) {
+        throw ServerException(
+          message: response.body,
+          statusCode: response.statusCode.toString(),
+        );
+      }
+      final data = jsonDecode(response.body)['results'] as List<dynamic>;
+      final brRating = data.firstWhere(
+        (rating) => rating['iso_3166_1'] == 'BR',
+        orElse: () => null,
+      );
+
+      return brRating != null
+          ? int.tryParse(
+              brRating['rating'] as String,
+            )
+          : null;
     } on ServerException {
       rethrow;
     } catch (e) {
