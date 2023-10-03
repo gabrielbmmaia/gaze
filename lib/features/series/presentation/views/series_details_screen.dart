@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gaze/core/extensions/string_extensions.dart';
 import 'package:gaze/core/res/colours.dart';
+import 'package:gaze/features/series/presentation/bloc/classification/classification_bloc.dart';
 import 'package:gaze/features/series/presentation/bloc/series_details/series_details_bloc.dart';
 import 'package:gaze/features/series/presentation/bloc/yt_trailers/yt_trailers_bloc.dart';
 import 'package:gaze/features/series/presentation/widgets/seasons_item.dart';
@@ -31,6 +32,9 @@ class _SeriesDetailsScreenState extends State<SeriesDetailsScreen> {
     context
         .read<YtTrailersBloc>()
         .add(LoadYtTrailersEvent(seriesId: widget.seriesId));
+    context
+        .read<ClassificationBloc>()
+        .add(LoadClassificationEvent(seriesId: widget.seriesId));
     super.initState();
   }
 
@@ -56,7 +60,21 @@ class _SeriesDetailsScreenState extends State<SeriesDetailsScreen> {
                 SliverList(
                   delegate: SliverChildListDelegate(
                     [
-                      SeriesDetailsHeader(seriesDetails: state.seriesDetails),
+                      BlocBuilder<ClassificationBloc, ClassificationState>(
+                        builder: (context, classificationState) {
+                          if (classificationState is LoadedClassification) {
+                            return SeriesDetailsHeader(
+                              seriesDetails: state.seriesDetails,
+                              classification:
+                                  classificationState.classification,
+                            );
+                          }
+                          return SeriesDetailsHeader(
+                            seriesDetails: state.seriesDetails,
+                            classification: null,
+                          );
+                        },
+                      ),
                       const Divider(
                         height: 1,
                         color: Colours.onDefaultColor,
@@ -81,6 +99,7 @@ class _SeriesDetailsScreenState extends State<SeriesDetailsScreen> {
                                 ),
                               ),
                             Text(
+                              textAlign: TextAlign.justify,
                               state.seriesDetails.overview,
                               style: const TextStyle(color: Colors.white),
                             ),

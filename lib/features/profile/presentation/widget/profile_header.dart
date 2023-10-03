@@ -18,29 +18,28 @@ class ProfileHeader extends StatelessWidget {
 
         return Column(
           children: [
-            const SizedBox(height: 20),
+            const SizedBox(height: 30),
             CircleAvatar(
-              radius: 50,
+              radius: 90,
               backgroundImage: image != null
                   ? NetworkImage(image)
                   : const AssetImage(MediaRes.userProfile) as ImageProvider,
             ),
+            const SizedBox(height: 30),
             Text(
               user?.fullName ?? 'No user',
               textAlign: TextAlign.center,
               style: const TextStyle(
-                fontWeight: FontWeight.w600,
-                fontSize: 24,
-              ),
+                  fontWeight: FontWeight.w500,
+                  fontSize: 24,
+                  color: Colors.white),
             ),
             if (user?.bio != null && user!.bio!.isNotEmpty) ...[
               const SizedBox(height: 8),
               Text(
                 user.bio!,
                 textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: Colours.neutralTextColour,
-                ),
+                style: const TextStyle(color: Colours.neutralTextColour),
               ),
             ],
           ],

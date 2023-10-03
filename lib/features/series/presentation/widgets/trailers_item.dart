@@ -9,46 +9,49 @@ class TrailersItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Ink(
-          height: 130,
-          width: 240,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(6),
-            image: DecorationImage(
-              image: NetworkImage(
-                'https://img.youtube.com/vi/${trailer.trailerKey}/0.jpg',
+    return SizedBox(
+      width: 240,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Ink(
+            height: 130,
+            width: 240,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(6),
+              image: DecorationImage(
+                image: NetworkImage(
+                  'https://img.youtube.com/vi/${trailer.trailerKey}/0.jpg',
+                ),
+                filterQuality: FilterQuality.high,
+                fit: BoxFit.fitWidth,
               ),
-              filterQuality: FilterQuality.high,
-              fit: BoxFit.fitWidth,
+            ),
+            child: InkWell(
+              borderRadius: BorderRadius.circular(6),
+              onTap: () async {
+                final youtubeUrl = Uri.parse(
+                  'https://www.youtube.com/embed/${trailer.trailerKey}',
+                );
+                if (await canLaunchUrl(youtubeUrl)) {
+                  await launchUrl(youtubeUrl);
+                }
+              },
             ),
           ),
-          child: InkWell(
-            borderRadius: BorderRadius.circular(6),
-            onTap: () async {
-              final youtubeUrl = Uri.parse(
-                'https://www.youtube.com/embed/${trailer.trailerKey}',
-              );
-              if (await canLaunchUrl(youtubeUrl)) {
-                await launchUrl(youtubeUrl);
-              }
-            },
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 5, right: 5, left: 5),
-          child: Text(
-            trailer.trailerTitle,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 16,
+          Padding(
+            padding: const EdgeInsets.only(top: 5, right: 5, left: 5),
+            child: Text(
+              trailer.trailerTitle,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+              ),
+              overflow: TextOverflow.ellipsis,
             ),
-            overflow: TextOverflow.ellipsis,
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

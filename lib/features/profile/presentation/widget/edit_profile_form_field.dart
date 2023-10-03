@@ -25,8 +25,9 @@ class EditProfileFormField extends StatelessWidget {
           child: Text(
             fieldTitle,
             style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 12,
+              fontWeight: FontWeight.w500,
+              fontSize: 14,
+              color: Colors.white
             ),
           ),
         ),

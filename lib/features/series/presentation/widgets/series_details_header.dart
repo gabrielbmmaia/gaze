@@ -7,9 +7,14 @@ import 'package:gaze/features/series/domain/models/series_details_model.dart';
 import 'package:gaze/features/series/presentation/widgets/text_tag.dart';
 
 class SeriesDetailsHeader extends StatelessWidget {
-  const SeriesDetailsHeader({required this.seriesDetails, super.key});
+  const SeriesDetailsHeader({
+    required this.seriesDetails,
+    required this.classification,
+    super.key,
+  });
 
   final SeriesDetailsModel seriesDetails;
+  final String? classification;
 
   @override
   Widget build(BuildContext context) {
@@ -70,32 +75,67 @@ class SeriesDetailsHeader extends StatelessWidget {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 20, bottom: 10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        seriesDetails.name,
-                        style: const TextStyle(
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 20, bottom: 10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          seriesDetails.name,
+                          style: const TextStyle(
                             color: Colors.white,
                             fontFamily: Fonts.aeonik,
                             fontSize: 20,
+                          ),
                         ),
-                      ),
-                      Row(
-                        children: [
-                          TextTag(text: '14'),
-                          const SizedBox(width: 10),
-                          Text(
-                            seriesDetails.firstAirDate.getYear,
-                            style: const TextStyle(
+                        Row(
+                          children: [
+                            if (classification != null)
+                              Padding(
+                                padding: const EdgeInsets.only(right: 10),
+                                child: TextTag(
+                                  text: (classification == '18')
+                                      ? '+${classification!}'
+                                      : classification!,
+                                  backgroundColor: (classification == 'L')
+                                      ? const Color(0xFF08B155)
+                                      : (classification == '10')
+                                          ? const Color(0xFF0E7DBF)
+                                          : (classification == '12')
+                                              ? const Color(0xFFF6C211)
+                                              : (classification == '14')
+                                                  ? const Color(0xFFE37722)
+                                                  : (classification == '16')
+                                                      ? const Color(0xFFD92826)
+                                                      : (classification == '18')
+                                                          ? const Color(
+                                                              0xFF1D1815,
+                                                            )
+                                                          : Colours
+                                                              .onDefaultColor,
+                                ),
+                              ),
+                            Text(
+                              seriesDetails.firstAirDate.getYear,
+                              style: const TextStyle(
                                 color: Colors.white,
-                                fontWeight: FontWeight.w500),
-                          )
-                        ],
-                      ),
-                    ],
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            Text(
+                              seriesDetails.inProduction
+                                  ? ' • Em produção'
+                                  : ' • ${seriesDetails.lastAirDate.getYear}',
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],

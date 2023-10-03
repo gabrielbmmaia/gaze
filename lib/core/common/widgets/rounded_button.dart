@@ -22,14 +22,14 @@ class RoundedButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        backgroundColor: buttonColour ?? Colours.primaryColour,
+        backgroundColor: buttonColour ?? Colours.onDefaultColor,
         foregroundColor: labelColour ?? Colors.white,
         minimumSize: const Size(double.maxFinite, 50),
       ),
       child: Text(
         label,
         style: textStyle ??
-            const TextStyle(fontSize: 16),
+            const TextStyle(fontSize: 16, color: Colors.white),
       ),
     );
   }

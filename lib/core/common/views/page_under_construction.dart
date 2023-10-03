@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gaze/core/res/colours.dart';
 import 'package:lottie/lottie.dart';
 
 class PageUnderConstruction extends StatelessWidget {
@@ -7,7 +8,15 @@ class PageUnderConstruction extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colours.onDefaultColor,
+        title: const Text(
+          'Em construção',
+          style: TextStyle(color: Colors.white),
+        ),
+        iconTheme: const IconThemeData(color: Colors.white),
+      ),
+      backgroundColor: Colours.defaultColor,
       body: SafeArea(
         child: Center(
           child: Lottie.asset('asset/lottie/page_under_construction.json'),

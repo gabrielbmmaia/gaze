@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gaze/core/extensions/context_extension.dart';
+import 'package:gaze/core/res/colours.dart';
 import 'package:gaze/core/res/string.dart';
 
 /*
@@ -47,6 +47,7 @@ class IField extends StatelessWidget {
       },
       keyboardType: keyBoardType,
       obscureText: obscureText,
+      style: const TextStyle(color: Colors.white),
       readOnly: readOnly,
       decoration: InputDecoration(
         border: OutlineInputBorder(
@@ -54,12 +55,12 @@ class IField extends StatelessWidget {
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(90),
-          borderSide: const BorderSide(color: Colors.grey),
+          borderSide: const BorderSide(color: Colors.white),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(90),
-          borderSide: BorderSide(
-            color: context.theme.primaryColor,
+          borderSide: const BorderSide(
+            color: Colours.secondaryColor,
           ),
         ),
         contentPadding: const EdgeInsets.symmetric(horizontal: 20),
@@ -70,7 +71,7 @@ class IField extends StatelessWidget {
         hintStyle: hintStyle ??
             const TextStyle(
               fontSize: 16,
-              fontWeight: FontWeight.w400,
+              fontWeight: FontWeight.w400, color: Colors.white,
             ),
       ),
     );

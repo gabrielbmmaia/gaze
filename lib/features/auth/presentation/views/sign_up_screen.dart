@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gaze/core/common/widgets/app_background.dart';
 import 'package:gaze/core/common/widgets/rounded_button.dart';
 import 'package:gaze/core/providers/user_provider.dart';
+import 'package:gaze/core/res/colours.dart';
 import 'package:gaze/core/res/fonts.dart';
 import 'package:gaze/core/res/string.dart';
 import 'package:gaze/core/utils/core_utils.dart';
@@ -38,7 +39,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colours.defaultColor,
       body: BlocConsumer<AuthBloc, AuthState>(
         listener: (_, state) {
           if (state is AuthError) {
@@ -61,7 +62,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         },
         builder: (context, state) {
           return AppBackground(
-            backgroundColor: Colors.white,
+            backgroundColor: Colours.defaultColor,
             child: ListView(
               shrinkWrap: true,
               padding: const EdgeInsets.symmetric(
@@ -75,6 +76,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     fontFamily: Fonts.satisfy,
                     fontWeight: FontWeight.w700,
                     fontSize: 90,
+                    color: Colours.secondaryColor,
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -84,14 +86,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   children: [
                     const Text(
                       StringRes.signUpYourAcc,
-                      style: TextStyle(fontSize: 16),
+                      style: TextStyle(fontSize: 16, color: Colors.white),
                     ),
                     const SizedBox(height: 10),
                     TextButton(
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      child: const Text(StringRes.alreadyHaveAcc),
+                      child: const Text(StringRes.alreadyHaveAcc, style: TextStyle(color: Colours.secondaryColor),),
                     ),
                   ],
                 ),
@@ -105,7 +107,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 const SizedBox(height: 30),
                 if (state is AuthLoading)
-                  const Center(child: CircularProgressIndicator())
+                  const Center(child: CircularProgressIndicator(color: Colours.secondaryColor,))
                 else
                   RoundedButton(
                     label: StringRes.createAccount,

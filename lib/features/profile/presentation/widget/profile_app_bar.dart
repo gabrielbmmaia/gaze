@@ -17,25 +17,24 @@ class ProfileAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       excludeHeaderSemantics: true,
-      backgroundColor: Colors.white,
+      backgroundColor: Colours.onDefaultColor,
       title: const Text(
         'Perfil',
-        style: TextStyle(
-          fontWeight: FontWeight.w600,
-          fontSize: 24,
-        ),
+        style: TextStyle(color: Colors.white),
       ),
       actions: [
         PopupMenuButton(
-          surfaceTintColor: Colors.white,
+          surfaceTintColor: Colors.white70,
           offset: const Offset(0, 50),
-          icon: const Icon(Icons.more_horiz),
+          icon: const Icon(Icons.more_horiz, color: Colors.white,),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),
           itemBuilder: (_) => [
             PopupMenuItem<void>(
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).pushNamed('fake-error');
+              },
               child: const PopupItem(
                 title: 'Fake Nav Error',
                 icon: Icon(

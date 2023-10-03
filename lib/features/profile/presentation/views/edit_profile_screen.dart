@@ -79,15 +79,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       builder: (context, state) {
         return Scaffold(
           extendBodyBehindAppBar: true,
-          backgroundColor: Colors.white,
+          backgroundColor: Colours.defaultColor,
           appBar: AppBar(
+            backgroundColor: Colours.onDefaultColor,
             leading: const NestedBackButton(),
             title: const Text(
               'Editar Perfil',
-              style: TextStyle(
-                fontWeight: FontWeight.w600,
-                fontSize: 24,
-              ),
+              style: TextStyle(color: Colors.white),
             ),
             actions: [
               TextButton(
@@ -140,7 +138,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               fontWeight: FontWeight.w500,
                               color: nothingChanged
                                   ? Colors.grey
-                                  : Colours.primaryColour,
+                                  : Colours.secondaryColor,
                             ),
                           );
                         },
@@ -149,11 +147,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             ],
           ),
           body: AppBackground(
-            backgroundColor: Colors.white,
+            backgroundColor: Colours.defaultColor,
             child: ListView(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               children: [
-                const SizedBox(height: 20),
+                const SizedBox(height: 30),
                 Builder(
                   builder: (context) {
                     final user = context.currentUser!;
@@ -162,8 +160,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             ? null
                             : user.profilePic;
                     return Container(
-                      width: 100,
-                      height: 100,
+                      width: 180,
+                      height: 180,
                       clipBehavior: Clip.hardEdge,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
@@ -176,13 +174,16 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       as ImageProvider,
                           fit: BoxFit.contain,
                           colorFilter: ColorFilter.mode(
-                            Colors.black.withOpacity(.5),
+                            Colors.black.withOpacity(.6),
                             BlendMode.darken,
                           ),
                         ),
                       ),
                       child: IconButton(
-                        icon: const Icon(Icons.edit, color: Colors.white),
+                        icon: const Icon(
+                          Icons.edit,
+                          color: Colours.secondaryColor,
+                        ),
                         onPressed: pickImage,
                       ),
                     );
