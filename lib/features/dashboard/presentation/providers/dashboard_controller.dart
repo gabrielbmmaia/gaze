@@ -13,6 +13,7 @@ import 'package:gaze/features/series/presentation/bloc/popular/popular_bloc.dart
 import 'package:gaze/features/series/presentation/bloc/top_rated/top_rated_bloc.dart';
 import 'package:gaze/features/series/presentation/bloc/trending/trending_bloc.dart';
 import 'package:gaze/features/series/presentation/views/series_screen.dart';
+import 'package:gaze/features/series/presentation/views/series_search_screen.dart';
 import 'package:provider/provider.dart';
 
 class DashboardController extends ChangeNotifier {
@@ -56,7 +57,7 @@ class DashboardController extends ChangeNotifier {
       child: const PersistentView(),
     ),
     ChangeNotifierProvider(
-      create: (_) => TabNavigator(TabItem(child: const Placeholder())),
+      create: (_) => TabNavigator(TabItem(child: const SeriesSearchScreen())),
       child: const PersistentView(),
     ),
     ChangeNotifierProvider(

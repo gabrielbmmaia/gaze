@@ -41,6 +41,12 @@ class _SeriesDetailsScreenState extends State<SeriesDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        elevation: 0,
+        iconTheme: const IconThemeData(color: Colors.white),
+        backgroundColor: Colors.transparent,
+      ),
       backgroundColor: Colours.defaultColor,
       body: BlocConsumer<SeriesDetailsBloc, SeriesDetailsState>(
         listener: (context, state) {
@@ -49,13 +55,6 @@ class _SeriesDetailsScreenState extends State<SeriesDetailsScreen> {
         builder: (context, state) {
           return CustomScrollView(
             slivers: [
-              const SliverAppBar(
-                elevation: 0,
-                iconTheme: IconThemeData(color: Colors.white),
-                backgroundColor: Colors.transparent,
-                expandedHeight: kToolbarHeight,
-                pinned: true,
-              ),
               if (state is LoadedSeriesDetails) ...[
                 SliverList(
                   delegate: SliverChildListDelegate(
@@ -316,47 +315,52 @@ class _SeriesDetailsScreenState extends State<SeriesDetailsScreen> {
                             BlocBuilder<YtTrailersBloc, YtTrailersState>(
                               builder: (context, state) {
                                 if (state is LoadedYtTrailers) {
-                                  return Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      const Divider(
-                                        height: 1,
-                                        color: Colours.onDefaultColor,
-                                        thickness: 1,
-                                      ),
-                                      const SizedBox(height: 15),
-                                      const Text(
-                                        'Mídias',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 20,
+                                  if (state.trailersList.isNotEmpty) {
+                                    return Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const Divider(
+                                          height: 1,
+                                          color: Colours.onDefaultColor,
+                                          thickness: 1,
                                         ),
-                                      ),
-                                      const SizedBox(height: 15),
-                                      SizedBox(
-                                        height: 200,
-                                        width: double.infinity,
-                                        child: ListView.builder(
-                                          itemCount: state.trailersList.length,
-                                          scrollDirection: Axis.horizontal,
-                                          itemBuilder: (context, index) {
-                                            return Padding(
-                                              padding: const EdgeInsets.only(
-                                                  right: 20),
-                                              child: TrailersItem(
-                                                trailer:
-                                                    state.trailersList[index],
-                                              ),
-                                            );
-                                          },
+                                        const SizedBox(height: 15),
+                                        const Text(
+                                          'Mídias',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 20,
+                                          ),
                                         ),
-                                      ),
-                                    ],
-                                  );
+                                        const SizedBox(height: 15),
+                                        SizedBox(
+                                          height: 200,
+                                          width: double.infinity,
+                                          child: ListView.builder(
+                                            itemCount:
+                                                state.trailersList.length,
+                                            scrollDirection:
+                                                Axis.horizontal,
+                                            itemBuilder: (context, index) {
+                                              return Padding(
+                                                padding:
+                                                    const EdgeInsets.only(
+                                                        right: 20),
+                                                child: TrailersItem(
+                                                  trailer: state
+                                                      .trailersList[index],
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                      ],
+                                    );
+                                  }
                                 }
-                                return CircularProgressIndicator();
+                                return const SizedBox();
                               },
                             ),
                           ],
