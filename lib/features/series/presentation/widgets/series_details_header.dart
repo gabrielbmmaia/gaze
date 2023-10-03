@@ -77,7 +77,11 @@ class SeriesDetailsHeader extends StatelessWidget {
                 ),
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 20, bottom: 10),
+                    padding: const EdgeInsets.only(
+                      left: 16,
+                      right: 16,
+                      bottom: 10,
+                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -116,22 +120,24 @@ class SeriesDetailsHeader extends StatelessWidget {
                                                               .onDefaultColor,
                                 ),
                               ),
-                            Text(
-                              seriesDetails.firstAirDate.getYear,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500,
+                            if (seriesDetails.firstAirDate != null)
+                              Text(
+                                seriesDetails.firstAirDate!.getYear,
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
-                            ),
-                            Text(
-                              seriesDetails.inProduction
-                                  ? ' • Em produção'
-                                  : ' • ${seriesDetails.lastAirDate.getYear}',
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            )
+                            if (seriesDetails.lastAirDate != null)
+                              Text(
+                                seriesDetails.inProduction
+                                    ? ' • Em produção'
+                                    : ' • ${seriesDetails.lastAirDate!.getYear}',
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              )
                           ],
                         ),
                       ],

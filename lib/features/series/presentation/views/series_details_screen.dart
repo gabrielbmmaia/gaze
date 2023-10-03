@@ -192,16 +192,18 @@ class _SeriesDetailsScreenState extends State<SeriesDetailsScreen> {
                                         ),
                                       ),
                                     ),
-                                    Expanded(
-                                      child: Text(
-                                        state.seriesDetails.firstAirDate
-                                            .toBrazilianDate,
-                                        style: const TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w500,
+                                    if (state.seriesDetails.firstAirDate !=
+                                        null)
+                                      Expanded(
+                                        child: Text(
+                                          state.seriesDetails.firstAirDate!
+                                              .toBrazilianDate,
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w500,
+                                          ),
                                         ),
                                       ),
-                                    ),
                                   ],
                                 ),
                                 const SizedBox(height: 15),
@@ -216,16 +218,17 @@ class _SeriesDetailsScreenState extends State<SeriesDetailsScreen> {
                                         ),
                                       ),
                                     ),
-                                    Expanded(
-                                      child: Text(
-                                        state.seriesDetails.lastAirDate
-                                            .toBrazilianDate,
-                                        style: const TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w500,
+                                    if (state.seriesDetails.lastAirDate != null)
+                                      Expanded(
+                                        child: Text(
+                                          state.seriesDetails.lastAirDate!
+                                              .toBrazilianDate,
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w500,
+                                          ),
                                         ),
                                       ),
-                                    ),
                                   ],
                                 ),
                                 const SizedBox(height: 15),
@@ -310,40 +313,47 @@ class _SeriesDetailsScreenState extends State<SeriesDetailsScreen> {
                               ),
                             ),
                             const SizedBox(height: 15),
-                            const Divider(
-                              height: 1,
-                              color: Colours.onDefaultColor,
-                              thickness: 1,
-                            ),
-                            const SizedBox(height: 15),
-                            const Text(
-                              'Mídias',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 20,
-                              ),
-                            ),
-                            const SizedBox(height: 15),
                             BlocBuilder<YtTrailersBloc, YtTrailersState>(
                               builder: (context, state) {
                                 if (state is LoadedYtTrailers) {
-                                  return SizedBox(
-                                    height: 200,
-                                    width: double.infinity,
-                                    child: ListView.builder(
-                                      itemCount: state.trailersList.length,
-                                      scrollDirection: Axis.horizontal,
-                                      itemBuilder: (context, index) {
-                                        return Padding(
-                                          padding:
-                                              const EdgeInsets.only(right: 20),
-                                          child: TrailersItem(
-                                            trailer: state.trailersList[index],
-                                          ),
-                                        );
-                                      },
-                                    ),
+                                  return Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const Divider(
+                                        height: 1,
+                                        color: Colours.onDefaultColor,
+                                        thickness: 1,
+                                      ),
+                                      const SizedBox(height: 15),
+                                      const Text(
+                                        'Mídias',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 20,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 15),
+                                      SizedBox(
+                                        height: 200,
+                                        width: double.infinity,
+                                        child: ListView.builder(
+                                          itemCount: state.trailersList.length,
+                                          scrollDirection: Axis.horizontal,
+                                          itemBuilder: (context, index) {
+                                            return Padding(
+                                              padding: const EdgeInsets.only(
+                                                  right: 20),
+                                              child: TrailersItem(
+                                                trailer:
+                                                    state.trailersList[index],
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    ],
                                   );
                                 }
                                 return CircularProgressIndicator();

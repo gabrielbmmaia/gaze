@@ -42,8 +42,8 @@ class SeriesDetailsModel extends Equatable {
         );
 
   final String id;
-  final String firstAirDate;
-  final String lastAirDate;
+  final String? firstAirDate;
+  final String? lastAirDate;
   final bool inProduction;
   final String backdropPath;
   final String posterPath;

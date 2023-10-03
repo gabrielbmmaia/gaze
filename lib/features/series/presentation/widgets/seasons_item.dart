@@ -57,13 +57,16 @@ class SeasonsItem extends StatelessWidget {
               ),
             ],
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 5, right: 5, left: 5),
-            child: Text(
-              seasonsModel.name,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 16,
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 5, right: 5, left: 5),
+              child: Text(
+                seasonsModel.name,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                ),
               ),
             ),
           ),
@@ -80,13 +83,14 @@ class SeasonsItem extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: 10),
-                Text(
-                  seasonsModel.airDate.getYear,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w500,
+                if (seasonsModel.airDate != null)
+                  Text(
+                    seasonsModel.airDate!.getYear,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
-                ),
               ],
             ),
           ),

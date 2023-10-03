@@ -18,7 +18,7 @@ class SeasonsModel extends Equatable {
           episodeCount: 0,
         );
 
-  final String airDate;
+  final String? airDate;
   final String name;
   final double voteAverage;
   final String posterPath;

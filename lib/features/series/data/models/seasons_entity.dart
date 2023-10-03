@@ -11,11 +11,11 @@ class SeasonsEntity extends SeasonsModel {
 
   factory SeasonsEntity.fromMap(Map<String, dynamic> map) {
     return SeasonsEntity(
-      airDate: map['air_date'] as String,
-      name: map['name'] as String,
-      voteAverage: map['vote_average'] as double,
-      posterPath: map['poster_path'] as String,
-      episodeCount: map['episode_count'] as int,
+      airDate: map['air_date'] as String?,
+      name: map['name'] as String? ?? '',
+      voteAverage: map['vote_average'] as double? ?? 0,
+      posterPath: map['poster_path'] as String? ?? '',
+      episodeCount: map['episode_count'] as int? ?? 0,
     );
   }
 
