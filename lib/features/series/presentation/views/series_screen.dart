@@ -47,7 +47,7 @@ class _SeriesScreenState extends State<SeriesScreen> {
           style: TextStyle(
             fontFamily: Fonts.satisfy,
             fontSize: 26,
-            color: Colors.amber,
+            color: Colours.secondaryColor,
           ),
         ),
       ),
@@ -59,115 +59,243 @@ class _SeriesScreenState extends State<SeriesScreen> {
             children: [
               BlocBuilder<TrendingBloc, TrendingState>(
                 builder: (context, state) {
-                  if (state is LoadedTrendingSeries) {
-                    return TrendingSlider(trendingList: state.trendingList);
-                  }
-                  return const CircularProgressIndicator();
+                  return SizedBox(
+                    height: 300,
+                    width: double.infinity,
+                    child: Stack(
+                      children: [
+                        if (state is LoadedTrendingSeries)
+                          TrendingSlider(trendingList: state.trendingList)
+                        else
+                          const Center(
+                            child: SizedBox(
+                              width: 50,
+                              height: 50,
+                              child: CircularProgressIndicator(
+                                color: Colours.secondaryColor,
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
+                  );
                 },
               ),
-              const SizedBox(height: 30),
+              const SizedBox(height: 20),
               BlocBuilder<NetflixBloc, NetflixState>(
                 builder: (context, state) {
-                  if (state is LoadedNetflixSeries) {
-                    return Padding(
-                      padding: const EdgeInsets.only(left: 8, right: 8),
-                      child: SeriesList(
-                        title: 'Netflix',
-                        seriesList: state.netflixList,
-                      ),
-                    );
-                  }
-                  return const CircularProgressIndicator();
+                  return SizedBox(
+                    height: 300,
+                    width: double.infinity,
+                    child: Stack(
+                      children: [
+                        if (state is LoadedNetflixSeries)
+                          Padding(
+                            padding: const EdgeInsets.only(left: 8, right: 8),
+                            child: SeriesList(
+                              title: 'Netflix',
+                              seriesList: state.netflixList,
+                            ),
+                          )
+                        else
+                          const Center(
+                            child: SizedBox(
+                              width: 50,
+                              height: 50,
+                              child: CircularProgressIndicator(
+                                color: Colours.secondaryColor,
+                              ),
+                            ),
+                          )
+                      ],
+                    ),
+                  );
                 },
               ),
-              const SizedBox(height: 30),
+              const SizedBox(height: 20),
               BlocBuilder<AmazonBloc, AmazonState>(
                 builder: (context, state) {
-                  if (state is LoadedAmazonSeries) {
-                    return Padding(
-                      padding: const EdgeInsets.only(left: 8, right: 8),
-                      child: SeriesList(
-                        title: 'Amazon Prime',
-                        seriesList: state.amazonList,
-                      ),
-                    );
-                  }
-                  return const CircularProgressIndicator();
+                  return SizedBox(
+                    height: 300,
+                    width: double.infinity,
+                    child: Stack(
+                      children: [
+                        if (state is LoadedAmazonSeries)
+                          Padding(
+                            padding: const EdgeInsets.only(left: 8, right: 8),
+                            child: SeriesList(
+                              title: 'Amazon Prime',
+                              seriesList: state.amazonList,
+                            ),
+                          )
+                        else
+                          const Center(
+                            child: SizedBox(
+                              width: 50,
+                              height: 50,
+                              child: CircularProgressIndicator(
+                                color: Colours.secondaryColor,
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
+                  );
                 },
               ),
-              const SizedBox(height: 30),
+              const SizedBox(height: 20),
               BlocBuilder<HboBloc, HboState>(
                 builder: (context, state) {
-                  if (state is LoadedHboSeries) {
-                    return Padding(
-                      padding: const EdgeInsets.only(left: 8, right: 8),
-                      child: SeriesList(
-                        title: 'HBO Max',
-                        seriesList: state.hboList,
-                      ),
-                    );
-                  }
-                  return const CircularProgressIndicator();
+                  return SizedBox(
+                    height: 300,
+                    width: double.infinity,
+                    child: Stack(
+                      children: [
+                        if (state is LoadedHboSeries)
+                          Padding(
+                            padding: const EdgeInsets.only(left: 8, right: 8),
+                            child: SeriesList(
+                              title: 'HBO Max',
+                              seriesList: state.hboList,
+                            ),
+                          )
+                        else
+                          const Center(
+                            child: SizedBox(
+                              width: 50,
+                              height: 50,
+                              child: CircularProgressIndicator(
+                                color: Colours.secondaryColor,
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
+                  );
                 },
               ),
-              const SizedBox(height: 30),
+              const SizedBox(height: 20),
               BlocBuilder<DisneyBloc, DisneyState>(
                 builder: (context, state) {
-                  if (state is LoadedDisneySeries) {
-                    return Padding(
-                      padding: const EdgeInsets.only(left: 8, right: 8),
-                      child: SeriesList(
-                        title: 'Disney+',
-                        seriesList: state.disneyList,
-                      ),
-                    );
-                  }
-                  return const CircularProgressIndicator();
+                  return SizedBox(
+                    height: 300,
+                    width: double.infinity,
+                    child: Stack(
+                      children: [
+                        if (state is LoadedDisneySeries)
+                          Padding(
+                            padding: const EdgeInsets.only(left: 8, right: 8),
+                            child: SeriesList(
+                              title: 'Disney+',
+                              seriesList: state.disneyList,
+                            ),
+                          )
+                        else
+                          const Center(
+                            child: SizedBox(
+                              width: 50,
+                              height: 50,
+                              child: CircularProgressIndicator(
+                                color: Colours.secondaryColor,
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
+                  );
                 },
               ),
-              const SizedBox(height: 30),
+              const SizedBox(height: 20),
               BlocBuilder<AppleBloc, AppleState>(
                 builder: (context, state) {
-                  if (state is LoadedAppleSeries) {
-                    return Padding(
-                      padding: const EdgeInsets.only(left: 8, right: 8),
-                      child: SeriesList(
-                        title: 'Apple TV+',
-                        seriesList: state.appleList,
-                      ),
-                    );
-                  }
-                  return const CircularProgressIndicator();
+                  return SizedBox(
+                    height: 300,
+                    width: double.infinity,
+                    child: Stack(
+                      children: [
+                        if (state is LoadedAppleSeries)
+                          Padding(
+                            padding: const EdgeInsets.only(left: 8, right: 8),
+                            child: SeriesList(
+                              title: 'Apple TV+',
+                              seriesList: state.appleList,
+                            ),
+                          )
+                        else
+                          const Center(
+                            child: SizedBox(
+                              width: 50,
+                              height: 50,
+                              child: CircularProgressIndicator(
+                                color: Colours.secondaryColor,
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
+                  );
                 },
               ),
-              const SizedBox(height: 30),
+              const SizedBox(height: 20),
               BlocBuilder<TopRatedBloc, TopRatedState>(
                 builder: (context, state) {
-                  if (state is LoadedTopRatedSeries) {
-                    return Padding(
-                      padding: const EdgeInsets.only(left: 8, right: 8),
-                      child: SeriesList(
-                        title: 'Bem Avaliados',
-                        seriesList: state.topRatedList,
-                      ),
-                    );
-                  }
-                  return const CircularProgressIndicator();
+                  return SizedBox(
+                    height: 300,
+                    width: double.infinity,
+                    child: Stack(
+                      children: [
+                        if (state is LoadedTopRatedSeries)
+                          Padding(
+                            padding: const EdgeInsets.only(left: 8, right: 8),
+                            child: SeriesList(
+                              title: 'Bem Avaliados',
+                              seriesList: state.topRatedList,
+                            ),
+                          )
+                        else
+                          const Center(
+                            child: SizedBox(
+                              width: 50,
+                              height: 50,
+                              child: CircularProgressIndicator(
+                                color: Colours.secondaryColor,
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
+                  );
                 },
               ),
-              const SizedBox(height: 30),
+              const SizedBox(height: 20),
               BlocBuilder<PopularBloc, PopularState>(
                 builder: (context, state) {
-                  if (state is LoadedPopularSeries) {
-                    return Padding(
-                      padding: const EdgeInsets.only(left: 8, right: 8),
-                      child: SeriesList(
-                        title: 'Popular',
-                        seriesList: state.popularList,
-                      ),
-                    );
-                  }
-                  return const CircularProgressIndicator();
+                  return SizedBox(
+                    height: 300,
+                    width: double.infinity,
+                    child: Stack(
+                      children: [
+                        if (state is LoadedPopularSeries)
+                          Padding(
+                            padding: const EdgeInsets.only(left: 8, right: 8),
+                            child: SeriesList(
+                              title: 'Popular',
+                              seriesList: state.popularList,
+                            ),
+                          )
+                        else
+                          const Center(
+                            child: SizedBox(
+                              width: 50,
+                              height: 50,
+                              child: CircularProgressIndicator(
+                                color: Colours.secondaryColor,
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
+                  );
                 },
               ),
             ],

@@ -33,28 +33,29 @@ class SeasonsItem extends StatelessWidget {
                   ),
                 ),
               ),
-              Positioned(
-                top: 5,
-                right: 5,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 2,
-                    horizontal: 6,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colours.onDefaultColor.withOpacity(0.4),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Text(
-                    seasonsModel.voteAverage.toString(),
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 12,
+              if (seasonsModel.voteAverage > 5)
+                Positioned(
+                  top: 5,
+                  right: 5,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 2,
+                      horizontal: 6,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colours.onDefaultColor.withOpacity(0.4),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Text(
+                      seasonsModel.voteAverage.toString(),
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12,
+                      ),
                     ),
                   ),
                 ),
-              ),
             ],
           ),
           Expanded(

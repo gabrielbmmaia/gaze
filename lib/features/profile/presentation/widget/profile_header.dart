@@ -20,6 +20,7 @@ class ProfileHeader extends StatelessWidget {
           children: [
             const SizedBox(height: 30),
             CircleAvatar(
+              backgroundColor: Colours.onDefaultColor,
               radius: 90,
               backgroundImage: image != null
                   ? NetworkImage(image)
