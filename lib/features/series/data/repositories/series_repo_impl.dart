@@ -120,7 +120,17 @@ class SeriesRepoImpl implements SeriesRepo {
     try {
       final result = await _remoteDataSource.getSeriesClassification(seriesId);
       return Right(result);
-    }on ServerException catch (e) {
+    } on ServerException catch (e) {
+      return Left(ServerFailure.fromException(e));
+    }
+  }
+
+  @override
+  ResultFuture<List<SeriesModel>> getSeriesByGenre(String genreId) async {
+    try {
+      final result = await _remoteDataSource.getSeriesByGenre(genreId);
+      return Right(result);
+    } on ServerException catch (e) {
       return Left(ServerFailure.fromException(e));
     }
   }

@@ -467,4 +467,43 @@ void main() {
       },
     );
   });
+
+  group('getSeriesByGenre', () {
+    test(
+      'should call [SeriesRemoteDataSource.getSeriesByGenre] and return '
+      '[Right<List<SeriesModel>>] when the call is successful',
+      () async {
+        when(() => remoteDataSource.getSeriesByGenre(any())).thenAnswer(
+          (_) async => tSeriesEntityList,
+        );
+
+        final result = await repo.getSeriesByGenre('123456');
+
+        expect(
+          result,
+          const Right<dynamic, List<SeriesModel>>(tSeriesEntityList),
+        );
+        verify(() => remoteDataSource.getSeriesByGenre('123456')).called(1);
+        verifyNoMoreInteractions(remoteDataSource);
+      },
+    );
+    test(
+      'should return [Left<ServerFailure>] when the call is unsuccessful',
+      () async {
+        when(() => remoteDataSource.getSeriesByGenre(any()))
+            .thenThrow(tServerException);
+
+        final result = await repo.getSeriesByGenre('123456');
+
+        expect(
+          result,
+          Left<Failure, dynamic>(
+            ServerFailure.fromException(tServerException),
+          ),
+        );
+        verify(() => remoteDataSource.getSeriesByGenre('123456')).called(1);
+        verifyNoMoreInteractions(remoteDataSource);
+      },
+    );
+  });
 }

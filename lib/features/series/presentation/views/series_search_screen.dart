@@ -90,6 +90,7 @@ class _SeriesSearchScreenState extends State<SeriesSearchScreen> {
             ),
             const SizedBox(height: 20),
             Wrap(
+              crossAxisAlignment: WrapCrossAlignment.center,
               alignment: WrapAlignment.center,
               children: [
                 for (final genre in genreList)
