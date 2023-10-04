@@ -506,4 +506,43 @@ void main() {
       },
     );
   });
+
+  group('getSearchedSeries', () {
+    test(
+      'should call [SeriesRemoteDataSource.getSearchedSeries] and return '
+          '[Right<List<SeriesModel>>] when the call is successful',
+          () async {
+        when(() => remoteDataSource.getSearchedSeries(any())).thenAnswer(
+              (_) async => tSeriesEntityList,
+        );
+
+        final result = await repo.getSearchedSeries('teste');
+
+        expect(
+          result,
+          const Right<dynamic, List<SeriesModel>>(tSeriesEntityList),
+        );
+        verify(() => remoteDataSource.getSearchedSeries('teste')).called(1);
+        verifyNoMoreInteractions(remoteDataSource);
+      },
+    );
+    test(
+      'should return [Left<ServerFailure>] when the call is unsuccessful',
+          () async {
+        when(() => remoteDataSource.getSearchedSeries(any()))
+            .thenThrow(tServerException);
+
+        final result = await repo.getSearchedSeries('teste');
+
+        expect(
+          result,
+          Left<Failure, dynamic>(
+            ServerFailure.fromException(tServerException),
+          ),
+        );
+        verify(() => remoteDataSource.getSearchedSeries('teste')).called(1);
+        verifyNoMoreInteractions(remoteDataSource);
+      },
+    );
+  });
 }

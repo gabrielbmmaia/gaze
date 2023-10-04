@@ -29,4 +29,6 @@ abstract class SeriesRepo {
   ResultFuture<String?> getSeriesClassification(String seriesId);
 
   ResultFuture<List<SeriesModel>> getSeriesByGenre(String genreId);
+
+  ResultFuture<List<SeriesModel>> getSearchedSeries(String text);
 }

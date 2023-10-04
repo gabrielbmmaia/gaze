@@ -37,10 +37,13 @@ class SeriesList extends StatelessWidget {
             itemBuilder: (context, index) {
               return Padding(
                 padding: const EdgeInsets.all(8),
-                child: SeriesItem(
-                  seriesModel: seriesList[index],
-                  imageHeight: 225,
-                  imageWidth: 150,
+                child: AspectRatio(
+                  aspectRatio: 500/750,
+                  child: SeriesItem(
+                    seriesModel: seriesList[index],
+                    imageHeight: 225,
+                    imageWidth: 150,
+                  ),
                 ),
               );
             },
