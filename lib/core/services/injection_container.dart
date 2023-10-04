@@ -17,6 +17,7 @@ import 'package:gaze/features/series/domain/usecases/get_disney_series.dart';
 import 'package:gaze/features/series/domain/usecases/get_hbo_series.dart';
 import 'package:gaze/features/series/domain/usecases/get_netflix_series.dart';
 import 'package:gaze/features/series/domain/usecases/get_popular_series.dart';
+import 'package:gaze/features/series/domain/usecases/get_searched_series.dart';
 import 'package:gaze/features/series/domain/usecases/get_series_by_genre.dart';
 import 'package:gaze/features/series/domain/usecases/get_series_classification.dart';
 import 'package:gaze/features/series/domain/usecases/get_series_details.dart';
@@ -31,6 +32,7 @@ import 'package:gaze/features/series/presentation/bloc/genre/genre_bloc.dart';
 import 'package:gaze/features/series/presentation/bloc/hbo/hbo_bloc.dart';
 import 'package:gaze/features/series/presentation/bloc/netflix/netflix_bloc.dart';
 import 'package:gaze/features/series/presentation/bloc/popular/popular_bloc.dart';
+import 'package:gaze/features/series/presentation/bloc/searched/searched_bloc.dart';
 import 'package:gaze/features/series/presentation/bloc/series_details/series_details_bloc.dart';
 import 'package:gaze/features/series/presentation/bloc/top_rated/top_rated_bloc.dart';
 import 'package:gaze/features/series/presentation/bloc/trending/trending_bloc.dart';
@@ -58,6 +60,7 @@ Future<void> _seriesInit() async {
     ..registerFactory(() => YtTrailersBloc(getYoutubeTrailers: sl()))
     ..registerFactory(() => ClassificationBloc(getSeriesClassification: sl()))
     ..registerFactory(() => GenreBloc(getSeriesByGenre: sl()))
+    ..registerFactory(() => SearchedBloc(getSearchedSeries: sl()))
 
     ..registerLazySingleton(() => GetPopularSeriesUseCase(sl()))
     ..registerLazySingleton(() => GetTrendingSeriesUseCase(sl()))
@@ -71,6 +74,7 @@ Future<void> _seriesInit() async {
     ..registerLazySingleton(() => GetYoutubeTrailersUseCase(sl()))
     ..registerLazySingleton(() => GetSeriesClassificationUseCase(sl()))
     ..registerLazySingleton(() => GetSeriesByGenreUseCase(sl()))
+    ..registerLazySingleton(() => GetSearchedSeriesUseCase(sl()))
 
     ..registerLazySingleton<SeriesRepo>(() => SeriesRepoImpl(sl()))
     ..registerLazySingleton<SeriesRemoteDataSource>(

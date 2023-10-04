@@ -11,6 +11,7 @@ import 'package:gaze/features/series/presentation/bloc/genre/genre_bloc.dart';
 import 'package:gaze/features/series/presentation/bloc/hbo/hbo_bloc.dart';
 import 'package:gaze/features/series/presentation/bloc/netflix/netflix_bloc.dart';
 import 'package:gaze/features/series/presentation/bloc/popular/popular_bloc.dart';
+import 'package:gaze/features/series/presentation/bloc/searched/searched_bloc.dart';
 import 'package:gaze/features/series/presentation/bloc/top_rated/top_rated_bloc.dart';
 import 'package:gaze/features/series/presentation/bloc/trending/trending_bloc.dart';
 import 'package:gaze/features/series/presentation/views/series_screen.dart';
@@ -61,7 +62,10 @@ class DashboardController extends ChangeNotifier {
       create: (_) => TabNavigator(
         TabItem(
           child: MultiBlocProvider(
-            providers: [BlocProvider(create: (_) => sl<GenreBloc>())],
+            providers: [
+              BlocProvider(create: (_) => sl<GenreBloc>()),
+              BlocProvider(create: (_) => sl<SearchedBloc>()),
+            ],
             child: const SeriesSearchScreen(),
           ),
         ),
