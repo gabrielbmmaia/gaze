@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gaze/core/enums/genres.dart';
 import 'package:gaze/core/extensions/context_extension.dart';
 import 'package:gaze/core/res/colours.dart';
+import 'package:gaze/core/res/fonts.dart';
+import 'package:gaze/core/services/injection_container.dart';
+import 'package:gaze/features/series/presentation/bloc/genre/genre_bloc.dart';
 import 'package:gaze/features/series/presentation/enum/search_type.dart';
 import 'package:gaze/features/series/presentation/views/search_list_screen.dart';
 
@@ -53,11 +57,17 @@ class _SeriesSearchScreenState extends State<SeriesSearchScreen> {
               textStyle: MaterialStateProperty.all(
                 const TextStyle(
                   color: Colors.white,
+                  fontFamily: Fonts.poppins,
+                  fontWeight: FontWeight.w400,
                 ),
               ),
               hintText: 'Nome da série',
               hintStyle: MaterialStateProperty.all(
-                const TextStyle(color: Colours.neutralTextColour),
+                const TextStyle(
+                  color: Colours.neutralTextColour,
+                  fontFamily: Fonts.poppins,
+                  fontWeight: FontWeight.w400,
+                ),
               ),
               trailing: [
                 IconButton(
@@ -102,17 +112,23 @@ class _SeriesSearchScreenState extends State<SeriesSearchScreen> {
                             MaterialStateProperty.all(Colours.onDefaultColor),
                         foregroundColor:
                             MaterialStateProperty.all(Colors.white),
+                        textStyle: MaterialStateProperty.all(
+                          const TextStyle(fontFamily: Fonts.poppins),
+                        ),
                       ),
                       onPressed: () {
                         context.push(
-                          SearchListScreen(
-                            args: NavigationSearchTypeArgs.genreSearch(
-                              genreIds[genre]!,
+                          BlocProvider(
+                            create: (_) => sl<GenreBloc>(),
+                            child: SearchListScreen(
+                              args: NavigationSearchTypeArgs.genreSearch(
+                                genreIds[genre]!,
+                              ),
                             ),
                           ),
                         );
                       },
-                      child: Text(genresName[genre]!),
+                      child: Text(genreNameFromGenres[genre]!),
                     ),
                   ),
               ],

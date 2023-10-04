@@ -44,7 +44,6 @@ class _SeriesDetailsScreenState extends State<SeriesDetailsScreen> {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         elevation: 0,
-        iconTheme: const IconThemeData(color: Colors.white),
         backgroundColor: Colors.transparent,
       ),
       backgroundColor: Colours.defaultColor,

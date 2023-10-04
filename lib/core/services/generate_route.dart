@@ -11,7 +11,6 @@ import 'package:gaze/features/auth/presentation/views/sign_in_screen.dart';
 import 'package:gaze/features/auth/presentation/views/sign_up_screen.dart';
 import 'package:gaze/features/dashboard/presentation/views/dashboard.dart';
 import 'package:gaze/features/series/presentation/bloc/classification/classification_bloc.dart';
-import 'package:gaze/features/series/presentation/bloc/popular/popular_bloc.dart';
 import 'package:gaze/features/series/presentation/bloc/series_details/series_details_bloc.dart';
 import 'package:gaze/features/series/presentation/bloc/yt_trailers/yt_trailers_bloc.dart';
 import 'package:gaze/features/series/presentation/views/series_details_screen.dart';
@@ -61,10 +60,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
 
     case DashboardScreen.routeName:
       return _pageBuilder(
-        (_) => BlocProvider(
-          create: (_) => sl<PopularBloc>(),
-          child: const DashboardScreen(),
-        ),
+        (_) => const DashboardScreen(),
         settings: settings,
       );
 

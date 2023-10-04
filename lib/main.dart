@@ -42,7 +42,12 @@ class MyApp extends StatelessWidget {
           ),
           visualDensity: VisualDensity.adaptivePlatformDensity,
           useMaterial3: true,
-          appBarTheme: const AppBarTheme(color: Colors.transparent),
+          appBarTheme: const AppBarTheme(
+            color: Colors.transparent,
+            elevation: 10,
+            titleTextStyle: TextStyle(color: Colors.white, fontFamily: Fonts.poppins, fontSize: 24),
+            iconTheme: IconThemeData(color: Colors.white),
+          ),
           fontFamily: Fonts.poppins,
         ),
         onGenerateRoute: generateRoute,

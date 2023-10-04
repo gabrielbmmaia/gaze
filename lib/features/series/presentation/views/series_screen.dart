@@ -40,8 +40,6 @@ class _SeriesScreenState extends State<SeriesScreen> {
     return Scaffold(
       backgroundColor: Colours.defaultColor,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
         title: const Text(
           StringRes.appTitle,
           style: TextStyle(
@@ -59,24 +57,27 @@ class _SeriesScreenState extends State<SeriesScreen> {
             children: [
               BlocBuilder<TrendingBloc, TrendingState>(
                 builder: (context, state) {
-                  return SizedBox(
-                    height: 300,
-                    width: double.infinity,
-                    child: Stack(
-                      children: [
-                        if (state is LoadedTrendingSeries)
-                          TrendingSlider(trendingList: state.trendingList)
-                        else
-                          const Center(
-                            child: SizedBox(
-                              width: 50,
-                              height: 50,
-                              child: CircularProgressIndicator(
-                                color: Colours.secondaryColor,
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 30),
+                    child: SizedBox(
+                      height: 300,
+                      width: double.infinity,
+                      child: Stack(
+                        children: [
+                          if (state is LoadedTrendingSeries)
+                            TrendingSlider(trendingList: state.trendingList)
+                          else
+                            const Center(
+                              child: SizedBox(
+                                width: 50,
+                                height: 50,
+                                child: CircularProgressIndicator(
+                                  color: Colours.secondaryColor,
+                                ),
                               ),
                             ),
-                          ),
-                      ],
+                        ],
+                      ),
                     ),
                   );
                 },
