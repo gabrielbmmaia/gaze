@@ -26,15 +26,7 @@ abstract class SeriesRemoteDataSource {
 
   Future<List<SeriesEntity>> getTopRatedSeries();
 
-  Future<List<SeriesEntity>> getNetflixSeries();
-
-  Future<List<SeriesEntity>> getAmazonSeries();
-
-  Future<List<SeriesEntity>> getDisneySeries();
-
-  Future<List<SeriesEntity>> getHBOSeries();
-
-  Future<List<SeriesEntity>> getAppleSeries();
+  Future<List<SeriesEntity>> getNetworkSeries(String networkId);
 
   Future<SeriesDetailsEntity> getSeriesDetails(String seriesId);
 
@@ -110,146 +102,6 @@ class SeriesRemoteDataSourceImpl extends SeriesRemoteDataSource {
       final response = await _client.get(
         Uri.parse(
           '$kBaseUrl$kGetTopRatedSeriesEndpoint?api_key=$kTmdbApiKey',
-        ),
-      );
-      if (response.statusCode != 200) {
-        throw ServerException(
-          message: response.body,
-          statusCode: response.statusCode.toString(),
-        );
-      }
-      final data = jsonDecode(response.body)['results'] as List<dynamic>;
-      return data
-          .map(
-            (series) => SeriesEntity.fromJson(series as Map<String, dynamic>),
-          )
-          .toList();
-    } on ServerException {
-      rethrow;
-    } catch (e) {
-      throw ServerException(message: e.toString(), statusCode: '505');
-    }
-  }
-
-  @override
-  Future<List<SeriesEntity>> getNetflixSeries() async {
-    try {
-      final response = await _client.get(
-        Uri.parse(
-          '$kBaseUrl$kGetDiscoverSeriesEndpoint?api_key=$kTmdbApiKey'
-          '&with_networks=213',
-        ),
-      );
-      if (response.statusCode != 200) {
-        throw ServerException(
-          message: response.body,
-          statusCode: response.statusCode.toString(),
-        );
-      }
-      final data = jsonDecode(response.body)['results'] as List<dynamic>;
-      return data
-          .map(
-            (series) => SeriesEntity.fromJson(series as Map<String, dynamic>),
-          )
-          .toList();
-    } on ServerException {
-      rethrow;
-    } catch (e) {
-      throw ServerException(message: e.toString(), statusCode: '505');
-    }
-  }
-
-  @override
-  Future<List<SeriesEntity>> getAmazonSeries() async {
-    try {
-      final response = await _client.get(
-        Uri.parse(
-          '$kBaseUrl$kGetDiscoverSeriesEndpoint?api_key=$kTmdbApiKey'
-          '&with_networks=1024',
-        ),
-      );
-      if (response.statusCode != 200) {
-        throw ServerException(
-          message: response.body,
-          statusCode: response.statusCode.toString(),
-        );
-      }
-      final data = jsonDecode(response.body)['results'] as List<dynamic>;
-      return data
-          .map(
-            (series) => SeriesEntity.fromJson(series as Map<String, dynamic>),
-          )
-          .toList();
-    } on ServerException {
-      rethrow;
-    } catch (e) {
-      throw ServerException(message: e.toString(), statusCode: '505');
-    }
-  }
-
-  @override
-  Future<List<SeriesEntity>> getDisneySeries() async {
-    try {
-      final response = await _client.get(
-        Uri.parse(
-          '$kBaseUrl$kGetDiscoverSeriesEndpoint?api_key=$kTmdbApiKey'
-          '&with_networks=2739',
-        ),
-      );
-      if (response.statusCode != 200) {
-        throw ServerException(
-          message: response.body,
-          statusCode: response.statusCode.toString(),
-        );
-      }
-      final data = jsonDecode(response.body)['results'] as List<dynamic>;
-      return data
-          .map(
-            (series) => SeriesEntity.fromJson(series as Map<String, dynamic>),
-          )
-          .toList();
-    } on ServerException {
-      rethrow;
-    } catch (e) {
-      throw ServerException(message: e.toString(), statusCode: '505');
-    }
-  }
-
-  @override
-  Future<List<SeriesEntity>> getHBOSeries() async {
-    try {
-      final response = await _client.get(
-        Uri.parse(
-          '$kBaseUrl$kGetDiscoverSeriesEndpoint?api_key=$kTmdbApiKey'
-          '&with_networks=49',
-        ),
-      );
-      if (response.statusCode != 200) {
-        throw ServerException(
-          message: response.body,
-          statusCode: response.statusCode.toString(),
-        );
-      }
-      final data = jsonDecode(response.body)['results'] as List<dynamic>;
-      return data
-          .map(
-            (series) => SeriesEntity.fromJson(series as Map<String, dynamic>),
-          )
-          .toList();
-    } on ServerException {
-      rethrow;
-    } catch (e) {
-      throw ServerException(message: e.toString(), statusCode: '505');
-    }
-  }
-
-  @override
-  Future<List<SeriesEntity>> getAppleSeries() async {
-    try {
-      final response = await _client.get(
-        Uri.parse(
-          '$kBaseUrl$kGetDiscoverSeriesEndpoint?api_key=$kTmdbApiKey'
-          '&with_networks=2552',
         ),
       );
       if (response.statusCode != 200) {
@@ -385,6 +237,34 @@ class SeriesRemoteDataSourceImpl extends SeriesRemoteDataSource {
       final response = await _client.get(
         Uri.parse(
           '$kBaseUrl$kGetSearchEndpoint?api_key=$kTmdbApiKey&query=$text',
+        ),
+      );
+      if (response.statusCode != 200) {
+        throw ServerException(
+          message: response.body,
+          statusCode: response.statusCode.toString(),
+        );
+      }
+      final data = jsonDecode(response.body)['results'] as List<dynamic>;
+      return data
+          .map(
+            (series) => SeriesEntity.fromJson(series as Map<String, dynamic>),
+          )
+          .toList();
+    } on ServerException {
+      rethrow;
+    } catch (e) {
+      throw ServerException(message: e.toString(), statusCode: '505');
+    }
+  }
+
+  @override
+  Future<List<SeriesEntity>> getNetworkSeries(String networkId) async {
+    try {
+      final response = await _client.get(
+        Uri.parse(
+          '$kBaseUrl$kGetDiscoverSeriesEndpoint?api_key=$kTmdbApiKey'
+          '&with_networks=$networkId',
         ),
       );
       if (response.statusCode != 200) {

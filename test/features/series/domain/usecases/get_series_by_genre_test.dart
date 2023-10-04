@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:gaze/core/enums/genres.dart';
 import 'package:gaze/features/series/domain/models/series_model.dart';
 import 'package:gaze/features/series/domain/repositories/series_repo.dart';
 import 'package:gaze/features/series/domain/usecases/get_series_by_genre.dart';
@@ -14,6 +15,7 @@ void main() {
   setUp(() {
     repo = MockSeriesRepo();
     useCase = GetSeriesByGenreUseCase(repo);
+    registerFallbackValue(Genres.animation);
   });
 
   const tSeriesList = [SeriesModel.empty()];
@@ -26,10 +28,10 @@ void main() {
         (_) async => const Right(tSeriesList),
       );
 
-      final result = await useCase('123456');
+      final result = await useCase(Genres.animation);
 
       expect(result, const Right<dynamic, List<SeriesModel>>(tSeriesList));
-      verify(() => repo.getSeriesByGenre('123456')).called(1);
+      verify(() => repo.getSeriesByGenre(Genres.animation)).called(1);
       verifyNoMoreInteractions(repo);
     },
   );

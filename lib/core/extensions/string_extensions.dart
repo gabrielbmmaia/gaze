@@ -23,4 +23,13 @@ extension StringExt on String {
     final parsedDate = DateTime.parse(this);
     return DateFormat.yMMMMd('pt_BR').format(parsedDate);
   }
+
+  String get toFirstUpperCase {
+    final splitWord = this.toLowerCase().split(' ');
+
+    return splitWord
+        .map((word) => word[0].toUpperCase() + word.substring(1))
+        .toList()
+        .join(' ');
+  }
 }

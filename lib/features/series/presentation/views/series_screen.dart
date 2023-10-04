@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gaze/core/enums/networks.dart';
 import 'package:gaze/core/res/colours.dart';
 import 'package:gaze/core/res/fonts.dart';
 import 'package:gaze/core/res/string.dart';
@@ -27,11 +28,13 @@ class _SeriesScreenState extends State<SeriesScreen> {
     context.read<PopularBloc>().add(const LoadPopularListEvent());
     context.read<TrendingBloc>().add(const LoadTrendingListEvent());
     context.read<TopRatedBloc>().add(const LoadTopRatedListEvent());
-    context.read<NetflixBloc>().add(const LoadNetflixListEvent());
-    context.read<AmazonBloc>().add(const LoadAmazonListEvent());
-    context.read<DisneyBloc>().add(const LoadDisneyListEvent());
-    context.read<HboBloc>().add(const LoadHboListEvent());
-    context.read<AppleBloc>().add(const LoadAppleListEvent());
+    context
+        .read<NetflixBloc>()
+        .add(const LoadNetflixListEvent(Networks.netflix));
+    context.read<AmazonBloc>().add(const LoadAmazonListEvent(Networks.amazon));
+    context.read<DisneyBloc>().add(const LoadDisneyListEvent(Networks.disney));
+    context.read<HboBloc>().add(const LoadHboListEvent(Networks.hbo));
+    context.read<AppleBloc>().add(const LoadAppleListEvent(Networks.apple));
     super.initState();
   }
 
@@ -96,6 +99,7 @@ class _SeriesScreenState extends State<SeriesScreen> {
                             child: SeriesList(
                               title: 'Netflix',
                               seriesList: state.netflixList,
+                              network: state.network,
                             ),
                           )
                         else
@@ -127,6 +131,7 @@ class _SeriesScreenState extends State<SeriesScreen> {
                             child: SeriesList(
                               title: 'Amazon Prime',
                               seriesList: state.amazonList,
+                              network: state.network,
                             ),
                           )
                         else
@@ -158,6 +163,7 @@ class _SeriesScreenState extends State<SeriesScreen> {
                             child: SeriesList(
                               title: 'HBO Max',
                               seriesList: state.hboList,
+                              network: state.network,
                             ),
                           )
                         else
@@ -189,6 +195,7 @@ class _SeriesScreenState extends State<SeriesScreen> {
                             child: SeriesList(
                               title: 'Disney+',
                               seriesList: state.disneyList,
+                              network: state.network,
                             ),
                           )
                         else
@@ -220,6 +227,7 @@ class _SeriesScreenState extends State<SeriesScreen> {
                             child: SeriesList(
                               title: 'Apple TV+',
                               seriesList: state.appleList,
+                              network: state.network,
                             ),
                           )
                         else

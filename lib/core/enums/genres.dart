@@ -39,17 +39,3 @@ Map<Genres, String> genreNameFromGenres = {
   Genres.reality: 'Reality',
   Genres.sciFiFantasy: 'Sci-Fi e Fantasia',
 };
-
-Map<String, String> genreNameFromId = {
-  '10759': 'Ação e Aventura',
-  '16': 'Animação',
-  '35': 'Comédia',
-  '80': 'Crime',
-  '99': 'Documentário',
-  '18': 'Drama',
-  '10751': 'Família',
-  '10762': 'Kids',
-  '9648': 'Mistério',
-  '10764': 'Reality',
-  '10765': 'Sci-Fi e Fantasia',
-};

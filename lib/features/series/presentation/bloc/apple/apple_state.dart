@@ -4,7 +4,7 @@ abstract class AppleState extends Equatable {
   const AppleState();
 
   @override
-  List<Object> get props => [];
+  List<dynamic> get props => [];
 }
 
 class AppleInitial extends AppleState {
@@ -16,12 +16,16 @@ class LoadingAppleSeries extends AppleState {
 }
 
 class LoadedAppleSeries extends AppleState {
-  const LoadedAppleSeries({required this.appleList});
+  const LoadedAppleSeries({
+    required this.appleList,
+    this.network = Networks.apple,
+  });
 
   final List<SeriesModel> appleList;
+  final Networks network;
 
   @override
-  List<Object> get props => [appleList];
+  List<dynamic> get props => [appleList, network];
 }
 
 class ErrorAppleSeries extends AppleState {

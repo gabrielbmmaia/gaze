@@ -1,4 +1,6 @@
 import 'package:dartz/dartz.dart';
+import 'package:gaze/core/enums/genres.dart';
+import 'package:gaze/core/enums/networks.dart';
 import 'package:gaze/core/errors/exceptions.dart';
 import 'package:gaze/core/errors/failures.dart';
 import 'package:gaze/core/utils/typedefs.dart';
@@ -44,56 +46,6 @@ class SeriesRepoImpl implements SeriesRepo {
   }
 
   @override
-  ResultFuture<List<SeriesModel>> getNetflixSeries() async {
-    try {
-      final result = await _remoteDataSource.getNetflixSeries();
-      return Right(result);
-    } on ServerException catch (e) {
-      return Left(ServerFailure.fromException(e));
-    }
-  }
-
-  @override
-  ResultFuture<List<SeriesModel>> getAmazonSeries() async {
-    try {
-      final result = await _remoteDataSource.getAmazonSeries();
-      return Right(result);
-    } on ServerException catch (e) {
-      return Left(ServerFailure.fromException(e));
-    }
-  }
-
-  @override
-  ResultFuture<List<SeriesModel>> getDisneySeries() async {
-    try {
-      final result = await _remoteDataSource.getDisneySeries();
-      return Right(result);
-    } on ServerException catch (e) {
-      return Left(ServerFailure.fromException(e));
-    }
-  }
-
-  @override
-  ResultFuture<List<SeriesModel>> getHBOSeries() async {
-    try {
-      final result = await _remoteDataSource.getHBOSeries();
-      return Right(result);
-    } on ServerException catch (e) {
-      return Left(ServerFailure.fromException(e));
-    }
-  }
-
-  @override
-  ResultFuture<List<SeriesModel>> getAppleSeries() async {
-    try {
-      final result = await _remoteDataSource.getAppleSeries();
-      return Right(result);
-    } on ServerException catch (e) {
-      return Left(ServerFailure.fromException(e));
-    }
-  }
-
-  @override
   ResultFuture<SeriesDetailsModel> getSeriesDetails(String seriesId) async {
     try {
       final result = await _remoteDataSource.getSeriesDetails(seriesId);
@@ -126,9 +78,9 @@ class SeriesRepoImpl implements SeriesRepo {
   }
 
   @override
-  ResultFuture<List<SeriesModel>> getSeriesByGenre(String genreId) async {
+  ResultFuture<List<SeriesModel>> getSeriesByGenre(Genres genre) async {
     try {
-      final result = await _remoteDataSource.getSeriesByGenre(genreId);
+      final result = await _remoteDataSource.getSeriesByGenre(genreIds[genre]!);
       return Right(result);
     } on ServerException catch (e) {
       return Left(ServerFailure.fromException(e));
@@ -139,6 +91,18 @@ class SeriesRepoImpl implements SeriesRepo {
   ResultFuture<List<SeriesModel>> getSearchedSeries(String text) async {
     try {
       final result = await _remoteDataSource.getSearchedSeries(text);
+      return Right(result);
+    } on ServerException catch (e) {
+      return Left(ServerFailure.fromException(e));
+    }
+  }
+
+  @override
+  ResultFuture<List<SeriesModel>> getNetworkSeries(Networks network) async {
+    try {
+      final result = await _remoteDataSource.getNetworkSeries(
+        getNetworkId[network]!,
+      );
       return Right(result);
     } on ServerException catch (e) {
       return Left(ServerFailure.fromException(e));

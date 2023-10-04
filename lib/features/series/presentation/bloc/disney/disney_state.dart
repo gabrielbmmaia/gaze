@@ -4,7 +4,7 @@ abstract class DisneyState extends Equatable {
   const DisneyState();
 
   @override
-  List<Object> get props => [];
+  List<dynamic> get props => [];
 }
 
 class DisneyInitial extends DisneyState {
@@ -16,12 +16,16 @@ class LoadingDisneySeries extends DisneyState {
 }
 
 class LoadedDisneySeries extends DisneyState {
-  const LoadedDisneySeries({required this.disneyList});
+  const LoadedDisneySeries({
+    required this.disneyList,
+    this.network = Networks.disney,
+  });
 
   final List<SeriesModel> disneyList;
+  final Networks network;
 
   @override
-  List<Object> get props => [disneyList];
+  List<dynamic> get props => [disneyList, network];
 }
 
 class ErrorDisneySeries extends DisneyState {

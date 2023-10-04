@@ -4,7 +4,7 @@ abstract class AmazonState extends Equatable {
   const AmazonState();
 
   @override
-  List<Object> get props => [];
+  List<dynamic> get props => [];
 }
 
 class AmazonInitial extends AmazonState {
@@ -16,12 +16,16 @@ class LoadingAmazonSeries extends AmazonState {
 }
 
 class LoadedAmazonSeries extends AmazonState {
-  const LoadedAmazonSeries({required this.amazonList});
+  const LoadedAmazonSeries({
+    required this.amazonList,
+    this.network = Networks.amazon,
+  });
 
   final List<SeriesModel> amazonList;
+  final Networks network;
 
   @override
-  List<Object> get props => [amazonList];
+  List<dynamic> get props => [amazonList, network];
 }
 
 class ErrorAmazonSeries extends AmazonState {

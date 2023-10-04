@@ -1,3 +1,5 @@
+import 'package:gaze/core/enums/genres.dart';
+import 'package:gaze/core/enums/networks.dart';
 import 'package:gaze/core/utils/typedefs.dart';
 import 'package:gaze/features/series/domain/models/series_details_model.dart';
 import 'package:gaze/features/series/domain/models/series_model.dart';
@@ -12,15 +14,7 @@ abstract class SeriesRepo {
 
   ResultFuture<List<SeriesModel>> getTopRatedSeries();
 
-  ResultFuture<List<SeriesModel>> getNetflixSeries();
-
-  ResultFuture<List<SeriesModel>> getAmazonSeries();
-
-  ResultFuture<List<SeriesModel>> getDisneySeries();
-
-  ResultFuture<List<SeriesModel>> getHBOSeries();
-
-  ResultFuture<List<SeriesModel>> getAppleSeries();
+  ResultFuture<List<SeriesModel>> getNetworkSeries(Networks network);
 
   ResultFuture<SeriesDetailsModel> getSeriesDetails(String seriesId);
 
@@ -28,7 +22,7 @@ abstract class SeriesRepo {
 
   ResultFuture<String?> getSeriesClassification(String seriesId);
 
-  ResultFuture<List<SeriesModel>> getSeriesByGenre(String genreId);
+  ResultFuture<List<SeriesModel>> getSeriesByGenre(Genres genre);
 
   ResultFuture<List<SeriesModel>> getSearchedSeries(String text);
 }

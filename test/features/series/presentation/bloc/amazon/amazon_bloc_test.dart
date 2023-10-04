@@ -1,22 +1,23 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
+import 'package:gaze/core/enums/networks.dart';
 import 'package:gaze/core/errors/failures.dart';
 import 'package:gaze/features/series/domain/models/series_model.dart';
-import 'package:gaze/features/series/domain/usecases/get_amazon_series.dart';
+import 'package:gaze/features/series/domain/usecases/get_network_series.dart';
 import 'package:gaze/features/series/presentation/bloc/amazon/amazon_bloc.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
 
-class MockGetAmazonSeriesUseCase extends Mock
-    implements GetAmazonSeriesUseCase {}
+import '../get_network_series.mock.dart';
 
 void main() {
-  late GetAmazonSeriesUseCase amazonSeries;
+  late GetNetworkSeriesUseCase getNetworkSeries;
   late AmazonBloc bloc;
 
   setUp(() {
-    amazonSeries = MockGetAmazonSeriesUseCase();
-    bloc = AmazonBloc(getAmazonSeries: amazonSeries);
+    getNetworkSeries = MockGetNetworkSeriesUseCase();
+    bloc = AmazonBloc(getNetworkSeries: getNetworkSeries);
+    registerFallbackValue(Networks.amazon);
   });
 
   tearDown(() => bloc.close());
@@ -36,19 +37,19 @@ void main() {
       'should emit [LoadingAmazonSeries, LoadedAmazonSeries] when '
           '[LoadAmazonListEvent] is added',
       build: () {
-        when(() => amazonSeries()).thenAnswer(
+        when(() => getNetworkSeries(any())).thenAnswer(
               (_) async => const Right(tSeriesList),
         );
         return bloc;
       },
-      act: (bloc) => bloc.add(const LoadAmazonListEvent()),
+      act: (bloc) => bloc.add(const LoadAmazonListEvent(Networks.amazon)),
       expect: () => const <AmazonState>[
         LoadingAmazonSeries(),
         LoadedAmazonSeries(amazonList: tSeriesList),
       ],
       verify: (_) {
-        verify(() => amazonSeries()).called(1);
-        verifyNoMoreInteractions(amazonSeries);
+        verify(() => getNetworkSeries(Networks.amazon)).called(1);
+        verifyNoMoreInteractions(getNetworkSeries);
       },
     );
 
@@ -56,19 +57,19 @@ void main() {
       'should emit [LoadingAmazonSeries, ErrorAmazonSeries] when '
           '[LoadAmazonListEvent] is added',
       build: () {
-        when(() => amazonSeries()).thenAnswer(
+        when(() => getNetworkSeries(any())).thenAnswer(
               (_) async => Left(tServerFailure),
         );
         return bloc;
       },
-      act: (bloc) => bloc.add(const LoadAmazonListEvent()),
+      act: (bloc) => bloc.add(const LoadAmazonListEvent(Networks.amazon)),
       expect: () => const <AmazonState>[
         LoadingAmazonSeries(),
         ErrorAmazonSeries(),
       ],
       verify: (_) {
-        verify(() => amazonSeries()).called(1);
-        verifyNoMoreInteractions(amazonSeries);
+        verify(() => getNetworkSeries(Networks.amazon)).called(1);
+        verifyNoMoreInteractions(getNetworkSeries);
       },
     );
   });

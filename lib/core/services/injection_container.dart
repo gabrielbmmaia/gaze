@@ -11,11 +11,7 @@ import 'package:gaze/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:gaze/features/series/data/data_sources/series_remote_data_source.dart';
 import 'package:gaze/features/series/data/repositories/series_repo_impl.dart';
 import 'package:gaze/features/series/domain/repositories/series_repo.dart';
-import 'package:gaze/features/series/domain/usecases/get_amazon_series.dart';
-import 'package:gaze/features/series/domain/usecases/get_apple_series.dart';
-import 'package:gaze/features/series/domain/usecases/get_disney_series.dart';
-import 'package:gaze/features/series/domain/usecases/get_hbo_series.dart';
-import 'package:gaze/features/series/domain/usecases/get_netflix_series.dart';
+import 'package:gaze/features/series/domain/usecases/get_network_series.dart';
 import 'package:gaze/features/series/domain/usecases/get_popular_series.dart';
 import 'package:gaze/features/series/domain/usecases/get_searched_series.dart';
 import 'package:gaze/features/series/domain/usecases/get_series_by_genre.dart';
@@ -28,11 +24,10 @@ import 'package:gaze/features/series/presentation/bloc/amazon/amazon_bloc.dart';
 import 'package:gaze/features/series/presentation/bloc/apple/apple_bloc.dart';
 import 'package:gaze/features/series/presentation/bloc/classification/classification_bloc.dart';
 import 'package:gaze/features/series/presentation/bloc/disney/disney_bloc.dart';
-import 'package:gaze/features/series/presentation/bloc/genre/genre_bloc.dart';
 import 'package:gaze/features/series/presentation/bloc/hbo/hbo_bloc.dart';
 import 'package:gaze/features/series/presentation/bloc/netflix/netflix_bloc.dart';
 import 'package:gaze/features/series/presentation/bloc/popular/popular_bloc.dart';
-import 'package:gaze/features/series/presentation/bloc/searched/searched_bloc.dart';
+import 'package:gaze/features/series/presentation/bloc/searched/series_list_bloc.dart';
 import 'package:gaze/features/series/presentation/bloc/series_details/series_details_bloc.dart';
 import 'package:gaze/features/series/presentation/bloc/top_rated/top_rated_bloc.dart';
 import 'package:gaze/features/series/presentation/bloc/trending/trending_bloc.dart';
@@ -51,25 +46,25 @@ Future<void> _seriesInit() async {
     ..registerFactory(() => TopRatedBloc(getTopRatedSeries: sl()))
     ..registerFactory(() => PopularBloc(getPopularSeries: sl()))
     ..registerFactory(() => TrendingBloc(getTrendingSeries: sl()))
-    ..registerFactory(() => NetflixBloc(getNetflixSeries: sl()))
-    ..registerFactory(() => AmazonBloc(getAmazonSeries: sl()))
-    ..registerFactory(() => DisneyBloc(getDisneySeries: sl()))
-    ..registerFactory(() => HboBloc(getHBOSeries: sl()))
-    ..registerFactory(() => AppleBloc(getAppleSeries: sl()))
+    ..registerFactory(() => NetflixBloc(getNetworkSeries: sl()))
+    ..registerFactory(() => AmazonBloc(getNetworkSeries: sl()))
+    ..registerFactory(() => DisneyBloc(getNetworkSeries: sl()))
+    ..registerFactory(() => HboBloc(getNetworkSeries: sl()))
+    ..registerFactory(() => AppleBloc(getNetworkSeries: sl()))
     ..registerFactory(() => SeriesDetailsBloc(getSeriesDetails: sl()))
     ..registerFactory(() => YtTrailersBloc(getYoutubeTrailers: sl()))
     ..registerFactory(() => ClassificationBloc(getSeriesClassification: sl()))
-    ..registerFactory(() => GenreBloc(getSeriesByGenre: sl()))
-    ..registerFactory(() => SearchedBloc(getSearchedSeries: sl()))
-
+    ..registerFactory(
+      () => SeriesListBloc(
+        getSearchedSeries: sl(),
+        getSeriesByGenre: sl(),
+        getNetworkSeries: sl(),
+      ),
+    )
     ..registerLazySingleton(() => GetPopularSeriesUseCase(sl()))
     ..registerLazySingleton(() => GetTrendingSeriesUseCase(sl()))
     ..registerLazySingleton(() => GetTopRatedSeriesUseCase(sl()))
-    ..registerLazySingleton(() => GetNetflixSeriesUseCase(sl()))
-    ..registerLazySingleton(() => GetAmazonSeriesUseCase(sl()))
-    ..registerLazySingleton(() => GetDisneySeriesUseCase(sl()))
-    ..registerLazySingleton(() => GetHBOSeriesUseCase(sl()))
-    ..registerLazySingleton(() => GetAppleSeriesUseCase(sl()))
+    ..registerLazySingleton(() => GetNetworkSeriesUseCase(sl()))
     ..registerLazySingleton(() => GetSeriesDetailsUseCase(sl()))
     ..registerLazySingleton(() => GetYoutubeTrailersUseCase(sl()))
     ..registerLazySingleton(() => GetSeriesClassificationUseCase(sl()))

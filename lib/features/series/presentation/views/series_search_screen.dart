@@ -5,9 +5,9 @@ import 'package:gaze/core/extensions/context_extension.dart';
 import 'package:gaze/core/res/colours.dart';
 import 'package:gaze/core/res/fonts.dart';
 import 'package:gaze/core/services/injection_container.dart';
-import 'package:gaze/features/series/presentation/bloc/genre/genre_bloc.dart';
+import 'package:gaze/features/series/presentation/bloc/searched/series_list_bloc.dart';
 import 'package:gaze/features/series/presentation/enum/search_type.dart';
-import 'package:gaze/features/series/presentation/views/search_list_screen.dart';
+import 'package:gaze/features/series/presentation/views/series_list_screen.dart';
 
 class SeriesSearchScreen extends StatefulWidget {
   const SeriesSearchScreen({super.key});
@@ -73,9 +73,12 @@ class _SeriesSearchScreenState extends State<SeriesSearchScreen> {
                 IconButton(
                   onPressed: () {
                     context.push(
-                      SearchListScreen(
-                        args: NavigationSearchTypeArgs.textSearch(
-                          searchController.text,
+                      BlocProvider(
+                        create: (_) => sl<SeriesListBloc>(),
+                        child: SeriesListScreen(
+                          args: NavigationSearchTypeArgs.textSearch(
+                            searchController.text.trim(),
+                          ),
                         ),
                       ),
                     );
@@ -119,11 +122,9 @@ class _SeriesSearchScreenState extends State<SeriesSearchScreen> {
                       onPressed: () {
                         context.push(
                           BlocProvider(
-                            create: (_) => sl<GenreBloc>(),
-                            child: SearchListScreen(
-                              args: NavigationSearchTypeArgs.genreSearch(
-                                genreIds[genre]!,
-                              ),
+                            create: (_) => sl<SeriesListBloc>(),
+                            child: SeriesListScreen(
+                              args: NavigationSearchTypeArgs.genreSearch(genre),
                             ),
                           ),
                         );

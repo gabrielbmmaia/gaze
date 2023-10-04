@@ -4,7 +4,7 @@ abstract class HboState extends Equatable {
   const HboState();
 
   @override
-  List<Object> get props => [];
+  List<dynamic> get props => [];
 }
 
 class HboInitial extends HboState {
@@ -16,12 +16,16 @@ class LoadingHboSeries extends HboState {
 }
 
 class LoadedHboSeries extends HboState {
-  const LoadedHboSeries({required this.hboList});
+  const LoadedHboSeries({
+    required this.hboList,
+    this.network = Networks.hbo,
+  });
 
   final List<SeriesModel> hboList;
+  final Networks network;
 
   @override
-  List<Object> get props => [hboList];
+  List<dynamic> get props => [hboList, network];
 }
 
 class ErrorHboSeries extends HboState {

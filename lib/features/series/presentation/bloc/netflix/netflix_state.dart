@@ -4,7 +4,7 @@ abstract class NetflixState extends Equatable {
   const NetflixState();
 
   @override
-  List<Object> get props => [];
+  List<dynamic> get props => [];
 }
 
 class NetflixInitial extends NetflixState {
@@ -16,12 +16,16 @@ class LoadingNetflixSeries extends NetflixState {
 }
 
 class LoadedNetflixSeries extends NetflixState {
-  const LoadedNetflixSeries({required this.netflixList});
+  const LoadedNetflixSeries({
+    required this.netflixList,
+    this.network = Networks.netflix,
+  });
 
   final List<SeriesModel> netflixList;
+  final Networks network;
 
   @override
-  List<Object> get props => [netflixList];
+  List<dynamic> get props => [netflixList, network];
 }
 
 class ErrorNetflixSeries extends NetflixState {
