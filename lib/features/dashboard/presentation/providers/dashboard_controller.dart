@@ -7,6 +7,7 @@ import 'package:gaze/features/profile/presentation/views/profile_screen.dart';
 import 'package:gaze/features/series/presentation/bloc/amazon/amazon_bloc.dart';
 import 'package:gaze/features/series/presentation/bloc/apple/apple_bloc.dart';
 import 'package:gaze/features/series/presentation/bloc/disney/disney_bloc.dart';
+import 'package:gaze/features/series/presentation/bloc/genre/genre_bloc.dart';
 import 'package:gaze/features/series/presentation/bloc/hbo/hbo_bloc.dart';
 import 'package:gaze/features/series/presentation/bloc/netflix/netflix_bloc.dart';
 import 'package:gaze/features/series/presentation/bloc/popular/popular_bloc.dart';
@@ -57,7 +58,14 @@ class DashboardController extends ChangeNotifier {
       child: const PersistentView(),
     ),
     ChangeNotifierProvider(
-      create: (_) => TabNavigator(TabItem(child: const SeriesSearchScreen())),
+      create: (_) => TabNavigator(
+        TabItem(
+          child: MultiBlocProvider(
+            providers: [BlocProvider(create: (_) => sl<GenreBloc>())],
+            child: const SeriesSearchScreen(),
+          ),
+        ),
+      ),
       child: const PersistentView(),
     ),
     ChangeNotifierProvider(
