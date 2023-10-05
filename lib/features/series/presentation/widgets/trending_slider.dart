@@ -21,7 +21,6 @@ class _TrendingSliderState extends State<TrendingSlider> {
       child: CarouselSlider.builder(
         itemCount: widget.trendingList.length,
         options: CarouselOptions(
-          aspectRatio: 500/750,
           height: 300,
           autoPlay: true,
           enlargeCenterPage: true,
@@ -35,8 +34,7 @@ class _TrendingSliderState extends State<TrendingSlider> {
             aspectRatio: 500/750,
             child: SeriesItem(
               seriesModel: widget.trendingList[itemIndex],
-              imageHeight: 250,
-              imageWidth: 200,
+              backgroundColor: Colors.transparent,
             ),
           );
         },

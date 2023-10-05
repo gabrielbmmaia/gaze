@@ -16,4 +16,5 @@ class StringRes {
   static const notAnEmail = 'Digite um email válido';
   static const profileUpdate = 'Perfil atualizado com sucesso!';
   static const recomendedImageSize = '400x400';
+  static const connectionProblemMessage = 'Falha na conexão com o servidor';
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gaze/core/res/colours.dart';
+import 'package:gaze/core/res/fonts.dart';
 
 class CoreUtils {
   const CoreUtils._();
@@ -13,11 +14,11 @@ class CoreUtils {
             message,
             style: const TextStyle(
               color: Colors.white,
-              fontWeight: FontWeight.bold,
+              fontFamily: Fonts.poppins,
             ),
           ),
           behavior: SnackBarBehavior.floating,
-          backgroundColor: Colours.primaryColour,
+          backgroundColor: Colours.onDefaultColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),

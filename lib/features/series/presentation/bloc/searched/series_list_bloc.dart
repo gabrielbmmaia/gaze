@@ -40,7 +40,7 @@ class SeriesListBloc extends Bloc<SeriesListEvent, SeriesListState> {
       final result = await _getNetworkSeriesUseCase(event.network!);
 
       result.fold(
-        (failure) => emit(const ErrorSeriesList()),
+        (failure) => emit(ErrorSeriesList(errorMessage: failure.message)),
         (data) => emit(LoadedSeriesList(seriesList: data)),
       );
     }
@@ -49,7 +49,7 @@ class SeriesListBloc extends Bloc<SeriesListEvent, SeriesListState> {
       final result = await _getSeriesByGenre(event.genre!);
 
       result.fold(
-        (failure) => emit(const ErrorSeriesList()),
+        (failure) => emit(ErrorSeriesList(errorMessage: failure.message)),
         (data) => emit(LoadedSeriesList(seriesList: data)),
       );
     }
@@ -58,7 +58,7 @@ class SeriesListBloc extends Bloc<SeriesListEvent, SeriesListState> {
       final result = await _getSearchedSeries(event.text!);
 
       result.fold(
-        (failure) => emit(const ErrorSeriesList()),
+        (failure) => emit(ErrorSeriesList(errorMessage: failure.message)),
         (data) => emit(LoadedSeriesList(seriesList: data)),
       );
     }

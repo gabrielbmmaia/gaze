@@ -25,5 +25,7 @@ class LoadedSeriesList extends SeriesListState {
 }
 
 class ErrorSeriesList extends SeriesListState {
-  const ErrorSeriesList();
+  const ErrorSeriesList({ required this.errorMessage});
+
+  final String errorMessage;
 }

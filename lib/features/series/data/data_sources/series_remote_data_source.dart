@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:gaze/core/errors/exceptions.dart';
+import 'package:gaze/core/res/string.dart';
 import 'package:gaze/features/series/data/data_sources/interceptor.dart';
 import 'package:gaze/features/series/data/models/series_details_entity.dart';
 import 'package:gaze/features/series/data/models/series_entity.dart';
@@ -227,7 +228,10 @@ class SeriesRemoteDataSourceImpl extends SeriesRemoteDataSource {
     } on ServerException {
       rethrow;
     } catch (e) {
-      throw ServerException(message: e.toString(), statusCode: '505');
+      throw const ServerException(
+        message: StringRes.connectionProblemMessage,
+        statusCode: '505',
+      );
     }
   }
 

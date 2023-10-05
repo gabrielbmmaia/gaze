@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:gaze/core/res/colours.dart';
 import 'package:gaze/features/series/data/data_sources/series_remote_data_source.dart';
 import 'package:gaze/features/series/domain/models/series_model.dart';
 import 'package:gaze/features/series/presentation/views/series_details_screen.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class SeriesItem extends StatefulWidget {
   const SeriesItem({
     required this.seriesModel,
-    this.imageWidth = 225,
-    this.imageHeight = 150,
+    this.backgroundColor,
     super.key,
   });
 
   final SeriesModel seriesModel;
-  final double imageWidth;
-  final double imageHeight;
+  final Color? backgroundColor;
 
   @override
   State<SeriesItem> createState() => _SeriesItemState();
@@ -22,19 +22,9 @@ class SeriesItem extends StatefulWidget {
 class _SeriesItemState extends State<SeriesItem> {
   @override
   Widget build(BuildContext context) {
-    return Ink(
-      height: widget.imageHeight,
-      width: widget.imageWidth,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(6),
-        image: DecorationImage(
-          image: NetworkImage(
-            '$kImageBaseUrl${widget.seriesModel.posterPath}',
-          ),
-          filterQuality: FilterQuality.high,
-          fit: BoxFit.cover,
-        ),
-      ),
+    return Material(
+      borderRadius: BorderRadius.circular(6),
+      clipBehavior: Clip.antiAlias,
       child: InkWell(
         borderRadius: BorderRadius.circular(6),
         onTap: () {
@@ -43,6 +33,28 @@ class _SeriesItemState extends State<SeriesItem> {
             arguments: widget.seriesModel.id,
           );
         },
+        child: Ink(
+          decoration: BoxDecoration(
+            color: Colours.onDefaultColor,
+            borderRadius: BorderRadius.circular(6),
+          ),
+          child: FadeInImage.memoryNetwork(
+            placeholder: kTransparentImage,
+            image: '$kImageBaseUrl${widget.seriesModel.posterPath}',
+            fit: BoxFit.cover,
+            fadeInDuration: const Duration(milliseconds: 200),
+            fadeOutDuration: const Duration(milliseconds: 200),
+            imageErrorBuilder: (_, __, ___) {
+              return const Center(
+                child: Icon(
+                  Icons.image_rounded,
+                  color: Colours.neutralTextColour,
+                  size: 60,
+                ),
+              );
+            },
+          ),
+        ),
       ),
     );
   }

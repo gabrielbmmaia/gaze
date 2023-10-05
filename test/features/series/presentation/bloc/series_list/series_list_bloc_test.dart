@@ -85,9 +85,9 @@ void main() {
         return bloc;
       },
       act: (bloc) => bloc.add(tLoadEvent),
-      expect: () => const <SeriesListState>[
-        LoadingSeriesList(),
-        ErrorSeriesList(),
+      expect: () => <SeriesListState>[
+        const LoadingSeriesList(),
+        ErrorSeriesList(errorMessage: tServerFailure.message),
       ],
       verify: (_) {
         verify(() => getSearchedSeries('teste')).called(1);
@@ -130,13 +130,15 @@ void main() {
         );
         return bloc;
       },
-      act: (bloc) => bloc.add(const LoadSeriesListEvent(
-        network: Networks.netflix,
-        searchType: SearchType.network,
-      ),),
-      expect: () => const <SeriesListState>[
-        LoadingSeriesList(),
-        ErrorSeriesList(),
+      act: (bloc) => bloc.add(
+        const LoadSeriesListEvent(
+          network: Networks.netflix,
+          searchType: SearchType.network,
+        ),
+      ),
+      expect: () => <SeriesListState>[
+        const LoadingSeriesList(),
+        ErrorSeriesList(errorMessage: tServerFailure.message),
       ],
       verify: (_) {
         verify(() => getNetworkSeries(Networks.netflix)).called(1);
@@ -148,10 +150,10 @@ void main() {
   group('networkCase', () {
     blocTest<SeriesListBloc, SeriesListState>(
       'should emit [LoadingSearchedSeries, LoadedSearchedSeries] when '
-          '[LoadSearchedListEvent] is added',
+      '[LoadSearchedListEvent] is added',
       build: () {
         when(() => getNetworkSeries(any())).thenAnswer(
-              (_) async => const Right(tSeriesList),
+          (_) async => const Right(tSeriesList),
         );
         return bloc;
       },
@@ -172,20 +174,22 @@ void main() {
     );
     blocTest<SeriesListBloc, SeriesListState>(
       'should emit [LoadingSearchedSeries, ErrorSearchedSeries] when '
-          '[LoadSearchedListEvent] is added',
+      '[LoadSearchedListEvent] is added',
       build: () {
         when(() => getNetworkSeries(any())).thenAnswer(
-              (_) async => Left(tServerFailure),
+          (_) async => Left(tServerFailure),
         );
         return bloc;
       },
-      act: (bloc) => bloc.add(const LoadSeriesListEvent(
-        network: Networks.netflix,
-        searchType: SearchType.network,
-      ),),
-      expect: () => const <SeriesListState>[
-        LoadingSeriesList(),
-        ErrorSeriesList(),
+      act: (bloc) => bloc.add(
+        const LoadSeriesListEvent(
+          network: Networks.netflix,
+          searchType: SearchType.network,
+        ),
+      ),
+      expect: () => <SeriesListState>[
+        const LoadingSeriesList(),
+        ErrorSeriesList(errorMessage: tServerFailure.message),
       ],
       verify: (_) {
         verify(() => getNetworkSeries(Networks.netflix)).called(1);
@@ -197,10 +201,10 @@ void main() {
   group('genreCase', () {
     blocTest<SeriesListBloc, SeriesListState>(
       'should emit [LoadingSearchedSeries, LoadedSearchedSeries] when '
-          '[LoadSearchedListEvent] is added',
+      '[LoadSearchedListEvent] is added',
       build: () {
         when(() => getSeriesByGenre(any())).thenAnswer(
-              (_) async => const Right(tSeriesList),
+          (_) async => const Right(tSeriesList),
         );
         return bloc;
       },
@@ -221,20 +225,22 @@ void main() {
     );
     blocTest<SeriesListBloc, SeriesListState>(
       'should emit [LoadingSearchedSeries, ErrorSearchedSeries] when '
-          '[LoadSearchedListEvent] is added',
+      '[LoadSearchedListEvent] is added',
       build: () {
         when(() => getSeriesByGenre(any())).thenAnswer(
-              (_) async => Left(tServerFailure),
+          (_) async => Left(tServerFailure),
         );
         return bloc;
       },
-      act: (bloc) => bloc.add(const LoadSeriesListEvent(
-        genre: Genres.animation,
-        searchType: SearchType.genre,
-      ),),
-      expect: () => const <SeriesListState>[
-        LoadingSeriesList(),
-        ErrorSeriesList(),
+      act: (bloc) => bloc.add(
+        const LoadSeriesListEvent(
+          genre: Genres.animation,
+          searchType: SearchType.genre,
+        ),
+      ),
+      expect: () => <SeriesListState>[
+        const LoadingSeriesList(),
+        ErrorSeriesList(errorMessage: tServerFailure.message),
       ],
       verify: (_) {
         verify(() => getSeriesByGenre(Genres.animation)).called(1);

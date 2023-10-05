@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gaze/core/enums/networks.dart';
 import 'package:gaze/core/extensions/context_extension.dart';
+import 'package:gaze/core/res/colours.dart';
 import 'package:gaze/core/services/injection_container.dart';
 import 'package:gaze/features/series/domain/models/series_model.dart';
 import 'package:gaze/features/series/presentation/bloc/searched/series_list_bloc.dart';
@@ -72,8 +73,7 @@ class SeriesList extends StatelessWidget {
                   aspectRatio: 500 / 750,
                   child: SeriesItem(
                     seriesModel: seriesList[index],
-                    imageHeight: 225,
-                    imageWidth: 150,
+                    backgroundColor: Colours.onDefaultColor,
                   ),
                 ),
               );
