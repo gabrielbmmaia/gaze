@@ -12,6 +12,8 @@ import 'package:gaze/features/series/presentation/bloc/netflix/netflix_bloc.dart
 import 'package:gaze/features/series/presentation/bloc/popular/popular_bloc.dart';
 import 'package:gaze/features/series/presentation/bloc/top_rated/top_rated_bloc.dart';
 import 'package:gaze/features/series/presentation/bloc/trending/trending_bloc.dart';
+import 'package:gaze/features/series/presentation/widgets/list_error.dart';
+import 'package:gaze/features/series/presentation/widgets/list_title.dart';
 import 'package:gaze/features/series/presentation/widgets/series_list.dart';
 import 'package:gaze/features/series/presentation/widgets/trending_slider.dart';
 
@@ -65,17 +67,30 @@ class _SeriesScreenState extends State<SeriesScreen> {
                     child: SizedBox(
                       height: 300,
                       width: double.infinity,
-                      child: Stack(
+                      child: Column(
                         children: [
                           if (state is LoadedTrendingSeries)
                             TrendingSlider(trendingList: state.trendingList)
+                          else if (state is ErrorTrendingSeries)
+                            ListError(
+                              errorMessage: StringRes.connectionProblemMessage,
+                              onPressed: () {
+                                context.read<TrendingBloc>().add(
+                                      const LoadTrendingListEvent(),
+                                    );
+                              },
+                            )
                           else
-                            const Center(
-                              child: SizedBox(
-                                width: 50,
-                                height: 50,
-                                child: CircularProgressIndicator(
-                                  color: Colours.secondaryColor,
+                            const Expanded(
+                              child: Align(
+                                child: Center(
+                                  child: SizedBox(
+                                    width: 50,
+                                    height: 50,
+                                    child: CircularProgressIndicator(
+                                      color: Colours.secondaryColor,
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
@@ -91,27 +106,39 @@ class _SeriesScreenState extends State<SeriesScreen> {
                   return SizedBox(
                     height: 300,
                     width: double.infinity,
-                    child: Stack(
+                    child: Column(
                       children: [
+                        const ListTitle(
+                          title: 'Netflix',
+                          network: Networks.netflix,
+                        ),
                         if (state is LoadedNetflixSeries)
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8, right: 8),
-                            child: SeriesList(
-                              title: 'Netflix',
-                              seriesList: state.netflixList,
-                              network: state.network,
-                            ),
+                          SeriesList(seriesList: state.netflixList)
+                        else if (state is ErrorNetflixSeries)
+                          ListError(
+                            errorMessage: StringRes.connectionProblemMessage,
+                            onPressed: () {
+                              context.read<NetflixBloc>().add(
+                                    const LoadNetflixListEvent(
+                                      Networks.netflix,
+                                    ),
+                                  );
+                            },
                           )
                         else
-                          const Center(
-                            child: SizedBox(
-                              width: 50,
-                              height: 50,
-                              child: CircularProgressIndicator(
-                                color: Colours.secondaryColor,
+                          const Expanded(
+                            child: Align(
+                              child: Center(
+                                child: SizedBox(
+                                  width: 50,
+                                  height: 50,
+                                  child: CircularProgressIndicator(
+                                    color: Colours.secondaryColor,
+                                  ),
+                                ),
                               ),
                             ),
-                          )
+                          ),
                       ],
                     ),
                   );
@@ -123,24 +150,34 @@ class _SeriesScreenState extends State<SeriesScreen> {
                   return SizedBox(
                     height: 300,
                     width: double.infinity,
-                    child: Stack(
+                    child: Column(
                       children: [
+                        const ListTitle(
+                          title: 'Amazon',
+                          network: Networks.amazon,
+                        ),
                         if (state is LoadedAmazonSeries)
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8, right: 8),
-                            child: SeriesList(
-                              title: 'Amazon Prime',
-                              seriesList: state.amazonList,
-                              network: state.network,
-                            ),
+                          SeriesList(seriesList: state.amazonList)
+                        else if (state is ErrorAmazonSeries)
+                          ListError(
+                            errorMessage: StringRes.connectionProblemMessage,
+                            onPressed: () {
+                              context.read<AmazonBloc>().add(
+                                    const LoadAmazonListEvent(Networks.amazon),
+                                  );
+                            },
                           )
                         else
-                          const Center(
-                            child: SizedBox(
-                              width: 50,
-                              height: 50,
-                              child: CircularProgressIndicator(
-                                color: Colours.secondaryColor,
+                          const Expanded(
+                            child: Align(
+                              child: Center(
+                                child: SizedBox(
+                                  width: 50,
+                                  height: 50,
+                                  child: CircularProgressIndicator(
+                                    color: Colours.secondaryColor,
+                                  ),
+                                ),
                               ),
                             ),
                           ),
@@ -155,24 +192,34 @@ class _SeriesScreenState extends State<SeriesScreen> {
                   return SizedBox(
                     height: 300,
                     width: double.infinity,
-                    child: Stack(
+                    child: Column(
                       children: [
+                        const ListTitle(
+                          title: 'HBO Max',
+                          network: Networks.hbo,
+                        ),
                         if (state is LoadedHboSeries)
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8, right: 8),
-                            child: SeriesList(
-                              title: 'HBO Max',
-                              seriesList: state.hboList,
-                              network: state.network,
-                            ),
+                          SeriesList(seriesList: state.hboList)
+                        else if (state is ErrorHboSeries)
+                          ListError(
+                            errorMessage: StringRes.connectionProblemMessage,
+                            onPressed: () {
+                              context.read<HboBloc>().add(
+                                    const LoadHboListEvent(Networks.hbo),
+                                  );
+                            },
                           )
                         else
-                          const Center(
-                            child: SizedBox(
-                              width: 50,
-                              height: 50,
-                              child: CircularProgressIndicator(
-                                color: Colours.secondaryColor,
+                          const Expanded(
+                            child: Align(
+                              child: Center(
+                                child: SizedBox(
+                                  width: 50,
+                                  height: 50,
+                                  child: CircularProgressIndicator(
+                                    color: Colours.secondaryColor,
+                                  ),
+                                ),
                               ),
                             ),
                           ),
@@ -187,24 +234,34 @@ class _SeriesScreenState extends State<SeriesScreen> {
                   return SizedBox(
                     height: 300,
                     width: double.infinity,
-                    child: Stack(
+                    child: Column(
                       children: [
+                        const ListTitle(
+                          title: 'Disney+',
+                          network: Networks.disney,
+                        ),
                         if (state is LoadedDisneySeries)
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8, right: 8),
-                            child: SeriesList(
-                              title: 'Disney+',
-                              seriesList: state.disneyList,
-                              network: state.network,
-                            ),
+                          SeriesList(seriesList: state.disneyList)
+                        else if (state is ErrorDisneySeries)
+                          ListError(
+                            errorMessage: StringRes.connectionProblemMessage,
+                            onPressed: () {
+                              context.read<DisneyBloc>().add(
+                                    const LoadDisneyListEvent(Networks.disney),
+                                  );
+                            },
                           )
                         else
-                          const Center(
-                            child: SizedBox(
-                              width: 50,
-                              height: 50,
-                              child: CircularProgressIndicator(
-                                color: Colours.secondaryColor,
+                          const Expanded(
+                            child: Align(
+                              child: Center(
+                                child: SizedBox(
+                                  width: 50,
+                                  height: 50,
+                                  child: CircularProgressIndicator(
+                                    color: Colours.secondaryColor,
+                                  ),
+                                ),
                               ),
                             ),
                           ),
@@ -219,24 +276,34 @@ class _SeriesScreenState extends State<SeriesScreen> {
                   return SizedBox(
                     height: 300,
                     width: double.infinity,
-                    child: Stack(
+                    child: Column(
                       children: [
+                        const ListTitle(
+                          title: 'Apple TV+',
+                          network: Networks.apple,
+                        ),
                         if (state is LoadedAppleSeries)
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8, right: 8),
-                            child: SeriesList(
-                              title: 'Apple TV+',
-                              seriesList: state.appleList,
-                              network: state.network,
-                            ),
+                          SeriesList(seriesList: state.appleList)
+                        else if (state is ErrorAppleSeries)
+                          ListError(
+                            errorMessage: StringRes.connectionProblemMessage,
+                            onPressed: () {
+                              context.read<AppleBloc>().add(
+                                    const LoadAppleListEvent(Networks.apple),
+                                  );
+                            },
                           )
                         else
-                          const Center(
-                            child: SizedBox(
-                              width: 50,
-                              height: 50,
-                              child: CircularProgressIndicator(
-                                color: Colours.secondaryColor,
+                          const Expanded(
+                            child: Align(
+                              child: Center(
+                                child: SizedBox(
+                                  width: 50,
+                                  height: 50,
+                                  child: CircularProgressIndicator(
+                                    color: Colours.secondaryColor,
+                                  ),
+                                ),
                               ),
                             ),
                           ),
@@ -251,23 +318,31 @@ class _SeriesScreenState extends State<SeriesScreen> {
                   return SizedBox(
                     height: 300,
                     width: double.infinity,
-                    child: Stack(
+                    child: Column(
                       children: [
+                        const ListTitle(title: 'Bem Avaliados'),
                         if (state is LoadedTopRatedSeries)
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8, right: 8),
-                            child: SeriesList(
-                              title: 'Bem Avaliados',
-                              seriesList: state.topRatedList,
-                            ),
+                          SeriesList(seriesList: state.topRatedList)
+                        else if (state is ErrorTopRatedSeries)
+                          ListError(
+                            errorMessage: StringRes.connectionProblemMessage,
+                            onPressed: () {
+                              context.read<TopRatedBloc>().add(
+                                    const LoadTopRatedListEvent(),
+                                  );
+                            },
                           )
                         else
-                          const Center(
-                            child: SizedBox(
-                              width: 50,
-                              height: 50,
-                              child: CircularProgressIndicator(
-                                color: Colours.secondaryColor,
+                          const Expanded(
+                            child: Align(
+                              child: Center(
+                                child: SizedBox(
+                                  width: 50,
+                                  height: 50,
+                                  child: CircularProgressIndicator(
+                                    color: Colours.secondaryColor,
+                                  ),
+                                ),
                               ),
                             ),
                           ),
@@ -282,23 +357,31 @@ class _SeriesScreenState extends State<SeriesScreen> {
                   return SizedBox(
                     height: 300,
                     width: double.infinity,
-                    child: Stack(
+                    child: Column(
                       children: [
+                        const ListTitle(title: 'Popular'),
                         if (state is LoadedPopularSeries)
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8, right: 8),
-                            child: SeriesList(
-                              title: 'Popular',
-                              seriesList: state.popularList,
-                            ),
+                          SeriesList(seriesList: state.popularList)
+                        else if (state is ErrorPopularSeries)
+                          ListError(
+                            errorMessage: StringRes.connectionProblemMessage,
+                            onPressed: () {
+                              context.read<PopularBloc>().add(
+                                    const LoadPopularListEvent(),
+                                  );
+                            },
                           )
                         else
-                          const Center(
-                            child: SizedBox(
-                              width: 50,
-                              height: 50,
-                              child: CircularProgressIndicator(
-                                color: Colours.secondaryColor,
+                          const Expanded(
+                            child: Align(
+                              child: Center(
+                                child: SizedBox(
+                                  width: 50,
+                                  height: 50,
+                                  child: CircularProgressIndicator(
+                                    color: Colours.secondaryColor,
+                                  ),
+                                ),
                               ),
                             ),
                           ),

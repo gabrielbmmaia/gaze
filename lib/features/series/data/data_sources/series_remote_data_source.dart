@@ -229,7 +229,7 @@ class SeriesRemoteDataSourceImpl extends SeriesRemoteDataSource {
       rethrow;
     } catch (e) {
       throw const ServerException(
-        message: StringRes.connectionProblemMessage,
+        message: StringRes.serverProblemMessage,
         statusCode: '505',
       );
     }
