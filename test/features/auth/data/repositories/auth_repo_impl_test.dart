@@ -6,6 +6,8 @@ import 'package:gaze/features/auth/data/data_sources/auth_remote_data_source.dar
 import 'package:gaze/features/auth/data/repositories/auth_repo_impl.dart';
 import 'package:gaze/features/auth/domain/models/user_model.dart';
 import 'package:gaze/features/auth/domain/repositories/auth_repo.dart';
+import 'package:gaze/features/series/data/models/series_entity.dart';
+import 'package:gaze/features/series/domain/models/series_model.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
 
@@ -19,6 +21,7 @@ void main() {
     remoteDataSource = MockAuthRemoteDataSource();
     repo = AuthRepoImpl(remoteDataSource);
     registerFallbackValue(UpdateUserAction.email);
+    registerFallbackValue(const SeriesEntity.empty());
   });
 
   const tUser = UserModel.empty();
@@ -208,6 +211,55 @@ void main() {
           () => remoteDataSource.updateUser(
             action: tUpdateAction,
             userData: tUserData,
+          ),
+        ).called(1);
+        verifyNoMoreInteractions(remoteDataSource);
+      },
+    );
+  });
+
+  group('addFavoriteItem', () {
+    test(
+      'should call [AuthRemoteDataSource.addFavoriteItem] and return void when '
+      'the call is successful',
+      () async {
+        when(() => remoteDataSource.addFavoriteItem(item: any(named: 'item')))
+            .thenAnswer((_) async => Future.value());
+
+        final result = await repo.addFavoriteItem(
+          item: const SeriesModel.empty(),
+        );
+
+        expect(result, const Right<dynamic, void>(null));
+        verify(
+          () => remoteDataSource.addFavoriteItem(
+            item: const SeriesEntity.empty(),
+          ),
+        ).called(1);
+        verifyNoMoreInteractions(remoteDataSource);
+      },
+    );
+
+    test(
+      'should call [AuthRemoteDataSource.addFavoriteItem] and return '
+      '[ServerFailure] when the call to remote data source is unsuccessful',
+      () async {
+        when(() => remoteDataSource.addFavoriteItem(item: any(named: 'item')))
+            .thenThrow(tServerException);
+
+        final result = await repo.addFavoriteItem(
+          item: const SeriesModel.empty(),
+        );
+
+        expect(
+          result,
+          Left<Failure, dynamic>(
+            ServerFailure.fromException(tServerException),
+          ),
+        );
+        verify(
+          () => remoteDataSource.addFavoriteItem(
+            item: const SeriesEntity.empty(),
           ),
         ).called(1);
         verifyNoMoreInteractions(remoteDataSource);

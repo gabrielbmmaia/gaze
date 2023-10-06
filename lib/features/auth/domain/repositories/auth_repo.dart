@@ -2,6 +2,7 @@
 import 'package:gaze/core/enums/update_user.dart';
 import 'package:gaze/core/utils/typedefs.dart';
 import 'package:gaze/features/auth/domain/models/user_model.dart';
+import 'package:gaze/features/series/domain/models/series_model.dart';
 
 /*
 * ResultFuture é um typedef de Future<Either<Failure, T>>
@@ -29,4 +30,7 @@ abstract class AuthRepo {
     required dynamic userData,
   });
 
+  ResultFuture<void> addFavoriteItem({required SeriesModel item});
+
+  ResultFuture<void> removeFavoriteItem({required SeriesModel item});
 }

@@ -10,6 +10,7 @@ import 'package:gaze/core/utils/constants.dart';
 import 'package:gaze/core/utils/typedefs.dart';
 import 'package:gaze/features/auth/data/models/user_entity.dart';
 import 'package:gaze/features/auth/domain/models/user_model.dart';
+import 'package:gaze/features/series/data/models/series_entity.dart';
 
 abstract class AuthRemoteDataSource {
   const AuthRemoteDataSource();
@@ -29,6 +30,10 @@ abstract class AuthRemoteDataSource {
     required UpdateUserAction action,
     required dynamic userData,
   });
+
+  Future<void> addFavoriteItem({required SeriesEntity item});
+
+  Future<void> removeFavoriteItem({required SeriesEntity item});
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
@@ -154,6 +159,26 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       debugPrintStack(stackTrace: s);
       throw ServerException(message: e.toString(), statusCode: '505');
     }
+  }
+
+  @override
+  Future<void> addFavoriteItem({required SeriesEntity item}) async {
+    await _cloudStoreClient
+        .collection('users')
+        .doc(_authClient.currentUser?.uid)
+        .update({
+      'favoriteList': FieldValue.arrayUnion([item.toMap()]),
+    });
+  }
+
+  @override
+  Future<void> removeFavoriteItem({required SeriesEntity item}) async {
+    await _cloudStoreClient
+        .collection('users')
+        .doc(_authClient.currentUser?.uid)
+        .update({
+      'favoriteList': FieldValue.arrayRemove([item.toMap()]),
+    });
   }
 
   Future<DocumentSnapshot<DataMap>> _getUserData(String uid) async {

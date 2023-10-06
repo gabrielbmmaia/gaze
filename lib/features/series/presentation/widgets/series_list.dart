@@ -4,10 +4,7 @@ import 'package:gaze/features/series/domain/models/series_model.dart';
 import 'package:gaze/features/series/presentation/widgets/series_item.dart';
 
 class SeriesList extends StatelessWidget {
-  const SeriesList({
-    required this.seriesList,
-    super.key,
-  });
+  const SeriesList({required this.seriesList, super.key});
 
   final List<SeriesModel> seriesList;
 

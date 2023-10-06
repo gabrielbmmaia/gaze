@@ -6,11 +6,14 @@ import 'package:gaze/core/utils/typedefs.dart';
 import 'package:gaze/features/auth/data/data_sources/auth_remote_data_source.dart';
 import 'package:gaze/features/auth/domain/models/user_model.dart';
 import 'package:gaze/features/auth/domain/repositories/auth_repo.dart';
+import 'package:gaze/features/series/data/mappers/series_mapper.dart';
+import 'package:gaze/features/series/domain/models/series_model.dart';
 
 class AuthRepoImpl implements AuthRepo {
-  const AuthRepoImpl(this._remoteDataSource);
+  AuthRepoImpl(this._remoteDataSource): mapper = SeriesMapper();
 
   final AuthRemoteDataSource _remoteDataSource;
+  final SeriesMapper mapper;
 
   @override
   ResultFuture<UserModel> signIn({
@@ -56,6 +59,26 @@ class AuthRepoImpl implements AuthRepo {
         action: action,
         userData: userData,
       );
+      return const Right(null);
+    } on ServerException catch (e) {
+      return Left(ServerFailure.fromException(e));
+    }
+  }
+
+  @override
+  ResultFuture<void> addFavoriteItem({required SeriesModel item}) async {
+    try {
+      await _remoteDataSource.addFavoriteItem(item: mapper.toData(item));
+      return const Right(null);
+    } on ServerException catch (e) {
+      return Left(ServerFailure.fromException(e));
+    }
+  }
+
+  @override
+  ResultFuture<void> removeFavoriteItem({required SeriesModel item}) async {
+    try {
+      await _remoteDataSource.removeFavoriteItem(item: mapper.toData(item));
       return const Right(null);
     } on ServerException catch (e) {
       return Left(ServerFailure.fromException(e));

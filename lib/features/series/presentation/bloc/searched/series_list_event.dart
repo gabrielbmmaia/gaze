@@ -20,21 +20,3 @@ class LoadSeriesListEvent extends SeriesListEvent {
   final Genres? genre;
   final SearchType searchType;
 }
-
-// class LoadGenreListEvent extends SearchedEvent {
-//   const LoadGenreListEvent({required this.genreId});
-//
-//   final String genreId;
-//
-//   @override
-//   List<String> get props => [genreId];
-// }
-//
-// class LoadNetworkListEvent extends SearchedEvent {
-//   const LoadNetworkListEvent({required this.networkId});
-//
-//   final String networkId;
-//
-//   @override
-//   List<String> get props => [networkId];
-// }
