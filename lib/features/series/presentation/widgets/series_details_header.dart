@@ -5,6 +5,7 @@ import 'package:gaze/core/res/fonts.dart';
 import 'package:gaze/features/series/data/data_sources/series_remote_data_source.dart';
 import 'package:gaze/features/series/domain/models/series_details_model.dart';
 import 'package:gaze/features/series/presentation/widgets/text_tag.dart';
+import 'package:iconly/iconly.dart';
 
 class SeriesDetailsHeader extends StatelessWidget {
   const SeriesDetailsHeader({
@@ -85,6 +86,19 @@ class SeriesDetailsHeader extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        Align(
+                          child: IconButton(
+                              onPressed: () {},
+                              icon: Icon(
+
+                                IconlyBold.star,
+                                color: Colors.white,
+                              )),
+                          alignment: Alignment.topRight,
+                        ),
+                        SizedBox(
+                          height: 30,
+                        ),
                         Text(
                           seriesDetails.name,
                           style: const TextStyle(

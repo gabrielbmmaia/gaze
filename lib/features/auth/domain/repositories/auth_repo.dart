@@ -33,4 +33,6 @@ abstract class AuthRepo {
   ResultFuture<void> addFavoriteItem({required SeriesModel item});
 
   ResultFuture<void> removeFavoriteItem({required SeriesModel item});
+
+  ResultFuture<bool> isFavoriteItem({required SeriesModel item});
 }

@@ -266,4 +266,53 @@ void main() {
       },
     );
   });
+
+  group('isFavoriteItem', () {
+    test(
+      'should call [AuthRemoteDataSource.isFavoriteItem] and return '
+      '[Right<bool>] when the call is successful',
+      () async {
+        when(() => remoteDataSource.isFavoriteItem(item: any(named: 'item')))
+            .thenAnswer((_) async => true);
+
+        final result = await repo.isFavoriteItem(
+          item: const SeriesModel.empty(),
+        );
+
+        expect(result, const Right<dynamic, bool>(true));
+        verify(
+          () => remoteDataSource.isFavoriteItem(
+            item: const SeriesEntity.empty(),
+          ),
+        ).called(1);
+        verifyNoMoreInteractions(remoteDataSource);
+      },
+    );
+
+    test(
+      'should call [AuthRemoteDataSource.isFavoriteItem] and return '
+      '[ServerFailure] when the call to remote data source is unsuccessful',
+      () async {
+        when(() => remoteDataSource.isFavoriteItem(item: any(named: 'item')))
+            .thenThrow(tServerException);
+
+        final result = await repo.isFavoriteItem(
+          item: const SeriesModel.empty(),
+        );
+
+        expect(
+          result,
+          Left<Failure, dynamic>(
+            ServerFailure.fromException(tServerException),
+          ),
+        );
+        verify(
+          () => remoteDataSource.isFavoriteItem(
+            item: const SeriesEntity.empty(),
+          ),
+        ).called(1);
+        verifyNoMoreInteractions(remoteDataSource);
+      },
+    );
+  });
 }

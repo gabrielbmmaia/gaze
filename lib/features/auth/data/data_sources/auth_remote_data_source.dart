@@ -34,6 +34,8 @@ abstract class AuthRemoteDataSource {
   Future<void> addFavoriteItem({required SeriesEntity item});
 
   Future<void> removeFavoriteItem({required SeriesEntity item});
+
+  Future<bool> isFavoriteItem({required SeriesEntity item});
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
@@ -179,6 +181,19 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         .update({
       'favoriteList': FieldValue.arrayRemove([item.toMap()]),
     });
+  }
+
+  @override
+  Future<bool> isFavoriteItem({required SeriesEntity item}) async {
+    final userDoc = await _cloudStoreClient
+        .collection('users')
+        .doc(_authClient.currentUser?.uid)
+        .get();
+    final favoriteList = userDoc.data()?['favoriteList'] ?? <dynamic>[];
+    final favoriteSeries = (favoriteList as List<dynamic>)
+        .map((item) => SeriesEntity.fromJson(favoriteList as DataMap))
+        .toList();
+    return favoriteSeries.contains(item);
   }
 
   Future<DocumentSnapshot<DataMap>> _getUserData(String uid) async {

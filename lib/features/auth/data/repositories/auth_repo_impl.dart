@@ -10,7 +10,7 @@ import 'package:gaze/features/series/data/mappers/series_mapper.dart';
 import 'package:gaze/features/series/domain/models/series_model.dart';
 
 class AuthRepoImpl implements AuthRepo {
-  AuthRepoImpl(this._remoteDataSource): mapper = SeriesMapper();
+  AuthRepoImpl(this._remoteDataSource) : mapper = SeriesMapper();
 
   final AuthRemoteDataSource _remoteDataSource;
   final SeriesMapper mapper;
@@ -80,6 +80,18 @@ class AuthRepoImpl implements AuthRepo {
     try {
       await _remoteDataSource.removeFavoriteItem(item: mapper.toData(item));
       return const Right(null);
+    } on ServerException catch (e) {
+      return Left(ServerFailure.fromException(e));
+    }
+  }
+
+  @override
+  ResultFuture<bool> isFavoriteItem({required SeriesModel item}) async {
+    try {
+      final result = await _remoteDataSource.isFavoriteItem(
+        item: mapper.toData(item),
+      );
+      return Right(result);
     } on ServerException catch (e) {
       return Left(ServerFailure.fromException(e));
     }
