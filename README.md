@@ -62,17 +62,17 @@ Nas telas de autenticação é possível logar em uma conta já existente, criar
 ![auth_feature](https://github.com/gabrielbmmaia/gaze/assets/109977155/dac79cb3-24d2-407f-a868-36f2430a7abe)
 
 ### Home Screen + Details Screen
-
+A tela inicial, Home, contém a interação principal do aplicativo. Nela, o usuário tem acesso a várias listas de séries, incluindo diferentes Networks, as séries mais populares do momento e as melhores avaliadas. Ao interagir com a seta de cada lista, o usuário é direcionado para a List Screen, onde terá uma visão ampliada da mesma lista para uma melhor visualização. Quando o usuário clica em qualquer uma das séries, é redirecionado para a Series Details Screen, onde pode conferir diversas informações sobre a série. Além disso, ao interagir com qualquer item de mídia, o usuário é redirecionado para o vídeo no YouTube.
 
 ![home-details](https://github.com/gabrielbmmaia/gaze/assets/109977155/f7010ce7-06a0-4bdd-9f0e-600777dd623c)
 
 ### Search Screen
-Na tela de Favoritos, o usuário tem acesso a todas as imagens que foram guardadas como favoritas, permitindo-lhe visualizar uma variedade de obras de artistas pelos quais ele demonstrou maior apreço.
+Na Search Screen o usuário pode pesquisar series a partir de um texto específico ou por algum gênero específico. Em ambas as escolhas o usuário será navegado para a Series List Screen que em cada situação receberá um argumento diferente para solicitar à TMDB Api.
 
 ![search-screen](https://github.com/gabrielbmmaia/gaze/assets/109977155/5f507be3-1a34-4697-8b27-975c67829897)
 
 ### Profile Screen
-Na tela "Ver mais", o usuário tem acesso à uma lista de imagens relacionadas à um único artista. Essa features consegue ser acessada ao clicar em "+ ver mais" em algum Card de Foto no aplicativo.
+Na Profile Screen o usuário tem acesso a todos seus dados incluindo a lista de series favoritas. Além disso, ele poderá tanto deslogar quanto editar seus dados. Uma observação legal é a "Fake Nav Error", essa não é para o usuário e sim para o desenvolvedor. Esse botão existe apenas para mostar para você desenvolvedor que podemos colocar uma tela em caso de erro na navegação do aplicativo e com isso o aplicativo não irá quebrar caso aconteça algum erro para o usuário =). 
 
 ![profile](https://github.com/gabrielbmmaia/gaze/assets/109977155/e73c50ec-e0e9-4992-81aa-ee92e82e9a8a)
 
