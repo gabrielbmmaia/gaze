@@ -1,13 +1,10 @@
 # Gaze
-[EM PRODUÇÂO]
-O PicView é um aplicativo que utiliza a Unsplash API para obter acesso aos dados necessários. Através dele, é possível visualizar uma ampla variedade de fotografias disponibilizadas por artistas no site da Unsplash. A intenção por trás do desenvolvimento do PicView foi a de colocar em prática a modularização de um aplicativo, bem como a vontade de construir um aplicativo completamente novo utilizando o Jetpack Compose.
+O Gaze é um aplicativo que utiliza a TMDB API para obter acesso aos dados necessários. Através dele, é possível visualizar as series que estão em alta em cada plataforma de streaming assim como pesquisar por serie e gêneros específicos. A intenção por trás do desenvolvimento do Gaze foi a de colocar em prática pela primeira vez o Framework Flutter além de também implementar pela primeira vez o Firebase em um aplicativo. 
 
 # Índice 
-[EM PRODUÇÂO]
 * [Layouts do Projeto](#layouts-do-projeto)
 * [Funcionalidades do projeto](#funcionalidades-do-projeto)
 * [Técnicas e tecnologias utilizadas](#técnicas-e-tecnologias-utilizadas)
-* [Funcionalidades do Card de Foto](#funcionalidades-do-card-de-foto)
 * [Navegação entre Features](#navegação-entre-features)
 * [Features](#features)
 * [Api](#api)
@@ -16,8 +13,7 @@ O PicView é um aplicativo que utiliza a Unsplash API para obter acesso aos dado
 
 # Layouts do Projeto
 Aqui é possível visualizar um resumo de todas as telas do aplicativo.
-![layout-gaze](https://github.com/gabrielbmmaia/gaze/assets/109977155/693e89d0-452c-4fd2-bf23-49bcde5740b7)
-
+![layout-gaze](https://github.com/gabrielbmmaia/gaze/assets/109977155/a52c332b-8d92-46d5-8e4b-f0dde818e586)
 
 # Funcionalidades do projeto
 `Listar series mais populares da TMDB` <br>
@@ -53,6 +49,7 @@ Aqui é possível visualizar um resumo de todas as telas do aplicativo.
 `Get_it`: usado para injeção de dependência. <br>
 `Clean Archtecture`: projeto foi feito totalmente na Clean Archtecture. <br>
 `Lottie`: utilizado para animação de algumas imagens. <br>
+`Teste Unitários`: foram feitos teste unitários em todas camadas do app seguindo o TDD. <br>
 
 # Navegação entre Telas
 ![screen-navigation](https://github.com/gabrielbmmaia/gaze/assets/109977155/efc284b3-2de0-4e15-acca-f53421c18353)
@@ -89,7 +86,7 @@ Na tela "Ver mais", o usuário tem acesso à uma lista de imagens relacionadas �
 ![see-more-screen](https://github.com/gabrielbmmaia/PicView/assets/109977155/e0ed0b61-778d-4dd3-b052-69d6c2b929b5)
 
 # Api
-https://unsplash.com/documentation ( utilizada 03/06/2023 )
+[https://unsplash.com/documentation](https://developer.themoviedb.org/reference/intro/getting-started) ( utilizada 20/09/2023 )
 
 # Abrir e rodar o projeto
 
@@ -104,5 +101,9 @@ tasks, você pode executar o App.
 
 # Showcase do aplicativo
 <div align="center">
- <video src=https://github.com/gabrielbmmaia/PicView/assets/109977155/8f4e7a6c-462d-423c-80b8-82667ee1ff4a width=800/>
+ <video src=https://github.com/gabrielbmmaia/gaze/assets/109977155/5402cb60-b5f8-44b1-a3a2-820072afee5f width=800/>
 <div/>
+
+
+
+
