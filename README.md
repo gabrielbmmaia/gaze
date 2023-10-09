@@ -91,7 +91,7 @@ Na tela "Ver mais", o usuário tem acesso à uma lista de imagens relacionadas �
 # Abrir e rodar o projeto
 
 ### Pela APK: <br>
-Para baixar a APK do aplicativo é só você clicar em PicView dentro de Releases localizado na direita da página ou caso estaja no celular ficará localizado logo abaixo do Readme do projeto. Clicando em PicView três arquivos aparecerão e clique em "pic-view.apk" e depois em Baixar. Caso não esteja permitido o celular baixar aplicativos por outras fontes sem ser a PlayStore será necessário permitir em configurações. Após isso é só abrir e se divertir.
+Para baixar a APK do aplicativo é só você clicar em (Gaze App) dentro de Releases localizado na direita da página ou caso estaja no celular ficará localizado logo abaixo do Readme do projeto. Clicando em Gaze App três arquivos aparecerão e clique em "app-release.apk" e depois em Baixar. Caso não esteja permitido o celular baixar aplicativos por outras fontes sem ser a PlayStore será necessário permitir em configurações. Após isso é só abrir e se divertir.
 
 ### Pelo Android Studio: <br>
 Após baixar o projeto, você pode abrir com o Android Studio. Para isso, na tela de launcher clique em:
