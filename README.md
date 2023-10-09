@@ -6,7 +6,7 @@ O Gaze é um aplicativo que utiliza a TMDB API para obter acesso aos dados neces
 * [Funcionalidades do projeto](#funcionalidades-do-projeto)
 * [Técnicas e tecnologias utilizadas](#técnicas-e-tecnologias-utilizadas)
 * [Navegação entre Telas](#navegação-entre-telas)
-* [Features](#features)
+* [Funcionalidades das Telas](#funcionalidades-das-telas)
 * [Api](#api)
 * [Abrir e rodar o projeto](#abrir-e-rodar-o-projeto)
 * [Showcase do aplicativo](#showcase-do-aplicativo)
@@ -54,36 +54,27 @@ Aqui é possível visualizar um resumo de todas as telas do aplicativo.
 # Navegação entre Telas
 ![screen-navigation](https://github.com/gabrielbmmaia/gaze/assets/109977155/efc284b3-2de0-4e15-acca-f53421c18353)
 
-# Features
+# Funcionalidades das Telas
 
-### Splash
-A Splash Screen exibe uma seleção de 5 imagens animadas distintas, fornecendo uma variedade de opções ao iniciar o aplicativo.
+### Authentication
+Nas telas de autenticação é possível logar em uma conta já existente, criar uma conta nova e pedir uma nova senha caso tenha esquecido. Aqui nessas telas a autenticação e armazenamento de novas contas é feita pelo firebase.
 
-![splash-screen-fox](https://github.com/gabrielbmmaia/PicView/assets/109977155/24cde29d-43ca-4c4f-be4b-b4b44971dbc8)
-![splash-screen-mountain](https://github.com/gabrielbmmaia/PicView/assets/109977155/7aff006e-82dc-49a2-93b6-8a32ce7ced5a)
-![splash-screen-forest](https://github.com/gabrielbmmaia/PicView/assets/109977155/d22dbe30-afa5-4b06-a6b6-81a5f0576450)
-![splash-screen-coffee](https://github.com/gabrielbmmaia/PicView/assets/109977155/13428386-d8cb-4f8f-bc0c-57b7f0497a7c)
-![splash-screen-cat](https://github.com/gabrielbmmaia/PicView/assets/109977155/dbfa8586-722d-43a1-93b6-de8f5e46163c)
+![auth_feature](https://github.com/gabrielbmmaia/gaze/assets/109977155/dac79cb3-24d2-407f-a868-36f2430a7abe)
 
-### Home
-A tela inicial apresenta uma lista de fotografias que são regularmente atualizadas pela Unsplash API, exibindo as imagens mais recentes disponíveis. Nessa tela, o usuário tem a capacidade de explorar uma variedade de fotografias de diversos artistas e categorias.
+### Home Screen + Details Screen
 
-![home-screen](https://github.com/gabrielbmmaia/PicView/assets/109977155/9a6f87d4-44af-46b7-83c2-680e851cda36)
 
-### Search
-Na tela de pesquisa, os usuários têm a capacidade de realizar pesquisas de imagens associadas a palavras-chave específicas. Além disso, é possível aplicar um filtro de cor que será utilizado para filtrar as imagens exibidas com base na cor selecionada.
+![home-details](https://github.com/gabrielbmmaia/gaze/assets/109977155/f7010ce7-06a0-4bdd-9f0e-600777dd623c)
 
-![feature-search](https://github.com/gabrielbmmaia/PicView/assets/109977155/c12e9de8-4537-4560-866a-17fc05513f38)
-
-### Favorite
+### Search Screen
 Na tela de Favoritos, o usuário tem acesso a todas as imagens que foram guardadas como favoritas, permitindo-lhe visualizar uma variedade de obras de artistas pelos quais ele demonstrou maior apreço.
 
-![favorite-screen](https://github.com/gabrielbmmaia/PicView/assets/109977155/8240b627-4e6f-444b-8936-f9b3b8300be5)
+![search-screen](https://github.com/gabrielbmmaia/gaze/assets/109977155/5f507be3-1a34-4697-8b27-975c67829897)
 
-### See More
+### Profile Screen
 Na tela "Ver mais", o usuário tem acesso à uma lista de imagens relacionadas à um único artista. Essa features consegue ser acessada ao clicar em "+ ver mais" em algum Card de Foto no aplicativo.
 
-![see-more-screen](https://github.com/gabrielbmmaia/PicView/assets/109977155/e0ed0b61-778d-4dd3-b052-69d6c2b929b5)
+![profile](https://github.com/gabrielbmmaia/gaze/assets/109977155/e73c50ec-e0e9-4992-81aa-ee92e82e9a8a)
 
 # Api
 [https://unsplash.com/documentation](https://developer.themoviedb.org/reference/intro/getting-started) ( utilizada 20/09/2023 )
