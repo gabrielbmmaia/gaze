@@ -5,7 +5,7 @@ O Gaze é um aplicativo que utiliza a TMDB API para obter acesso aos dados neces
 * [Layouts do Projeto](#layouts-do-projeto)
 * [Funcionalidades do projeto](#funcionalidades-do-projeto)
 * [Técnicas e tecnologias utilizadas](#técnicas-e-tecnologias-utilizadas)
-* [Navegação entre Features](#navegação-entre-features)
+* [Navegação entre Telas](#navegação-entre-telas)
 * [Features](#features)
 * [Api](#api)
 * [Abrir e rodar o projeto](#abrir-e-rodar-o-projeto)
