@@ -17,7 +17,7 @@ class ProfileAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       excludeHeaderSemantics: true,
-      backgroundColor: Colours.onDefaultColor,
+      backgroundColor: Colours.onPrimaryColor,
       title: const Text(
         'Perfil',
         style: TextStyle(color: Colors.white),

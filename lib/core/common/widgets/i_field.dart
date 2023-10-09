@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gaze/core/res/colours.dart';
 import 'package:gaze/core/res/string.dart';
 
-/*
-* Campo de formulário padrão do aplicativo
-* */
+/// [StatelessWidget] que serve como base para todos formulários do app.
 class IField extends StatelessWidget {
   const IField({
     required this.controller,

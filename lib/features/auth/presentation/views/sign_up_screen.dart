@@ -39,7 +39,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colours.defaultColor,
+      backgroundColor: Colours.primaryColor,
       body: BlocConsumer<AuthBloc, AuthState>(
         listener: (_, state) {
           if (state is AuthError) {
@@ -62,7 +62,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         },
         builder: (context, state) {
           return AppBackground(
-            backgroundColor: Colours.defaultColor,
+            backgroundColor: Colours.primaryColor,
             child: ListView(
               shrinkWrap: true,
               padding: const EdgeInsets.symmetric(

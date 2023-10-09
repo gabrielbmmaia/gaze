@@ -38,7 +38,7 @@ class ListError extends StatelessWidget {
               onPressed: onPressed,
               style: ButtonStyle(
                 backgroundColor:
-                    MaterialStateProperty.all(Colours.onDefaultColor),
+                    MaterialStateProperty.all(Colours.onPrimaryColor),
               ),
               child: const Text(
                 'Tentar novamente',

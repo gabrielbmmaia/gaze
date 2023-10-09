@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:gaze/core/res/colours.dart';
 
+/// [Widget] Padrão de botões com texto no aplicativo.
+/// Nele podemos modificar:
+/// [label]> Texto do botão
+/// [onPressed]> Passar a funcionalidade de onPressed desejada
+/// [buttonColour]> Cor do plano de fundo do botão
+/// [textStyle]> Estilo do texto do botão
 class RoundedButton extends StatelessWidget {
   const RoundedButton({
     required this.label,
@@ -22,7 +28,7 @@ class RoundedButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        backgroundColor: buttonColour ?? Colours.onDefaultColor,
+        backgroundColor: buttonColour ?? Colours.onPrimaryColor,
         foregroundColor: labelColour ?? Colors.white,
         minimumSize: const Size(double.maxFinite, 50),
       ),

@@ -49,7 +49,7 @@ class _SeriesDetailsScreenState extends State<SeriesDetailsScreen> {
         elevation: 0,
         backgroundColor: Colors.transparent,
       ),
-      backgroundColor: Colours.defaultColor,
+      backgroundColor: Colours.primaryColor,
       body: BlocConsumer<SeriesDetailsBloc, SeriesDetailsState>(
         listener: (context, state) {
           if (state is LoadedSeriesDetails) {
@@ -92,7 +92,7 @@ class _SeriesDetailsScreenState extends State<SeriesDetailsScreen> {
                       ),
                       const Divider(
                         height: 1,
-                        color: Colours.onDefaultColor,
+                        color: Colours.onPrimaryColor,
                         thickness: 1,
                         indent: 14,
                         endIndent: 14,
@@ -143,7 +143,7 @@ class _SeriesDetailsScreenState extends State<SeriesDetailsScreen> {
                             const SizedBox(height: 10),
                             const Divider(
                               height: 1,
-                              color: Colours.onDefaultColor,
+                              color: Colours.onPrimaryColor,
                               thickness: 1,
                             ),
                             const SizedBox(height: 15),
@@ -298,7 +298,7 @@ class _SeriesDetailsScreenState extends State<SeriesDetailsScreen> {
                             const SizedBox(height: 15),
                             const Divider(
                               height: 1,
-                              color: Colours.onDefaultColor,
+                              color: Colours.onPrimaryColor,
                               thickness: 1,
                             ),
                             const SizedBox(height: 15),
@@ -338,7 +338,7 @@ class _SeriesDetailsScreenState extends State<SeriesDetailsScreen> {
                                       children: [
                                         const Divider(
                                           height: 1,
-                                          color: Colours.onDefaultColor,
+                                          color: Colours.onPrimaryColor,
                                           thickness: 1,
                                         ),
                                         const SizedBox(height: 15),

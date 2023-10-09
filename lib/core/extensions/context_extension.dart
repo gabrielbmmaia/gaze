@@ -5,7 +5,6 @@ import 'package:gaze/core/providers/user_provider.dart';
 import 'package:gaze/features/auth/domain/models/user_model.dart';
 
 extension ContextExt on BuildContext {
-  ThemeData get theme => Theme.of(this);
 
   UserProvider get userProvider => read<UserProvider>();
 
@@ -13,7 +12,9 @@ extension ContextExt on BuildContext {
 
   TabNavigator get tabNavigator => read<TabNavigator>();
 
+  // Pop de NestedViews
   void pop() => tabNavigator.pop();
 
+  // Push de NestedViews
   void push(Widget page) => tabNavigator.push(TabItem(child: page));
 }

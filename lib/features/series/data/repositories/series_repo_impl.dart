@@ -80,7 +80,7 @@ class SeriesRepoImpl implements SeriesRepo {
   @override
   ResultFuture<List<SeriesModel>> getSeriesByGenre(Genres genre) async {
     try {
-      final result = await _remoteDataSource.getSeriesByGenre(genreIds[genre]!);
+      final result = await _remoteDataSource.getSeriesByGenre(getGenresId[genre]!);
       return Right(result);
     } on ServerException catch (e) {
       return Left(ServerFailure.fromException(e));

@@ -79,9 +79,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       builder: (context, state) {
         return Scaffold(
           extendBodyBehindAppBar: true,
-          backgroundColor: Colours.defaultColor,
+          backgroundColor: Colours.primaryColor,
           appBar: AppBar(
-            backgroundColor: Colours.onDefaultColor,
+            backgroundColor: Colours.onPrimaryColor,
             leading: const NestedBackButton(),
             title: const Text(
               'Editar Perfil',
@@ -147,7 +147,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             ],
           ),
           body: AppBackground(
-            backgroundColor: Colours.defaultColor,
+            backgroundColor: Colours.primaryColor,
             child: ListView(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               children: [

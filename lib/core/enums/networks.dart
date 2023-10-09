@@ -1,3 +1,4 @@
+/// Todos possíveis Networks do aplicativo.
 enum Networks {
   amazon,
   apple,
@@ -6,6 +7,8 @@ enum Networks {
   netflix,
 }
 
+/// Passar um [Networks] para receber o Id dela.
+/// Ex: getNetworkId[Networks.netflix] para receber '213'
 Map<Networks, String> getNetworkId = {
   Networks.amazon: '1024',
   Networks.apple: '2552',
@@ -14,6 +17,8 @@ Map<Networks, String> getNetworkId = {
   Networks.netflix: '213',
 };
 
+/// Passar um [Networks] para receber o nome dela.
+/// Ex: getNetworkName[Networks.netflix] para receber 'Netflix'
 Map<Networks, String> getNetworkName = {
   Networks.amazon: 'Amazon',
   Networks.apple: 'Apple TV+',

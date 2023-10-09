@@ -1,7 +1,10 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:gaze/features/dashboard/presentation/views/dashboard.dart';
 import 'package:uuid/uuid.dart';
 
+/// Classe utilizada em [DashboardScreen] que serve para fazer a NestedNavigation
+/// entre as telas do [DashboardScreen]
 class TabNavigator extends ChangeNotifier {
   TabNavigator(this._initialPage) {
     _navigationStack.add(_initialPage);

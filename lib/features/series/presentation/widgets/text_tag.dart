@@ -4,7 +4,7 @@ import 'package:gaze/core/res/colours.dart';
 class TextTag extends StatelessWidget {
   const TextTag({
     required this.text,
-    this.backgroundColor = Colours.onDefaultColor,
+    this.backgroundColor = Colours.onPrimaryColor,
     super.key,
   });
 

@@ -9,30 +9,25 @@ class SeriesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox(
-          height: 240,
-          width: double.infinity,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            physics: const BouncingScrollPhysics(),
-            itemCount: seriesList.length,
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.all(8),
-                child: AspectRatio(
-                  aspectRatio: 500 / 750,
-                  child: SeriesItem(
-                    seriesModel: seriesList[index],
-                  ),
-                ),
-              );
-            },
-          ),
-        ),
-      ],
+    return SizedBox(
+      height: 240,
+      width: double.infinity,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        physics: const BouncingScrollPhysics(),
+        itemCount: seriesList.length,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.all(8),
+            child: AspectRatio(
+              aspectRatio: 500 / 750,
+              child: SeriesItem(
+                seriesModel: seriesList[index],
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 }

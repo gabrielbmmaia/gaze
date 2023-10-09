@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
         title: StringRes.appTitle,
         theme: ThemeData(
           colorScheme: ColorScheme.fromSwatch(
-            accentColor: Colours.primaryColour,
+            accentColor: Colours.secondaryColor,
           ),
           visualDensity: VisualDensity.adaptivePlatformDensity,
           useMaterial3: true,

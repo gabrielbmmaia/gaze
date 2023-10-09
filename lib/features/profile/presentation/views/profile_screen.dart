@@ -26,7 +26,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const ProfileAppBar(),
-      backgroundColor: Colours.defaultColor,
+      backgroundColor: Colours.primaryColor,
       body: BlocBuilder<FavoriteBloc, FavoriteState>(
         builder: (context, state) {
           return Column(

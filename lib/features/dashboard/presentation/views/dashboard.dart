@@ -46,7 +46,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 currentIndex: controller.currentIndex,
                 showSelectedLabels: false,
                 showUnselectedLabels: false,
-                backgroundColor: Colours.onDefaultColor,
+                backgroundColor: Colours.onPrimaryColor,
                 elevation: 8,
                 onTap: controller.changeIndex,
                 items: [

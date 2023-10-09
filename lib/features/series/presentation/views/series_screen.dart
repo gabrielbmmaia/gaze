@@ -43,7 +43,7 @@ class _SeriesScreenState extends State<SeriesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colours.defaultColor,
+      backgroundColor: Colours.primaryColor,
       appBar: AppBar(
         title: const Text(
           StringRes.appTitle,

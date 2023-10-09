@@ -41,6 +41,7 @@ dependencies:
   carousel_slider: ^4.2.1
   shimmer: ^3.0.0
   transparent_image: ^2.0.1
+  flutter_native_splash: ^2.3.3
 
 dev_dependencies:
   flutter_test:
@@ -54,6 +55,24 @@ dev_dependencies:
   google_sign_in_mocks: ^0.3.0
   mocktail: ^1.0.0
   very_good_analysis: ^5.1.0
+  flutter_launcher_icons: ^0.13.1
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "asset/images/gaze-icon.png"
+  adaptive_icon_foreground: "asset/images/adaptive-logo.png"
+  adaptive_icon_background: "#111822"
+
+flutter_native_splash:
+  android: true
+  ios: true
+  web: false
+  color: "#111822"
+  image: "asset/images/gaze-logo.png"
+  android_12:
+    color: "#111822"
+    image: "asset/images/gaze-logo.png"
 
 flutter:
 

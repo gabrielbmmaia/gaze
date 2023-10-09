@@ -339,7 +339,7 @@ void main() {
           const Right<dynamic, List<SeriesModel>>(tSeriesEntityList),
         );
         verify(
-          () => remoteDataSource.getSeriesByGenre(genreIds[Genres.animation]!),
+          () => remoteDataSource.getSeriesByGenre(getGenresId[Genres.animation]!),
         ).called(1);
         verifyNoMoreInteractions(remoteDataSource);
       },
@@ -359,7 +359,7 @@ void main() {
           ),
         );
         verify(
-          () => remoteDataSource.getSeriesByGenre(genreIds[Genres.animation]!),
+          () => remoteDataSource.getSeriesByGenre(getGenresId[Genres.animation]!),
         ).called(1);
         verifyNoMoreInteractions(remoteDataSource);
       },

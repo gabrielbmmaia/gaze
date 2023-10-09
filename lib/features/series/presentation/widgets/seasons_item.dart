@@ -43,7 +43,7 @@ class SeasonsItem extends StatelessWidget {
                       horizontal: 6,
                     ),
                     decoration: BoxDecoration(
-                      color: Colours.onDefaultColor.withOpacity(0.4),
+                      color: Colours.onPrimaryColor.withOpacity(0.4),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Text(

@@ -1,6 +1,8 @@
+import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:gaze/core/errors/exceptions.dart';
 
+/// Classe criada para servir como estado de error de um [Either]
 abstract class Failure extends Equatable {
   Failure({
     required this.message,
@@ -22,6 +24,7 @@ abstract class Failure extends Equatable {
   List<dynamic> get props => [message, statusCode];
 }
 
+/// Failure utilizado em conexões externas com servidores como APIs e Firebase
 class ServerFailure extends Failure {
   ServerFailure({required super.message, required super.statusCode});
 

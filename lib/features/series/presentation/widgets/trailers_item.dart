@@ -31,9 +31,8 @@ class TrailersItem extends StatelessWidget {
               borderRadius: BorderRadius.circular(6),
               onTap: () async {
                 final youtubeUrl = Uri.parse(
-                  'https://www.youtube.com/embed/${trailer.trailerKey}',
-                );
-                if (await canLaunchUrl(youtubeUrl)) {
+                    'https://www.youtube.com/watch?v=${trailer.trailerKey}');
+                if (!await canLaunchUrl(youtubeUrl)) {
                   await launchUrl(youtubeUrl);
                 }
               },

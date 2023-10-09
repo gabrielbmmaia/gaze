@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+/// Esse [Widget] é utilizado para telas onde é necessario [SafeArea],[Center]
+/// [backgroundColor] modifica a cor do plano de fundo do widget
 class AppBackground extends StatelessWidget {
   const AppBackground({required this.child, super.key, this.backgroundColor});
 

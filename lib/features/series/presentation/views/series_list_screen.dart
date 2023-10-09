@@ -54,11 +54,11 @@ class _SeriesListScreenState extends State<SeriesListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colours.defaultColor,
+      backgroundColor: Colours.primaryColor,
       appBar: AppBar(
         title: Text(
           widget.args.searchType == SearchType.genre
-              ? genreNameFromGenres[widget.args.genre]!
+              ? getGenresName[widget.args.genre]!
               : widget.args.searchType == SearchType.network
                   ? getNetworkName[widget.args.network]!
                   : widget.args.text.toFirstUpperCase,
@@ -100,7 +100,7 @@ class _SeriesListScreenState extends State<SeriesListScreen> {
                           )
                         : SliverToBoxAdapter(
                             child: Shimmer.fromColors(
-                              baseColor: Colours.onDefaultColor,
+                              baseColor: Colours.onPrimaryColor,
                               highlightColor:
                                   Colors.grey[100]!.withOpacity(0.5),
                               child: GridView.builder(
@@ -120,7 +120,7 @@ class _SeriesListScreenState extends State<SeriesListScreen> {
                                     width: 150,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(6),
-                                      color: Colours.onDefaultColor,
+                                      color: Colours.onPrimaryColor,
                                     ),
                                   );
                                 },

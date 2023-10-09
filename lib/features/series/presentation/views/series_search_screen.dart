@@ -44,7 +44,7 @@ class _SeriesSearchScreenState extends State<SeriesSearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colours.defaultColor,
+      backgroundColor: Colours.primaryColor,
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: ListView(
@@ -52,7 +52,7 @@ class _SeriesSearchScreenState extends State<SeriesSearchScreen> {
             SearchBar(
               controller: searchController,
               backgroundColor: MaterialStateProperty.all(
-                Colours.onDefaultColor,
+                Colours.onPrimaryColor,
               ),
               textStyle: MaterialStateProperty.all(
                 const TextStyle(
@@ -92,7 +92,7 @@ class _SeriesSearchScreenState extends State<SeriesSearchScreen> {
             ),
             const SizedBox(height: 30),
             const Divider(
-              color: Colours.onDefaultColor,
+              color: Colours.onPrimaryColor,
               height: 1,
               thickness: 1,
             ),
@@ -112,7 +112,7 @@ class _SeriesSearchScreenState extends State<SeriesSearchScreen> {
                     child: ElevatedButton(
                       style: ButtonStyle(
                         backgroundColor:
-                            MaterialStateProperty.all(Colours.onDefaultColor),
+                            MaterialStateProperty.all(Colours.onPrimaryColor),
                         foregroundColor:
                             MaterialStateProperty.all(Colors.white),
                         textStyle: MaterialStateProperty.all(
@@ -129,7 +129,7 @@ class _SeriesSearchScreenState extends State<SeriesSearchScreen> {
                           ),
                         );
                       },
-                      child: Text(genreNameFromGenres[genre]!),
+                      child: Text(getGenresName[genre]!),
                     ),
                   ),
               ],

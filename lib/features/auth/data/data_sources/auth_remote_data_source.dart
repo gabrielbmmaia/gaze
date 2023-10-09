@@ -252,25 +252,21 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
   @override
   Stream<List<SeriesEntity>> getFavoriteListStream() {
-    // Get the user document reference based on uid
     final userDocumentRef =
         _cloudStoreClient.collection('users').doc(_authClient.currentUser?.uid);
 
-    // Listen for changes in the favoriteList field
     return userDocumentRef.snapshots().map((documentSnapshot) {
       var favoriteList = <SeriesEntity>[];
 
-      // Check if the document exists and has the favoriteList field
       if (documentSnapshot.exists && documentSnapshot.data() != null) {
         final data = documentSnapshot.data()!;
         if (data.containsKey('favoriteList')) {
-          // Parse the favoriteList field from the document
           final favoriteListData = data['favoriteList'] as List<dynamic>;
           favoriteList = favoriteListData
               .map(
                 (item) => SeriesEntity.fromJson(item as Map<String, dynamic>),
               )
-              .toList(); // Convert the dynamic items to FavoriteItem objects
+              .toList();
         }
       }
       return favoriteList;

@@ -65,15 +65,18 @@ class _SeriesDetailsHeaderState extends State<SeriesDetailsHeader> {
                     filterQuality: FilterQuality.high,
                   ),
                 ),
-                child: Container(
-                  decoration: const BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        Colours.defaultColor,
-                        Colors.transparent,
-                      ],
-                      begin: Alignment.bottomCenter,
-                      end: Alignment.center,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 20),
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          Colours.primaryColor,
+                          Colors.transparent,
+                        ],
+                        begin: Alignment.bottomCenter,
+                        end: Alignment.center,
+                      ),
                     ),
                   ),
                 ),
@@ -171,7 +174,7 @@ class _SeriesDetailsHeaderState extends State<SeriesDetailsHeader> {
                                                                 0xFF1D1815,
                                                               )
                                                             : Colours
-                                                                .onDefaultColor,
+                                                                .onPrimaryColor,
                                   ),
                                 ),
                               if (widget.seriesDetails.firstAirDate != null)

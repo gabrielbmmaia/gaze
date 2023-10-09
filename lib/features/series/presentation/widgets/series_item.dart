@@ -20,22 +20,21 @@ class SeriesItem extends StatefulWidget {
 class _SeriesItemState extends State<SeriesItem> {
   @override
   Widget build(BuildContext context) {
-    return Material(
+    return InkWell(
       borderRadius: BorderRadius.circular(6),
-      clipBehavior: Clip.antiAlias,
-      child: InkWell(
-        borderRadius: BorderRadius.circular(6),
-        onTap: () {
-          Navigator.of(context).pushNamed(
-            SeriesDetailsScreen.routeName,
-            arguments: widget.seriesModel.id,
-          );
-        },
-        child: Ink(
-          decoration: BoxDecoration(
-            color: Colours.onDefaultColor,
-            borderRadius: BorderRadius.circular(6),
-          ),
+      onTap: () {
+        Navigator.of(context).pushNamed(
+          SeriesDetailsScreen.routeName,
+          arguments: widget.seriesModel.id,
+        );
+      },
+      child: Ink(
+        decoration: BoxDecoration(
+          color: Colours.onPrimaryColor,
+          borderRadius: BorderRadius.circular(6),
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(6),
           child: FadeInImage.memoryNetwork(
             placeholder: kTransparentImage,
             image: '$kImageBaseUrl${widget.seriesModel.posterPath}',

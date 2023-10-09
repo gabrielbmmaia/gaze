@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gaze/core/providers/tab_navigator.dart';
+import 'package:gaze/features/dashboard/presentation/views/dashboard.dart';
 
+/// Classe necessária para fazer a NestedNavigation no [DashboardScreen]
 class PersistentView extends StatefulWidget {
   const PersistentView({
     this.body,

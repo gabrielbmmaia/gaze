@@ -1,3 +1,4 @@
+/// Todos possíveis Genres do aplicativo
 enum Genres {
   actionAdventure,
   animation,
@@ -12,7 +13,9 @@ enum Genres {
   sciFiFantasy,
 }
 
-Map<Genres, String> genreIds = {
+/// Passar um [Genres] para receber o Id dela.
+/// Ex: getGenresId[Genres.animation] para receber '10759'
+Map<Genres, String> getGenresId = {
   Genres.actionAdventure: '10759',
   Genres.animation: '16',
   Genres.comedy: '35',
@@ -26,7 +29,9 @@ Map<Genres, String> genreIds = {
   Genres.sciFiFantasy: '10765',
 };
 
-Map<Genres, String> genreNameFromGenres = {
+/// Passar um [Genres] para receber o nome dela.
+/// Ex: getGenresName[Genres.animation] para receber 'Animação'
+Map<Genres, String> getGenresName = {
   Genres.actionAdventure: 'Ação e Aventura',
   Genres.animation: 'Animação',
   Genres.comedy: 'Comédia',
