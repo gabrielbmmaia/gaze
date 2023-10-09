@@ -220,17 +220,17 @@ void main() {
 
   group('addFavoriteItem', () {
     test(
-      'should call [AuthRemoteDataSource.addFavoriteItem] and return void when '
+      'should call [AuthRemoteDataSource.addFavoriteItem] and return [true] when '
       'the call is successful',
       () async {
         when(() => remoteDataSource.addFavoriteItem(item: any(named: 'item')))
-            .thenAnswer((_) async => Future.value());
+            .thenAnswer((_) async => true);
 
         final result = await repo.addFavoriteItem(
           item: const SeriesModel.empty(),
         );
 
-        expect(result, const Right<dynamic, void>(null));
+        expect(result, const Right<dynamic, bool>(true));
         verify(
           () => remoteDataSource.addFavoriteItem(
             item: const SeriesEntity.empty(),
@@ -259,6 +259,55 @@ void main() {
         );
         verify(
           () => remoteDataSource.addFavoriteItem(
+            item: const SeriesEntity.empty(),
+          ),
+        ).called(1);
+        verifyNoMoreInteractions(remoteDataSource);
+      },
+    );
+  });
+
+  group('removeFavoriteItem', () {
+    test(
+      'should call [AuthRemoteDataSource.removeFavoriteItem] and return '
+      '[false] when the call is successful',
+      () async {
+        when(() => remoteDataSource.removeFavoriteItem(item: any(named: 'item')))
+            .thenAnswer((_) async => false);
+
+        final result = await repo.removeFavoriteItem(
+          item: const SeriesModel.empty(),
+        );
+
+        expect(result, const Right<dynamic, bool>(false));
+        verify(
+          () => remoteDataSource.removeFavoriteItem(
+            item: const SeriesEntity.empty(),
+          ),
+        ).called(1);
+        verifyNoMoreInteractions(remoteDataSource);
+      },
+    );
+
+    test(
+      'should call [AuthRemoteDataSource.addFavoriteItem] and return '
+      '[ServerFailure] when the call to remote data source is unsuccessful',
+      () async {
+        when(() => remoteDataSource.removeFavoriteItem(item: any(named: 'item')))
+            .thenThrow(tServerException);
+
+        final result = await repo.removeFavoriteItem(
+          item: const SeriesModel.empty(),
+        );
+
+        expect(
+          result,
+          Left<Failure, dynamic>(
+            ServerFailure.fromException(tServerException),
+          ),
+        );
+        verify(
+          () => remoteDataSource.removeFavoriteItem(
             item: const SeriesEntity.empty(),
           ),
         ).called(1);

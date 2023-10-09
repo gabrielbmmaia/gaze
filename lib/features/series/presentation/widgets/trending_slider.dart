@@ -34,7 +34,6 @@ class _TrendingSliderState extends State<TrendingSlider> {
             aspectRatio: 500/750,
             child: SeriesItem(
               seriesModel: widget.trendingList[itemIndex],
-              backgroundColor: Colors.transparent,
             ),
           );
         },

@@ -7,6 +7,7 @@ import 'package:gaze/core/extensions/context_extension.dart';
 import 'package:gaze/core/services/injection_container.dart';
 import 'package:gaze/features/auth/data/models/user_entity.dart';
 import 'package:gaze/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:gaze/features/auth/presentation/bloc/favorite/favorite_bloc.dart';
 import 'package:gaze/features/auth/presentation/views/sign_in_screen.dart';
 import 'package:gaze/features/auth/presentation/views/sign_up_screen.dart';
 import 'package:gaze/features/dashboard/presentation/views/dashboard.dart';
@@ -73,7 +74,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
           providers: [
             BlocProvider(create: (_) => sl<SeriesDetailsBloc>()),
             BlocProvider(create: (_) => sl<YtTrailersBloc>()),
-            BlocProvider(create: (_) => sl<ClassificationBloc>())
+            BlocProvider(create: (_) => sl<ClassificationBloc>()),
+            BlocProvider(create: (_) => sl<FavoriteBloc>()),
           ],
           child: SeriesDetailsScreen(seriesId: settings.arguments as String),
         ),

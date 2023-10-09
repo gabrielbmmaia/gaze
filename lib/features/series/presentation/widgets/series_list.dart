@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gaze/core/res/colours.dart';
 import 'package:gaze/features/series/domain/models/series_model.dart';
 import 'package:gaze/features/series/presentation/widgets/series_item.dart';
 
@@ -27,7 +26,6 @@ class SeriesList extends StatelessWidget {
                   aspectRatio: 500 / 750,
                   child: SeriesItem(
                     seriesModel: seriesList[index],
-                    backgroundColor: Colours.onDefaultColor,
                   ),
                 ),
               );

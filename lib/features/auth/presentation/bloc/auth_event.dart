@@ -47,12 +47,3 @@ class UpdateUserEvent extends AuthEvent {
   @override
   List<dynamic> get props => [action, userData];
 }
-
-class AddFavoriteItemEvent extends AuthEvent {
-  const AddFavoriteItemEvent({required this.seriesModel});
-
-  final SeriesModel seriesModel;
-
-  @override
-  List<Object> get props => [seriesModel];
-}

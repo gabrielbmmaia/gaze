@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gaze/core/extensions/string_extensions.dart';
 import 'package:gaze/core/res/colours.dart';
+import 'package:gaze/core/utils/core_utils.dart';
+import 'package:gaze/features/auth/presentation/bloc/favorite/favorite_bloc.dart';
+import 'package:gaze/features/series/domain/models/series_model.dart';
 import 'package:gaze/features/series/presentation/bloc/classification/classification_bloc.dart';
 import 'package:gaze/features/series/presentation/bloc/series_details/series_details_bloc.dart';
 import 'package:gaze/features/series/presentation/bloc/yt_trailers/yt_trailers_bloc.dart';
@@ -49,29 +52,43 @@ class _SeriesDetailsScreenState extends State<SeriesDetailsScreen> {
       backgroundColor: Colours.defaultColor,
       body: BlocConsumer<SeriesDetailsBloc, SeriesDetailsState>(
         listener: (context, state) {
-          // TODO: implement listener
+          if (state is LoadedSeriesDetails) {
+            final model = state.seriesDetails;
+            context.read<FavoriteBloc>().add(
+                  IsFavoriteItemEvent(
+                    seriesModel: SeriesModel(
+                      name: model.name,
+                      posterPath: model.posterPath,
+                      id: model.id,
+                    ),
+                  ),
+                );
+          }
+          if (state is ErrorSeriesDetails) {
+            Future.delayed(const Duration(seconds: 1), () {
+              CoreUtils.showSnackBar(context, state.errorMessage);
+              Navigator.pop(context);
+            });
+          }
         },
         builder: (context, state) {
+          final classificationState = context.watch<ClassificationBloc>().state;
+          final favoriteState = context.watch<FavoriteBloc>().state;
           return CustomScrollView(
             slivers: [
               if (state is LoadedSeriesDetails) ...[
                 SliverList(
                   delegate: SliverChildListDelegate(
                     [
-                      BlocBuilder<ClassificationBloc, ClassificationState>(
-                        builder: (context, classificationState) {
-                          if (classificationState is LoadedClassification) {
-                            return SeriesDetailsHeader(
-                              seriesDetails: state.seriesDetails,
-                              classification:
-                                  classificationState.classification,
-                            );
-                          }
-                          return SeriesDetailsHeader(
-                            seriesDetails: state.seriesDetails,
-                            classification: null,
-                          );
-                        },
+                      SeriesDetailsHeader(
+                        seriesDetails: state.seriesDetails,
+                        classification:
+                            (classificationState is LoadedClassification)
+                                ? classificationState.classification
+                                : null,
+                        isFavorite: (favoriteState is IsFavoriteItem)
+                            ? favoriteState.isFavorite
+                            : null,
                       ),
                       const Divider(
                         height: 1,
@@ -340,16 +357,14 @@ class _SeriesDetailsScreenState extends State<SeriesDetailsScreen> {
                                           child: ListView.builder(
                                             itemCount:
                                                 state.trailersList.length,
-                                            scrollDirection:
-                                                Axis.horizontal,
+                                            scrollDirection: Axis.horizontal,
                                             itemBuilder: (context, index) {
                                               return Padding(
-                                                padding:
-                                                    const EdgeInsets.only(
-                                                        right: 20),
+                                                padding: const EdgeInsets.only(
+                                                    right: 20),
                                                 child: TrailersItem(
-                                                  trailer: state
-                                                      .trailersList[index],
+                                                  trailer:
+                                                      state.trailersList[index],
                                                 ),
                                               );
                                             },

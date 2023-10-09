@@ -30,9 +30,11 @@ abstract class AuthRepo {
     required dynamic userData,
   });
 
-  ResultFuture<void> addFavoriteItem({required SeriesModel item});
+  ResultFuture<bool> addFavoriteItem({required SeriesModel item});
 
-  ResultFuture<void> removeFavoriteItem({required SeriesModel item});
+  ResultFuture<bool> removeFavoriteItem({required SeriesModel item});
 
   ResultFuture<bool> isFavoriteItem({required SeriesModel item});
+
+  Stream<List<SeriesModel>> getFavoriteListStream();
 }

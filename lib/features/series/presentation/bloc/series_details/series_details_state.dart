@@ -25,5 +25,7 @@ class LoadedSeriesDetails extends SeriesDetailsState {
 }
 
 class ErrorSeriesDetails extends SeriesDetailsState {
-  const ErrorSeriesDetails();
+  const ErrorSeriesDetails({required this.errorMessage});
+
+  final String errorMessage;
 }

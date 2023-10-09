@@ -66,20 +66,20 @@ class AuthRepoImpl implements AuthRepo {
   }
 
   @override
-  ResultFuture<void> addFavoriteItem({required SeriesModel item}) async {
+  ResultFuture<bool> addFavoriteItem({required SeriesModel item}) async {
     try {
       await _remoteDataSource.addFavoriteItem(item: mapper.toData(item));
-      return const Right(null);
+      return const Right(true);
     } on ServerException catch (e) {
       return Left(ServerFailure.fromException(e));
     }
   }
 
   @override
-  ResultFuture<void> removeFavoriteItem({required SeriesModel item}) async {
+  ResultFuture<bool> removeFavoriteItem({required SeriesModel item}) async {
     try {
       await _remoteDataSource.removeFavoriteItem(item: mapper.toData(item));
-      return const Right(null);
+      return const Right(false);
     } on ServerException catch (e) {
       return Left(ServerFailure.fromException(e));
     }
@@ -96,4 +96,8 @@ class AuthRepoImpl implements AuthRepo {
       return Left(ServerFailure.fromException(e));
     }
   }
+
+  @override
+  Stream<List<SeriesModel>> getFavoriteListStream() =>
+      _remoteDataSource.getFavoriteListStream();
 }

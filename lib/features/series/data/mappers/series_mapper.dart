@@ -6,7 +6,6 @@ class SeriesMapper {
     return SeriesModel(
       id: entity.id,
       posterPath: entity.posterPath,
-      voteAverage: entity.voteAverage,
       name: entity.name,
     );
   }
@@ -15,7 +14,6 @@ class SeriesMapper {
     return SeriesEntity(
       id: model.id,
       posterPath: model.posterPath,
-      voteAverage: model.voteAverage,
       name: model.name,
     );
   }

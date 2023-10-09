@@ -8,12 +8,10 @@ import 'package:transparent_image/transparent_image.dart';
 class SeriesItem extends StatefulWidget {
   const SeriesItem({
     required this.seriesModel,
-    this.backgroundColor,
     super.key,
   });
 
   final SeriesModel seriesModel;
-  final Color? backgroundColor;
 
   @override
   State<SeriesItem> createState() => _SeriesItemState();

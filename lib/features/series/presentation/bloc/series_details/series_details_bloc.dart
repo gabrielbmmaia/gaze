@@ -27,7 +27,7 @@ class SeriesDetailsBloc extends Bloc<SeriesDetailsEvent, SeriesDetailsState> {
     final result = await _getSeriesDetails(event.seriesId);
 
     result.fold(
-      (failure) => emit(const ErrorSeriesDetails()),
+      (failure) => emit(ErrorSeriesDetails(errorMessage: failure.message)),
       (data) => emit(LoadedSeriesDetails(seriesDetails: data)),
     );
   }

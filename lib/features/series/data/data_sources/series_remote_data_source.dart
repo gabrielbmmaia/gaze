@@ -136,7 +136,7 @@ class SeriesRemoteDataSourceImpl extends SeriesRemoteDataSource {
       );
       if (response.statusCode != 200) {
         throw ServerException(
-          message: response.body,
+          message: StringRes.serverProblemMessage,
           statusCode: response.statusCode.toString(),
         );
       }
@@ -145,7 +145,10 @@ class SeriesRemoteDataSourceImpl extends SeriesRemoteDataSource {
     } on ServerException {
       rethrow;
     } catch (e) {
-      throw ServerException(message: e.toString(), statusCode: '505');
+      throw const ServerException(
+        message: StringRes.serverProblemMessage,
+        statusCode: '505',
+      );
     }
   }
 

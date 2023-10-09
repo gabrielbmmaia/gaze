@@ -4,10 +4,14 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:gaze/features/auth/data/data_sources/auth_remote_data_source.dart';
 import 'package:gaze/features/auth/data/repositories/auth_repo_impl.dart';
 import 'package:gaze/features/auth/domain/repositories/auth_repo.dart';
+import 'package:gaze/features/auth/domain/usecases/add_or_remove_favorite_item.dart';
+import 'package:gaze/features/auth/domain/usecases/get_favorite_series.dart';
+import 'package:gaze/features/auth/domain/usecases/is_favorite_item.dart';
 import 'package:gaze/features/auth/domain/usecases/sign_in.dart';
 import 'package:gaze/features/auth/domain/usecases/sign_up.dart';
 import 'package:gaze/features/auth/domain/usecases/update_user.dart';
 import 'package:gaze/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:gaze/features/auth/presentation/bloc/favorite/favorite_bloc.dart';
 import 'package:gaze/features/series/data/data_sources/series_remote_data_source.dart';
 import 'package:gaze/features/series/data/repositories/series_repo_impl.dart';
 import 'package:gaze/features/series/domain/repositories/series_repo.dart';
@@ -70,7 +74,6 @@ Future<void> _seriesInit() async {
     ..registerLazySingleton(() => GetSeriesClassificationUseCase(sl()))
     ..registerLazySingleton(() => GetSeriesByGenreUseCase(sl()))
     ..registerLazySingleton(() => GetSearchedSeriesUseCase(sl()))
-
     ..registerLazySingleton<SeriesRepo>(() => SeriesRepoImpl(sl()))
     ..registerLazySingleton<SeriesRemoteDataSource>(
       SeriesRemoteDataSourceImpl.new,
@@ -86,11 +89,21 @@ Future<void> _authInit() async {
         updateUser: sl(),
       ),
     )
+    ..registerFactory(
+      () => FavoriteBloc(
+        isFavoriteItem: sl(),
+        addFavoriteItem: sl(),
+        getFavoriteSeries: sl(),
+      ),
+    )
 
     //Use Cases
     ..registerLazySingleton(() => SignInUseCase(sl()))
     ..registerLazySingleton(() => SignUpUseCase(sl()))
     ..registerLazySingleton(() => UpdateUserUseCase(sl()))
+    ..registerLazySingleton(() => IsFavoriteItemUseCase(sl()))
+    ..registerLazySingleton(() => AddOrRemoveFavoriteItemUseCase(sl()))
+    ..registerLazySingleton(() => GetFavoriteSeriesUseCase(sl()))
 
     //Repository
     ..registerLazySingleton<AuthRepo>(() => AuthRepoImpl(sl()))

@@ -151,7 +151,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             child: ListView(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               children: [
-                const SizedBox(height: 30),
+                const SizedBox(height: 20),
                 Builder(
                   builder: (context) {
                     final user = context.currentUser!;
@@ -160,8 +160,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             ? null
                             : user.profilePic;
                     return Container(
-                      width: 180,
-                      height: 180,
+                      width: 160,
+                      height: 160,
                       clipBehavior: Clip.hardEdge,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,

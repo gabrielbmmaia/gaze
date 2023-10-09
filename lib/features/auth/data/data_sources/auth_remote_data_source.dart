@@ -36,6 +36,10 @@ abstract class AuthRemoteDataSource {
   Future<void> removeFavoriteItem({required SeriesEntity item});
 
   Future<bool> isFavoriteItem({required SeriesEntity item});
+
+  Future<List<SeriesEntity>> getFavoriteSeries();
+
+  Stream<List<SeriesEntity>> getFavoriteListStream();
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
@@ -165,35 +169,63 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
   @override
   Future<void> addFavoriteItem({required SeriesEntity item}) async {
-    await _cloudStoreClient
-        .collection('users')
-        .doc(_authClient.currentUser?.uid)
-        .update({
-      'favoriteList': FieldValue.arrayUnion([item.toMap()]),
-    });
+    try {
+      await _cloudStoreClient
+          .collection('users')
+          .doc(_authClient.currentUser?.uid)
+          .update({
+        'favoriteList': FieldValue.arrayUnion([item.toMap()]),
+      });
+    } catch (e) {
+      throw ServerException(message: e.toString(), statusCode: '');
+    }
   }
 
   @override
   Future<void> removeFavoriteItem({required SeriesEntity item}) async {
-    await _cloudStoreClient
-        .collection('users')
-        .doc(_authClient.currentUser?.uid)
-        .update({
-      'favoriteList': FieldValue.arrayRemove([item.toMap()]),
-    });
+    try {
+      await _cloudStoreClient
+          .collection('users')
+          .doc(_authClient.currentUser?.uid)
+          .update({
+        'favoriteList': FieldValue.arrayRemove([item.toMap()]),
+      });
+    } catch (e) {
+      throw ServerException(message: e.toString(), statusCode: '');
+    }
   }
 
   @override
   Future<bool> isFavoriteItem({required SeriesEntity item}) async {
-    final userDoc = await _cloudStoreClient
-        .collection('users')
-        .doc(_authClient.currentUser?.uid)
-        .get();
-    final favoriteList = userDoc.data()?['favoriteList'] ?? <dynamic>[];
-    final favoriteSeries = (favoriteList as List<dynamic>)
-        .map((item) => SeriesEntity.fromJson(favoriteList as DataMap))
-        .toList();
-    return favoriteSeries.contains(item);
+    try {
+      final userDoc = await _cloudStoreClient
+          .collection('users')
+          .doc(_authClient.currentUser?.uid)
+          .get();
+      final favoriteList = userDoc.data()?['favoriteList'] as List<dynamic>;
+      final favoriteSeries = (favoriteList as List<dynamic>)
+          .map((item) => SeriesEntity.fromJson(item as DataMap))
+          .toList();
+      return favoriteSeries.contains(item);
+    } catch (e) {
+      throw ServerException(message: e.toString(), statusCode: '505');
+    }
+  }
+
+  @override
+  Future<List<SeriesEntity>> getFavoriteSeries() async {
+    try {
+      final userDoc = await _cloudStoreClient
+          .collection('users')
+          .doc(_authClient.currentUser?.uid)
+          .get();
+      final favoriteList = userDoc.data()?['favoriteList'] as List<dynamic>;
+      return (favoriteList as List<dynamic>)
+          .map((item) => SeriesEntity.fromJson(item as DataMap))
+          .toList();
+    } catch (e) {
+      throw ServerException(message: e.toString(), statusCode: '505');
+    }
   }
 
   Future<DocumentSnapshot<DataMap>> _getUserData(String uid) async {
@@ -216,5 +248,32 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         .collection('users')
         .doc(_authClient.currentUser?.uid)
         .update(map);
+  }
+
+  @override
+  Stream<List<SeriesEntity>> getFavoriteListStream() {
+    // Get the user document reference based on uid
+    final userDocumentRef =
+        _cloudStoreClient.collection('users').doc(_authClient.currentUser?.uid);
+
+    // Listen for changes in the favoriteList field
+    return userDocumentRef.snapshots().map((documentSnapshot) {
+      var favoriteList = <SeriesEntity>[];
+
+      // Check if the document exists and has the favoriteList field
+      if (documentSnapshot.exists && documentSnapshot.data() != null) {
+        final data = documentSnapshot.data()!;
+        if (data.containsKey('favoriteList')) {
+          // Parse the favoriteList field from the document
+          final favoriteListData = data['favoriteList'] as List<dynamic>;
+          favoriteList = favoriteListData
+              .map(
+                (item) => SeriesEntity.fromJson(item as Map<String, dynamic>),
+              )
+              .toList(); // Convert the dynamic items to FavoriteItem objects
+        }
+      }
+      return favoriteList;
+    });
   }
 }

@@ -59,9 +59,9 @@ void main() {
         return bloc;
       },
       act: (bloc) => bloc.add(const LoadSeriesDetailsEvent(seriesId: '123456')),
-      expect: () => const <SeriesDetailsState>[
-        LoadingSeriesDetails(),
-        ErrorSeriesDetails(),
+      expect: () => <SeriesDetailsState>[
+        const LoadingSeriesDetails(),
+        ErrorSeriesDetails(errorMessage: tServerFailure.message),
       ],
       verify: (_) {
         verify(() => getSeriesDetails('123456')).called(1);
