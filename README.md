@@ -40,42 +40,22 @@ Aqui é possível visualizar um resumo de todas as telas do aplicativo.
 `Adicionar series à sua lista de favoritos` <br>
 
 # Técnicas e tecnologias utilizadas
-[EM PRODUÇÂO]
-`Kotlin`: linguagem utilizada no projeto. <br>
-`Jetpack Compose`: projeto completamente construido em Jetpack Compose. <br>
-`Modularização`: projeto foi moduralizado dividido por feature utilizando Gradle.kts. <br>
-`Flow`: fazer atualizações da tela em tempo real. <br>
-`Courutines`: usado para colocar ações demoradas. <br>
+`Flutter`: foi escolhido o framework Flutter para construir um app híbrido. <br>
+`Dart`: linguagem utilizada no projeto. <br>
 `Git`: usado para versionar o código no github. <br>
-`Retrofit`: usado para pegar dados da UnsplashApi. <br>
-`OkHttp`: usado para interceptar dados do Retrofit. <br>
-`Gson`: usado para transformar os dados JSON. <br>
-`Room`: biblioteca para criação do banco de dados de fotos Favoritas. <br>
-`Hilt`: usado para injeção de dependência. <br>
-`Arquitetura Clean + MvvM`: projeto foi feito totalmente na arquitetura Clean e o padrão de projeto MvvM. <br>
-`Coil`: biblioteca para carregar as imagens e GIFs. <br>
-`Accompanist`: utilizado para animar a transição entre telas. <br>
-`Lottie`: utilizado para animar o movimento da Splash Screen a partir de um Raw Json. <br>
-`Paging3`: biblioteca para paginação de dados. <br>
+`Http`: usado para pegar dados da TMDB Api. <br>
+`Provider`: usado para prover algumas instâncias. <br>
+`Shared Preferences`: usado para indicar que o usuário já está logado no app. <br>
+`Url Launcher`: usado para enviar o usuário para o Youtube ao clicar em uma mídia. <br>
+`Image Picker`: Usado para o usuário escolher uma imagem em seu perfil. <br>
+`Firebase`: foi utilizado para armazenas todos os dados do aplicativo. Foi usando Authtentication, Cloud Firestore, Storage <br>
+`Bloc`: foi escolhido para fazer o gerenciamento de estados. <br>
+`Get_it`: usado para injeção de dependência. <br>
+`Clean Archtecture`: projeto foi feito totalmente na Clean Archtecture. <br>
+`Lottie`: utilizado para animação de algumas imagens. <br>
 
-
-# Temas do Projeto
-O PicView oferece não somente um tema claro e escuro padrão, mas também suporta Dynamic Colors, permitindo uma infinidade de possibilidades de temas ao aplicativo. Essa funcionalidade está disponível para usuários que possuem o sistema operacional Android 12 ou versões superiores.
-
-![dynamic-colors](https://github.com/gabrielbmmaia/PicView/assets/109977155/4f26b1fd-a44f-4d4a-88de-9b00d852331f)
-
-# Funcionalidades do Card de Foto
-O Card de Foto é o Composable principal do aplicativo e aqui podemos ver todas as funcionalidades que ele proporciona ao usuário.
-
-![funcionalidades-card-foto](https://github.com/gabrielbmmaia/PicView/assets/109977155/a45ea746-6d7d-4d09-b427-cddfd1163b0f)
-
-Além dessas funcionalidades, a lista de Card de Foto é adaptada automaticamente de acordo com a rotação da tela, exibindo-se em um layout de duas colunas.
-
-![double-span-demo](https://github.com/gabrielbmmaia/PicView/assets/109977155/b0e2efd4-8831-40c4-9086-1af0e30d3d06)
-
-
-# Navegação entre Features
-![navegacao-features](https://github.com/gabrielbmmaia/PicView/assets/109977155/f4052999-31b3-4e36-8f4c-00e46226005b)
+# Navegação entre Telas
+![screen-navigation](https://github.com/gabrielbmmaia/gaze/assets/109977155/efc284b3-2de0-4e15-acca-f53421c18353)
 
 # Features
 
