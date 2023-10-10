@@ -44,7 +44,7 @@ Aqui é possível visualizar um resumo de todas as telas do aplicativo.
 `Shared Preferences`: usado para indicar que o usuário já está logado no app. <br>
 `Url Launcher`: usado para enviar o usuário para o Youtube ao clicar em uma mídia. <br>
 `Image Picker`: Usado para o usuário escolher uma imagem em seu perfil. <br>
-`Firebase`: foi utilizado para armazenas todos os dados do aplicativo. Foi usando Authtentication, Cloud Firestore, Storage <br>
+`Firebase`: foi utilizado para armazenas todos os dados do aplicativo. Foi usando `Authtentication`  `Cloud Firestore`  `Storage` <br>
 `Bloc`: foi escolhido para fazer o gerenciamento de estados. <br>
 `Get_it`: usado para injeção de dependência. <br>
 `Clean Archtecture`: projeto foi feito totalmente na Clean Archtecture. <br>
