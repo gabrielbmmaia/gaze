@@ -72,7 +72,7 @@ Na Search Screen o usuário pode pesquisar series a partir de um texto específi
 ![search-screen](https://github.com/gabrielbmmaia/gaze/assets/109977155/5f507be3-1a34-4697-8b27-975c67829897)
 
 ### Profile Screen
-Na Profile Screen o usuário tem acesso a todos seus dados incluindo a lista de series favoritas. Além disso, ele poderá tanto deslogar quanto editar seus dados. Uma observação legal é a "Fake Nav Error", essa não é para o usuário e sim para o desenvolvedor. Esse botão existe apenas para mostar para você desenvolvedor que podemos colocar uma tela em caso de erro na navegação do aplicativo e com isso o aplicativo não irá quebrar caso aconteça algum erro para o usuário =). 
+Na Profile Screen, o usuário tem acesso a todos os seus dados, incluindo a lista de séries favoritas. Além disso, ele pode tanto deslogar quanto editar suas informações. Uma observação interessante é o "Fake Nav Error"; este não é destinado ao usuário, mas sim ao desenvolvedor. Esse botão existe apenas para mostrar a você, desenvolvedor, que podemos criar uma tela em caso de erro na navegação do aplicativo. Com isso, o aplicativo não irá quebrar caso ocorra algum erro para o usuário 😊.
 
 ![profile](https://github.com/gabrielbmmaia/gaze/assets/109977155/e73c50ec-e0e9-4992-81aa-ee92e82e9a8a)
 
